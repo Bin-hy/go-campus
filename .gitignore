@@ -1,1 +1,4 @@
 *.local.*
+
+# 自己的答案不提交
+*/solution.go

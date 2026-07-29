@@ -1,14 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GoCampus logo">
   <defs>
-    <linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#12b886"/>
-      <stop offset="1" stop-color="#228be6"/>
+    <linearGradient id="mark" x1="15" y1="14" x2="50" y2="51" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#63e6be"/>
+      <stop offset="1" stop-color="#22b8cf"/>
+    </linearGradient>
+    <linearGradient id="surface" x1="7" y1="5" x2="57" y2="59" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1e293b"/>
+      <stop offset="1" stop-color="#0f172a"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="url(#g)"/>
-  <path d="M15 18.5 32 11l17 7.5L32 26l-17-7.5Z" fill="#fff"/>
-  <path d="M21 23v11.5c0 4.7 5 8.5 11 8.5s11-3.8 11-8.5V23l-11 5-11-5Z" fill="#fff" fill-opacity=".88"/>
-  <path d="M49 21v15" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="49" cy="39" r="3" fill="#fff"/>
-  <path d="m26 49 4 4 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#surface)"/>
+  <path d="M50 10c0 12.15-9.85 22-22 22S6 22.15 6 10" fill="#fff" opacity=".035"/>
+  <path d="M43.5 20.5A17 17 0 1 0 47 39H34.5" fill="none" stroke="url(#mark)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M47 39v7" fill="none" stroke="url(#mark)" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="47.5" cy="17" r="3" fill="#fff" opacity=".9"/>
 </svg>

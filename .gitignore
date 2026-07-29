@@ -2,3 +2,9 @@
 
 # 自己的答案不提交
 **/solution.go
+
+# VitePress
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+.DS_Store

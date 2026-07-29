@@ -1,0 +1,3 @@
+[submodule "projects/docs-rag"]
+	path = projects/docs-rag
+	url = https://github.com/Bin-hy/documentsRag.git

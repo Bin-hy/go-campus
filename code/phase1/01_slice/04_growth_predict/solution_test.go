@@ -18,10 +18,10 @@ func TestPredictGrowth(t *testing.T) {
 		{"零容量", 0, 1, 1},
 		{"零容量需要多个", 0, 5, 5},
 		{"256临界点-翻倍", 128, 200, 256},
-		{"256临界点-增长公式", 256, 300, 448},  // 256 + (256 + 768)/4 = 256 + 256 = 512... 实际: 256 + (256+768)/4 = 256+256=512? No. newcap=256, newcap += (256+768)/4 = 256+256 = 512 >= 300. 所以是512
-		{"大容量增长", 512, 600, 704},           // 512 + (512 + 768) / 4 = 512 + 320 = 832? No wait: newcap=512, newcap += (512+768)/4 = 512 + 320 = 832 >= 600, 所以832? 
+		{"256临界点-增长公式", 256, 300, 448}, // 256 + (256 + 768)/4 = 256 + 256 = 512... 实际: 256 + (256+768)/4 = 256+256=512? No. newcap=256, newcap += (256+768)/4 = 256+256 = 512 >= 300. 所以是512
+		{"大容量增长", 512, 600, 704},       // 512 + (512 + 768) / 4 = 512 + 320 = 832? No wait: newcap=512, newcap += (512+768)/4 = 512 + 320 = 832 >= 600, 所以832?
 	}
-	
+
 	// 修正预期值：重新计算
 	// 256 -> needCap=300: newcap=256, newcap += (256+768)/4 = 256+256=512. 512 >= 300. result=512
 	// 512 -> needCap=600: newcap=512, newcap += (512+768)/4 = 512+320=832. 832 >= 600. result=832
@@ -41,15 +41,15 @@ func TestPredictGrowth(t *testing.T) {
 
 func TestOptimalPrealloc(t *testing.T) {
 	tests := []struct {
-		name              string
-		appendSizes       []int
-		expectWithout     int
-		expectWith        int
+		name          string
+		appendSizes   []int
+		expectWithout int
+		expectWith    int
 	}{
 		{
 			name:          "逐个append10次",
 			appendSizes:   []int{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-			expectWithout: 4, // cap: 0->1->2->4->8->16, 扩容4次
+			expectWithout: 5, // cap: 0->1->2->4->8->16, 扩容5次
 			expectWith:    0, // 预分配10，不需要扩容
 		},
 		{

@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "docs:sync-exercises": "node scripts/generate-exercise-docs.mjs",
+    "predocs:dev": "npm run docs:sync-exercises",
     "docs:dev": "vitepress dev docs --host 127.0.0.1",
+    "predocs:build": "npm run docs:sync-exercises",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs --host 127.0.0.1"
   },

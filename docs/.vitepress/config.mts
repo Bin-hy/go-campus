@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { buildExerciseSidebar } from './exercises'
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -28,6 +29,7 @@ export default defineConfig({
         ]
       },
       { text: '知识详解', link: '/第一阶段-知识点详解' },
+      { text: '习题集和答案', link: '/习题集和答案/' },
       { text: '练习指南', link: '/练习指南' }
     ],
 
@@ -68,7 +70,8 @@ export default defineConfig({
             { text: '第一阶段知识详解', link: '/第一阶段-知识点详解' }
           ]
         }
-      ]
+      ],
+      '/习题集和答案/': buildExerciseSidebar()
     },
 
     socialLinks: [

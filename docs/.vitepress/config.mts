@@ -19,10 +19,10 @@ export default defineConfig({
 
     nav: [
       { text: '首页', link: '/' },
-      { text: '总体规划', link: '/学习计划安排/总体规划' },
       {
-        text: '学习阶段',
+        text: '学习计划',
         items: [
+          { text: '总体规划', link: '/学习计划安排/总体规划' },
           { text: '第一阶段 · Go 语言深入', link: '/学习计划安排/第一阶段-Go语言深入' },
           { text: '第二阶段 · 计算机基础', link: '/学习计划安排/第二阶段-计算机基础强化' },
           { text: '第三阶段 · AI 应用开发', link: '/学习计划安排/第三阶段-AI应用开发基础' }
@@ -31,12 +31,18 @@ export default defineConfig({
       {
         text: '知识详解',
         items: [
-          { text: '第一阶段 · 知识点总览', link: '/第一阶段-知识点详解' },
-          { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' }
+          { text: '知识点总览', link: '/第一阶段-知识点详解' },
+          { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
+          { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' }
         ]
       },
-      { text: '习题集和答案', link: '/习题集和答案/' },
-      { text: '练习指南', link: '/练习指南' }
+      {
+        text: '代码练习',
+        items: [
+          { text: '练习指南', link: '/练习指南' },
+          { text: '习题集和答案', link: '/习题集和答案/' }
+        ]
+      }
     ],
 
     sidebar: {
@@ -49,33 +55,20 @@ export default defineConfig({
             { text: '第二阶段：计算机基础强化', link: '/学习计划安排/第二阶段-计算机基础强化' },
             { text: '第三阶段：AI 应用开发基础', link: '/学习计划安排/第三阶段-AI应用开发基础' }
           ]
-        },
-        {
-          text: '配套内容',
-          items: [
-            { text: '第一阶段知识详解', link: '/第一阶段-知识点详解' },
-            { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
-            { text: '代码练习指南', link: '/练习指南' }
-          ]
         }
       ],
-      '/第一阶段-知识点详解': [
+      '/第一阶段-知识': [
         {
-          text: 'Go 语言深入',
-          items: [
-            { text: '知识点详解', link: '/第一阶段-知识点详解' },
-            { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
-            { text: '阶段学习计划', link: '/学习计划安排/第一阶段-Go语言深入' },
-            { text: '代码练习指南', link: '/练习指南' }
-          ]
-        }
-      ],
-      '/第一阶段-知识详解/': [
-        {
-          text: '第一阶段知识详解',
+          text: '第一阶段 · 知识详解',
           items: [
             { text: '知识点总览', link: '/第一阶段-知识点详解' },
             { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
+            { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
             { text: '阶段学习计划', link: '/学习计划安排/第一阶段-Go语言深入' },
             { text: '代码练习指南', link: '/练习指南' }
           ]
@@ -83,10 +76,17 @@ export default defineConfig({
       ],
       '/练习指南': [
         {
-          text: '实践训练',
+          text: '代码练习',
           items: [
-            { text: '代码练习指南', link: '/练习指南' },
-            { text: '第一阶段知识详解', link: '/第一阶段-知识点详解' }
+            { text: '练习指南', link: '/练习指南' },
+            { text: '习题集和答案', link: '/习题集和答案/' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: '知识点总览', link: '/第一阶段-知识点详解' },
+            { text: '第一阶段学习计划', link: '/学习计划安排/第一阶段-Go语言深入' }
           ]
         }
       ],

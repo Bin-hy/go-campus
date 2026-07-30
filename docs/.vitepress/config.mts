@@ -28,7 +28,13 @@ export default defineConfig({
           { text: '第三阶段 · AI 应用开发', link: '/学习计划安排/第三阶段-AI应用开发基础' }
         ]
       },
-      { text: '知识详解', link: '/第一阶段-知识点详解' },
+      {
+        text: '知识详解',
+        items: [
+          { text: '第一阶段 · 知识点总览', link: '/第一阶段-知识点详解' },
+          { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' }
+        ]
+      },
       { text: '习题集和答案', link: '/习题集和答案/' },
       { text: '练习指南', link: '/练习指南' }
     ],
@@ -48,6 +54,7 @@ export default defineConfig({
           text: '配套内容',
           items: [
             { text: '第一阶段知识详解', link: '/第一阶段-知识点详解' },
+            { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
             { text: '代码练习指南', link: '/练习指南' }
           ]
         }
@@ -57,6 +64,18 @@ export default defineConfig({
           text: 'Go 语言深入',
           items: [
             { text: '知识点详解', link: '/第一阶段-知识点详解' },
+            { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
+            { text: '阶段学习计划', link: '/学习计划安排/第一阶段-Go语言深入' },
+            { text: '代码练习指南', link: '/练习指南' }
+          ]
+        }
+      ],
+      '/第一阶段-知识详解/': [
+        {
+          text: '第一阶段知识详解',
+          items: [
+            { text: '知识点总览', link: '/第一阶段-知识点详解' },
+            { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
             { text: '阶段学习计划', link: '/学习计划安排/第一阶段-Go语言深入' },
             { text: '代码练习指南', link: '/练习指南' }
           ]

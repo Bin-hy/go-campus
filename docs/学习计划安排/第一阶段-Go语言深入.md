@@ -10,11 +10,13 @@
 
 ### 1.1 Slice 切片
 
+**配套精读：** [Slice、Map 与内存布局：Slice 篇](/第一阶段-知识详解/Slice-Map与内存布局#一、slice-从三字段视图到扩容)
+
 **必须掌握的知识点：**
 - 底层数据结构：`array unsafe.Pointer + len int + cap int`
 - 扩容策略：
-  - Go 1.18 之前：len < 1024 翻倍，>= 1024 增长 1.25 倍
-  - Go 1.18+：len < 256 翻倍，>= 256 用公式 `newcap += (newcap + 3*threshold) / 4`
+  - Go 1.18 之前：旧容量 < 1024 时翻倍，>= 1024 时按约 1.25 倍增长
+  - Go 1.18+：旧容量 < 256 时翻倍，>= 256 时用公式 `newcap += (newcap + 3*threshold) / 4`
 - 切片截取 `s[low:high:max]` 三个参数的含义
 - append 何时触发拷贝（扩容时底层数组更换）
 - nil slice vs empty slice 的区别（`var s []int` vs `s := []int{}`）
@@ -50,6 +52,10 @@ func getFirst100(data []byte) []byte {
 
 ### 1.2 Map 映射
 
+**配套精读：** [Slice、Map 与内存布局：Map 篇](/第一阶段-知识详解/Slice-Map与内存布局#三、map-经典-hmap-bmap-实现)
+
+> 本项目使用 Go 1.22，以下为该版本的经典 Map 实现。Go 1.24+ 的版本差异见配套精读。
+
 **必须掌握的知识点：**
 - 底层结构：`hmap` + `bmap`（bucket 数组）
   - 每个 bucket 存 8 个 kv 对
@@ -59,7 +65,7 @@ func getFirst100(data []byte) []byte {
 - 扩容机制：
   - 翻倍扩容：负载因子 > 6.5 时触发
   - 等量扩容（sameSizeGrow）：overflow bucket 太多时整理碎片
-  - 渐进式迁移：每次读写迁移 1-2 个 bucket
+  - 渐进式迁移：后续赋值或删除操作顺带迁移相关 bucket；普通读取兼容新旧布局但不负责迁移
 - 遍历无序原因：起始 bucket 随机 + 扩容迁移
 - **并发不安全**：并发读写会 `fatal error: concurrent map read and map write`
 - 删除操作不会缩容（只标记 tophash 为 emptyOne）
@@ -152,10 +158,12 @@ func BenchmarkConcat(b *testing.B) { /* 实现 */ }
 
 ### 1.5 Struct 结构体
 
+**配套精读：** [Slice、Map 与内存布局：内存对齐篇](/第一阶段-知识详解/Slice-Map与内存布局#二、内存对齐-容量和布局背后的约束)
+
 **必须掌握的知识点：**
 - 内存对齐规则：
-  - 每个字段的偏移量必须是其大小的整数倍
-  - 结构体总大小必须是最大字段大小的整数倍
+  - 每个字段的偏移量必须是其类型对齐值的整数倍
+  - 结构体总大小必须是最大字段对齐值的整数倍
   - 字段顺序影响内存占用（可通过重排减少 padding）
 - 方法接收者：值接收者 vs 指针接收者
   - 值接收者：方法内是副本，不影响原值
@@ -505,8 +513,8 @@ func noEscape() int {
 ### 4.3 struct 内存对齐
 
 **必须掌握的知识点：**
-- 对齐规则：字段偏移必须是字段大小的整数倍
-- 结构体总大小：最大字段大小的整数倍
+- 对齐规则：字段偏移必须是字段类型对齐值的整数倍
+- 结构体总大小：最大字段对齐值的整数倍
 - 优化手段：按字段大小从大到小排列，减少 padding
 - `unsafe.Sizeof`、`unsafe.Alignof`、`unsafe.Offsetof`
 

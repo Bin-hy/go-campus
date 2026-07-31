@@ -1,7 +1,8 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { buildExerciseSidebar } from './exercises'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   lang: 'zh-CN',
   title: 'GoCampus',
   description: '面向 AI 应用开发实习的 Go 学习与实战手册',
@@ -31,9 +32,11 @@ export default defineConfig({
       {
         text: '知识详解',
         items: [
-          { text: '知识点总览', link: '/第一阶段-知识点详解' },
+          { text: '第一阶段 · Go 语言深入', link: '/第一阶段-知识点详解' },
           { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
-          { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' }
+          { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' },
+          { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
+          { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' }
         ]
       },
       {
@@ -90,6 +93,22 @@ export default defineConfig({
           ]
         }
       ],
+      '/第二阶段-知识详解/': [
+        {
+          text: '第二阶段 · 计算机基础',
+          items: [
+            { text: '操作系统面试详解', link: '/第二阶段-知识详解/操作系统面试详解' },
+            { text: '计算机网络面试详解', link: '/第二阶段-知识详解/计算机网络面试详解' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: '阶段学习计划', link: '/学习计划安排/第二阶段-计算机基础强化' },
+            { text: '代码练习指南', link: '/练习指南' }
+          ]
+        }
+      ],
       '/习题集和答案/': buildExerciseSidebar()
     },
 
@@ -143,4 +162,4 @@ export default defineConfig({
       copyright: 'GoCampus Learning Notes'
     }
   }
-})
+}))

@@ -40,6 +40,12 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: '项目实战',
+        items: [
+          { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' }
+        ]
+      },
+      {
         text: '代码练习',
         items: [
           { text: '练习指南', link: '/练习指南' },
@@ -109,7 +115,33 @@ export default withMermaid(defineConfig({
           ]
         }
       ],
-      '/习题集和答案/': buildExerciseSidebar()
+      '/习题集和答案/': buildExerciseSidebar(),
+      '/phase3/docs-rag/': [
+        {
+          text: 'RAG 文档问答系统',
+          items: [
+            { text: '项目首页', link: '/phase3/docs-rag/' },
+            { text: '学习笔记', link: '/phase3/docs-rag/学习笔记' },
+            { text: '项目设计', link: '/phase3/docs-rag/项目设计' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: '阶段学习计划', link: '/学习计划安排/第三阶段-AI应用开发基础' },
+            { text: '第三阶段总览', link: '/phase3/' }
+          ]
+        }
+      ],
+      '/phase3/': [
+        {
+          text: '第三阶段 · AI 应用开发',
+          items: [
+            { text: '阶段总览', link: '/phase3/' },
+            { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' }
+          ]
+        }
+      ]
     },
 
     socialLinks: [

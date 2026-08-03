@@ -9,6 +9,27 @@ export default withMermaid(defineConfig({
   cleanUrls: true,
   lastUpdated: true,
 
+  mermaid: {
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#e6fcf5',
+      primaryBorderColor: '#087f5b',
+      primaryTextColor: '#212529',
+      secondaryColor: '#f1f3f5',
+      secondaryBorderColor: '#099268',
+      tertiaryColor: '#fff9db',
+      tertiaryBorderColor: '#f59f00',
+      lineColor: '#099268',
+      textColor: '#343a40',
+      fontSize: '14px',
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+      nodeTextColor: '#212529',
+    },
+  },
+  mermaidPlugin: {
+    class: 'mermaid',
+  },
+
   head: [
     ['meta', { name: 'theme-color', content: '#087f5b' }],
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]
@@ -35,6 +56,7 @@ export default withMermaid(defineConfig({
           { text: '第一阶段 · Go 语言深入', link: '/第一阶段-知识点详解' },
           { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
           { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' },
+          { text: 'String 与字节切片', link: '/第一阶段-知识详解/String与字节切片' },
           { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
           { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' }
         ]
@@ -42,7 +64,8 @@ export default withMermaid(defineConfig({
       {
         text: '项目实战',
         items: [
-          { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' }
+          { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' },
+          { text: 'AI Agent Harness', link: '/phase3/agent-harness/' }
         ]
       },
       {
@@ -72,7 +95,8 @@ export default withMermaid(defineConfig({
           items: [
             { text: '知识点总览', link: '/第一阶段-知识点详解' },
             { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
-            { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' }
+            { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' },
+            { text: 'String 与字节切片', link: '/第一阶段-知识详解/String与字节切片' }
           ]
         },
         {
@@ -116,6 +140,24 @@ export default withMermaid(defineConfig({
         }
       ],
       '/习题集和答案/': buildExerciseSidebar(),
+      '/phase3/agent-harness/': [
+        {
+          text: 'AI Agent Harness',
+          items: [
+            { text: '项目首页', link: '/phase3/agent-harness/' },
+            { text: '学习笔记', link: '/phase3/agent-harness/学习笔记' },
+            { text: '项目设计', link: '/phase3/agent-harness/项目设计' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: '阶段学习计划', link: '/学习计划安排/第三阶段-AI应用开发基础' },
+            { text: '第三阶段总览', link: '/phase3/' },
+            { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' }
+          ]
+        }
+      ],
       '/phase3/docs-rag/': [
         {
           text: 'RAG 文档问答系统',
@@ -138,7 +180,8 @@ export default withMermaid(defineConfig({
           text: '第三阶段 · AI 应用开发',
           items: [
             { text: '阶段总览', link: '/phase3/' },
-            { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' }
+            { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' },
+            { text: 'AI Agent Harness', link: '/phase3/agent-harness/' }
           ]
         }
       ]

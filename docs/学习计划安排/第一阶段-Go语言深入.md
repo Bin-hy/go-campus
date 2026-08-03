@@ -138,9 +138,13 @@ type Sorter interface { Sort([]int) []int }
 
 ### 1.4 String 字符串
 
+**配套精读：** [String 与字节切片](/第一阶段-知识详解/String与字节切片)
+
 **必须掌握的知识点：**
 - 底层结构：`data unsafe.Pointer + len int`（不可变）
-- string 与 []byte 的转换开销（会拷贝）
+- string 与 []byte 的转换语义，以及“零分配”和“零拷贝”的区别
+- Map 临时查询 key、字符串比较中的编译器转换优化
+- `unsafe.String` / `unsafe.SliceData` 零拷贝的只读与生命周期约束
 - `strings.Builder` 为什么高效（避免多次分配）
 - rune vs byte：UTF-8 编码下中文占 3 字节
 - 字符串拼接方式性能对比：`+` < `fmt.Sprintf` < `strings.Builder` < `bytes.Buffer`

@@ -31,7 +31,8 @@ GoCampus/
 │   ├── 学习计划安排/             # 三阶段学习计划
 │   ├── 第一阶段-知识详解/        # 深入原理文档
 │   │   ├── Slice-Map与内存布局.md
-│   │   └── Interface底层原理.md
+│   │   ├── Interface底层原理.md
+│   │   └── String与字节切片.md
 │   ├── 习题集和答案/             # 自动生成的习题文档
 │   └── .vitepress/              # VitePress 配置与主题
 ├── projects/                    # 实战项目

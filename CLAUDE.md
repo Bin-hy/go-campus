@@ -47,3 +47,7 @@ Agent开发实习生（AI剪辑） - 剪映CapCut
 
 
 https://jobs.bytedance.com/campus/position/7667130430085105925/detail
+
+# 编写规则
+
+绘流程图等使用 mermaid 语法在markdown中

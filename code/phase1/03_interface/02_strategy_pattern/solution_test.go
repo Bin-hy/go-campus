@@ -48,11 +48,15 @@ func TestQuickSort(t *testing.T) {
 		{"空", []int{}, []int{}},
 		{"大量元素", func() []int {
 			s := make([]int, 1000)
-			for i := range s { s[i] = 1000 - i }
+			for i := range s {
+				s[i] = 1000 - i
+			}
 			return s
 		}(), func() []int {
 			s := make([]int, 1000)
-			for i := range s { s[i] = i + 1 }
+			for i := range s {
+				s[i] = i + 1
+			}
 			return s
 		}()},
 	}

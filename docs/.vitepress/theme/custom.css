@@ -53,3 +53,25 @@
     display: block;
   }
 }
+
+.viewer-container {
+  z-index: 2000;
+}
+
+/* Mermaid 图表样式 */
+.mermaid {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.dark .mermaid {
+  background: var(--vp-c-bg-soft);
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}

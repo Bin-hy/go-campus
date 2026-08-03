@@ -74,7 +74,7 @@ func TestDescribe(t *testing.T) {
 
 func TestTotalArea(t *testing.T) {
 	shapes := []Shape{
-		Circle{Radius: 1},       // pi
+		Circle{Radius: 1},              // pi
 		Rectangle{Width: 2, Height: 3}, // 6
 	}
 	expected := math.Pi + 6

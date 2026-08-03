@@ -18,6 +18,14 @@
 - [学习笔记](/phase3/docs-rag/学习笔记)
 - [项目设计](/phase3/docs-rag/项目设计)
 
+### 2. AI Agent Harness — 智能视频剪辑 Agent
+
+使用 Go 实现面向智能视频剪辑场景的 AI Agent 运行时框架，涵盖 ReAct 控制循环、工具编排、任务规划、记忆管理和安全护栏。模拟字节跳动剪映 CapCut AutoCut 的核心 Agent 能力。
+
+- [项目首页](/phase3/agent-harness/)
+- [学习笔记](/phase3/agent-harness/学习笔记)
+- [项目设计](/phase3/agent-harness/项目设计)
+
 ---
 
 > 后续项目将陆续添加到此页面。

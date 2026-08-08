@@ -10,3 +10,6 @@ docs/.vitepress/dist/
 # 由 scripts/generate-exercise-docs.mjs 在启动/构建前生成
 docs/习题集和答案/phase*/
 .DS_Store
+
+.claude/
+.reasonix/

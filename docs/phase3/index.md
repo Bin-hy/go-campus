@@ -26,6 +26,16 @@
 - [学习笔记](/phase3/agent-harness/学习笔记)
 - [项目设计](/phase3/agent-harness/项目设计)
 
+### 3. pi 开源 Harness 深度拆解
+
+深度拆解 [earendil-works/pi](https://github.com/earendil-works/pi)（85k+ stars 的开源 Agent 工具链），理解 Agent Harness 在生产中的真实落地形态：Agent Loop、Tool Calling、LLM 抽象、上下文压缩、会话持久化、RPC 协议、TUI 差分渲染与扩展系统。含 Go/Eino 对照与面试速答。
+
+- [项目全景](/phase3/pi-harness/)
+- [01 核心机制：Agent Loop](/phase3/pi-harness/核心机制)
+- [02 LLM 抽象层](/phase3/pi-harness/LLM抽象层)
+- [03 工程化落地](/phase3/pi-harness/工程化落地)
+- [04 Go 落地与面试](/phase3/pi-harness/Go落地与面试)
+
 ---
 
 > 后续项目将陆续添加到此页面。

@@ -16,6 +16,7 @@
     "vitepress-plugin-mermaid": "^2.0.17"
   },
   "dependencies": {
+    "artalk": "^2.10.0",
     "viewerjs": "^1.11.8"
   }
 }

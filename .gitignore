@@ -7,6 +7,9 @@
 node_modules/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
+# Artalk 服务端地址（本地配置，含真实地址不提交）
+docs/.env
+docs/.env.local
 # 由 scripts/generate-exercise-docs.mjs 在启动/构建前生成
 docs/习题集和答案/phase*/
 .DS_Store

@@ -47,7 +47,7 @@ func TestRun_ZeroItems(t *testing.T) {
 func TestRun_Large(t *testing.T) {
 	// 100个生产者，各产100个: sum(0..9999) = 49995000
 	result := Run(100, 50, 100)
-	expected := 100*100*(100*100-1) / 2 // n*(n-1)/2 where n=10000
+	expected := 100 * 100 * (100*100 - 1) / 2 // n*(n-1)/2 where n=10000
 	if result != expected {
 		t.Errorf("期望 %d，得到 %d", expected, result)
 	}

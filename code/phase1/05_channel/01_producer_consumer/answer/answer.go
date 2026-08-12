@@ -4,43 +4,62 @@ package answer
 
 import (
 	"sync"
-	"sync/atomic"
 )
 
+// Run 运行生产者-消费者模型
+// numProducers: 生产者数量
+// numConsumers: 消费者数量
+// itemsPerProducer: 每个生产者产生的任务数
+// 生产者 p 产生的值为: p*itemsPerProducer + 0, p*itemsPerProducer + 1, ..., p*itemsPerProducer + (itemsPerProducer-1)
+// 返回所有任务值的总和
 func Run(numProducers, numConsumers, itemsPerProducer int) int {
-	ch := make(chan int, numProducers*itemsPerProducer)
+	// TODO: 在这里实现你的代码
+	sum := 0
+	mu := sync.Mutex{}
+	// 任务队列
+	taskQueue := make(chan func(), 1)
+	consumerWG := sync.WaitGroup{}
+	producerWG := sync.WaitGroup{}
 
-	// 启动生产者
-	var prodWg sync.WaitGroup
-	for p := 0; p < numProducers; p++ {
-		prodWg.Add(1)
-		go func(p int) {
-			defer prodWg.Done()
-			for i := 0; i < itemsPerProducer; i++ {
-				ch <- p*itemsPerProducer + i
-			}
-		}(p)
-	}
-
-	// 生产者全部完成后关闭 channel
-	go func() {
-		prodWg.Wait()
-		close(ch)
-	}()
-
-	// 启动消费者
-	var sum int64
-	var consWg sync.WaitGroup
-	for c := 0; c < numConsumers; c++ {
-		consWg.Add(1)
+	// 生成消费者
+	for i := 0; i < numConsumers; i++ {
+		consumerWG.Add(1)
 		go func() {
-			defer consWg.Done()
-			for task := range ch {
-				atomic.AddInt64(&sum, int64(task))
+			defer consumerWG.Done()
+			for task := range taskQueue {
+				func() {
+					defer recover() // 保护consume 哪怕task失败也能继续for，保持consumer活着
+
+					// 执行任务
+					task()
+				}()
 			}
 		}()
 	}
 
-	consWg.Wait()
-	return int(sum)
+	// 生成生产者
+	for p := 0; p < numProducers; p++ {
+		producerWG.Add(1)
+
+		go func(p int) {
+			defer producerWG.Done()
+
+			for i := 0; i < itemsPerProducer; i++ {
+				value := p*itemsPerProducer + i
+				taskQueue <- func() {
+					mu.Lock()
+					sum += value
+					mu.Unlock()
+				}
+			}
+		}(p)
+
+	}
+	// 生产者生产完 任务
+	producerWG.Wait()
+	close(taskQueue)
+
+	// 等待消费者处理完任务
+	consumerWG.Wait()
+	return sum
 }

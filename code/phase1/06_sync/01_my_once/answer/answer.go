@@ -13,11 +13,15 @@ type MyOnce struct {
 }
 
 func (o *MyOnce) Do(f func()) {
+
+	// 快判断，抢锁
 	if atomic.LoadUint32(&o.done) == 1 {
 		return
 	}
 	o.mu.Lock()
 	defer o.mu.Unlock()
+
+	// 确保抢到锁之后的状态没有改变
 	if o.done == 0 {
 		defer atomic.StoreUint32(&o.done, 1)
 		f()

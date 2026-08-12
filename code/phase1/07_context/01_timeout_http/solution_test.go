@@ -57,7 +57,7 @@ func TestFetchWithTimeout_ParentCancel(t *testing.T) {
 
 func TestFetchMultiple_AllSuccess(t *testing.T) {
 	fetcher := mockFetcher(10*time.Millisecond, "data")
-	urls := []string{"http://a.com", "http://b.com", "http://c.com"}
+	urls := []string{"https://bilibili.com", "https://baidu.com", "https://fast.com"}
 
 	results := FetchMultiple(urls, time.Second, fetcher)
 	if len(results) != 3 {

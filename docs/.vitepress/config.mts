@@ -191,7 +191,10 @@ export default withMermaid(defineConfig({
           items: [
             { text: '项目首页', link: '/phase3/docs-rag/' },
             { text: '学习笔记', link: '/phase3/docs-rag/学习笔记' },
-            { text: '项目设计', link: '/phase3/docs-rag/项目设计' }
+            { text: '项目设计', link: '/phase3/docs-rag/项目设计' },
+            { text: '多模态文档处理逻辑', link: '/phase3/docs-rag/多模态文档处理逻辑' },
+            { text: 'Rag 的 13 种分块策略', link: '/phase3/docs-rag/Rag的13种分块策略' },
+            { text: '落地化的 RAG 系统优化策略', link: '/phase3/docs-rag/落地化的RAG系统优化策略' }
           ]
         },
         {

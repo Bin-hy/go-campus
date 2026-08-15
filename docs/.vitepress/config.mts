@@ -57,6 +57,7 @@ export default withMermaid(defineConfig({
           { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
           { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' },
           { text: 'String 与字节切片', link: '/第一阶段-知识详解/String与字节切片' },
+          { text: 'Go 内存分配详解', link: '/第一阶段-知识详解/Go内存分配详解' },
           { text: 'Go 并发编程详解', link: '/第一阶段-知识详解/Go并发编程详解' },
           { text: 'Go 并发编程问答集', link: '/第一阶段-知识详解/Go并发编程问答集' },
           { text: 'Go Context 详解', link: '/第一阶段-知识详解/Go Context 详解' },
@@ -101,6 +102,7 @@ export default withMermaid(defineConfig({
             { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
             { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' },
             { text: 'String 与字节切片', link: '/第一阶段-知识详解/String与字节切片' },
+            { text: 'Go 内存分配详解', link: '/第一阶段-知识详解/Go内存分配详解' },
             { text: 'Go 并发编程详解', link: '/第一阶段-知识详解/Go并发编程详解' },
             { text: 'Go 并发编程问答集', link: '/第一阶段-知识详解/Go并发编程问答集' },
             { text: 'Go Context 详解', link: '/第一阶段-知识详解/Go Context 详解' }

@@ -7,6 +7,10 @@
 
 ## 一、Goroutine 原理
 
+::: tip 配套基础
+本节涉及的 goroutine 栈、栈增长、上下文切换，其底层原理（PC/SP/Stack Frame、逃逸分析）见 [Go 函数调用与栈详解](/第一阶段-知识详解/Go函数调用与栈详解)。
+:::
+
 ### 1.1 goroutine 是什么
 
 goroutine 是 Go runtime 管理的轻量级用户态线程。
@@ -161,6 +165,8 @@ P = processor（调度资源）
 3. 绑定 mcache 做高效内存分配
 
 > 补充：P 是 GM 模型升级到 GMP 的关键——没有 P 就只能用全局队列加锁。
+>
+> 深入：GMP 的完整调度机制（G 状态机、gopark、Handoff、并发与并行）见 [Go GMP 调度详解](/第一阶段-知识详解/Go GMP 调度详解)。
 
 ### 1.8 goroutine 泄漏
 

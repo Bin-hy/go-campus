@@ -59,12 +59,14 @@ export default withMermaid(defineConfig({
           { text: 'String 与字节切片', link: '/第一阶段-知识详解/String与字节切片' },
           { text: 'Go 函数调用与栈详解', link: '/第一阶段-知识详解/Go函数调用与栈详解' },
           { text: 'Go 内存分配详解', link: '/第一阶段-知识详解/Go内存分配详解' },
+          { text: 'Go GC 详解', link: '/第一阶段-知识详解/Go GC 详解' },
           { text: 'Go 并发编程详解', link: '/第一阶段-知识详解/Go并发编程详解' },
           { text: 'Go GMP 调度详解', link: '/第一阶段-知识详解/Go GMP 调度详解' },
           { text: 'Go 并发编程问答集', link: '/第一阶段-知识详解/Go并发编程问答集' },
           { text: 'Go Context 详解', link: '/第一阶段-知识详解/Go Context 详解' },
           { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
-          { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' }
+          { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' },
+          { text: '后端技术栈强化', link: '/后端技术栈强化/' }
         ]
       },
       {
@@ -106,6 +108,7 @@ export default withMermaid(defineConfig({
             { text: 'String 与字节切片', link: '/第一阶段-知识详解/String与字节切片' },
             { text: 'Go 函数调用与栈详解', link: '/第一阶段-知识详解/Go函数调用与栈详解' },
             { text: 'Go 内存分配详解', link: '/第一阶段-知识详解/Go内存分配详解' },
+            { text: 'Go GC 详解', link: '/第一阶段-知识详解/Go GC 详解' },
             { text: 'Go 并发编程详解', link: '/第一阶段-知识详解/Go并发编程详解' },
             { text: 'Go GMP 调度详解', link: '/第一阶段-知识详解/Go GMP 调度详解' },
             { text: 'Go 并发编程问答集', link: '/第一阶段-知识详解/Go并发编程问答集' },
@@ -117,6 +120,71 @@ export default withMermaid(defineConfig({
           items: [
             { text: '阶段学习计划', link: '/学习计划安排/第一阶段-Go语言深入' },
             { text: '代码练习指南', link: '/练习指南' }
+          ]
+        }
+      ],
+      '/后端技术栈强化/': [
+        {
+          text: '开始',
+          items: [
+            { text: '模块总览', link: '/后端技术栈强化/' }
+          ]
+        },
+        {
+          text: 'S1 MySQL 深入',
+          collapsed: false,
+          items: [
+            { text: '存储引擎与 B+ 树', link: '/后端技术栈强化/01-mysql/存储引擎与B+树' },
+            { text: '事务与 MVCC', link: '/后端技术栈强化/01-mysql/事务与MVCC' },
+            { text: '索引与 SQL 优化', link: '/后端技术栈强化/01-mysql/索引与SQL优化' },
+            { text: '主从复制与高可用', link: '/后端技术栈强化/01-mysql/主从复制与高可用' },
+            { text: '面试题集', link: '/后端技术栈强化/01-mysql/面试题集' }
+          ]
+        },
+        {
+          text: 'S2 Redis 深入',
+          collapsed: false,
+          items: [
+            { text: '数据结构底层', link: '/后端技术栈强化/02-redis/数据结构底层' },
+            { text: '持久化与高可用', link: '/后端技术栈强化/02-redis/持久化与高可用' },
+            { text: '缓存问题与一致性', link: '/后端技术栈强化/02-redis/缓存问题与一致性' },
+            { text: '分布式锁与场景', link: '/后端技术栈强化/02-redis/分布式锁与场景' },
+            { text: '面试题集', link: '/后端技术栈强化/02-redis/面试题集' }
+          ]
+        },
+        {
+          text: 'S3 Kafka 深入',
+          collapsed: false,
+          items: [
+            { text: '架构与存储', link: '/后端技术栈强化/03-kafka/架构与存储' },
+            { text: '生产消费语义', link: '/后端技术栈强化/03-kafka/生产消费语义' },
+            { text: '可靠性与积压', link: '/后端技术栈强化/03-kafka/可靠性与积压' },
+            { text: '面试题集', link: '/后端技术栈强化/03-kafka/面试题集' }
+          ]
+        },
+        {
+          text: 'S4 Go 微服务',
+          collapsed: false,
+          items: [
+            { text: '架构与 gRPC', link: '/后端技术栈强化/04-microservice/架构与gRPC' },
+            { text: '治理与稳定性', link: '/后端技术栈强化/04-microservice/治理与稳定性' },
+            { text: '面试题集', link: '/后端技术栈强化/04-microservice/面试题集' }
+          ]
+        },
+        {
+          text: 'S5 高并发场景题',
+          collapsed: false,
+          items: [
+            { text: '场景题（上）：秒杀/红包/ID/一致性', link: '/后端技术栈强化/05-high-concurrency/场景题-上' },
+            { text: '场景题（中）：锁/限流/幂等/消息', link: '/后端技术栈强化/05-high-concurrency/场景题-中' },
+            { text: '场景题（下）：Feed/点赞/排行/短链', link: '/后端技术栈强化/05-high-concurrency/场景题-下' }
+          ]
+        },
+        {
+          text: 'S6 Agent Backend',
+          collapsed: false,
+          items: [
+            { text: '系统设计与串联', link: '/后端技术栈强化/06-agent-backend/系统设计与串联' }
           ]
         }
       ],

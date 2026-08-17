@@ -50,7 +50,9 @@ func TestObjectPool_Demo(t *testing.T) {
 
 func BenchmarkProcessData_Bad(b *testing.B) {
 	inputs := make([]int, 10000)
-	for i := range inputs { inputs[i] = i }
+	for i := range inputs {
+		inputs[i] = i
+	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ProcessData_Bad(inputs)
@@ -59,7 +61,9 @@ func BenchmarkProcessData_Bad(b *testing.B) {
 
 func BenchmarkProcessData_Good(b *testing.B) {
 	inputs := make([]int, 10000)
-	for i := range inputs { inputs[i] = i }
+	for i := range inputs {
+		inputs[i] = i
+	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ProcessData_Good(inputs)
@@ -68,7 +72,9 @@ func BenchmarkProcessData_Good(b *testing.B) {
 
 func BenchmarkConcatStrings_Bad(b *testing.B) {
 	strs := make([]string, 1000)
-	for i := range strs { strs[i] = "x" }
+	for i := range strs {
+		strs[i] = "x"
+	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ConcatStrings_Bad(strs)
@@ -77,7 +83,9 @@ func BenchmarkConcatStrings_Bad(b *testing.B) {
 
 func BenchmarkConcatStrings_Good(b *testing.B) {
 	strs := make([]string, 1000)
-	for i := range strs { strs[i] = "x" }
+	for i := range strs {
+		strs[i] = "x"
+	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ConcatStrings_Good(strs)

@@ -40,8 +40,8 @@ func TestOptimizedMessage_Size(t *testing.T) {
 
 	// 字段总大小：8+1+1+4+8+2+1 = 25 bytes
 	// 最优对齐：8+8+4+2+1+1+1+padding = 应该是 24 或 32 取决于排列
-	// 最优排列：ID(8) + Timestamp(8) + Length(4) + Flags(2) + Type(1) + Priority(1) + Valid(1) + pad(7)... 
-	// 实际最优是 24 bytes: 两个 int64(16) + uint32(4) + uint16(2) + 3个uint8(3) + 1 pad = 32? 
+	// 最优排列：ID(8) + Timestamp(8) + Length(4) + Flags(2) + Type(1) + Priority(1) + Valid(1) + pad(7)...
+	// 实际最优是 24 bytes: 两个 int64(16) + uint32(4) + uint16(2) + 3个uint8(3) + 1 pad = 32?
 	// 不对：uint64(8) + int64(8) + uint32(4) + uint16(2) + uint8(1) + uint8(1) + bool(1) + pad(7)
 	// = 8+8+4+2+1+1+1+pad(7) 不对... 对齐到 8: 8+8 = 16, +4+2+1+1 = 8, +1+pad(7) = 8 → 总32
 	// 更优：uint64(8) + int64(8) + uint32(4) + uint16(2) + uint8+uint8+bool = 3, pad 5 → 8+8+8 = nope

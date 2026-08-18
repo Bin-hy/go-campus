@@ -1,12 +1,13 @@
 # 后端技术栈强化
 
-> 面向字节「后端 agent 决策」岗位的后端能力补齐。按 **S1 → S6** 依赖顺序学，共 12 周。
+> 面向字节「后端 agent 决策」岗位的后端能力补齐。按 **S1 → S7** 依赖顺序学（S7 为工程化底座加分项），共 13.5 周。
 
 ## 学习路径
 
 ```text
 S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
         → S4 微服务（服务层）→ S5 高并发场景题（综合）→ S6 Agent Backend（串联）
+        → S7 K8s（工程化底座）
 ```
 
 - 每个核心模块都要达到五级能力：**L1 原理 → L2 机制 → L3 故障 → L4 设计 → L5 追问**（能连续回答三层追问不卡壳）。
@@ -65,11 +66,21 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 |------|------|
 | [系统设计与串联](./06-agent-backend/系统设计与串联) | 四组件串联成 Agent 决策系统 |
 
+## S7 K8s 容器编排（1.5 周）
+
+| 文章 | 内容 |
+|------|------|
+| [架构与核心对象](./07-k8s/架构与核心对象) | 控制面/数据面、Pod、声明式 API、核心对象 |
+| [调度与控制器](./07-k8s/调度与控制器) | 控制循环、滚动更新、HPA、requests/limits |
+| [网络与存储](./07-k8s/网络与存储) | Service/Ingress/DNS、CNI、PV/PVC/StorageClass |
+| [高可用与故障排查](./07-k8s/高可用与故障排查) | 探针、OOM、get/describe/logs 排障、etcd 高可用 |
+| [面试题集](./07-k8s/面试题集) | 6 题追问 3 层 |
+
 ---
 
 ## 配套实验
 
-实验代码在 `code/backend/`（`docker compose up -d` 起中间件，`go test ./...` 验证）：
+实验代码在 `code/backend/`（MySQL/Redis/Kafka 实验需 `docker compose up -d` 起中间件，`go test ./...` 验证；07-k8s 为纯 Go 模拟，直接 `go test` 即可，可选装 kind 起单机集群 + `kubectl` 实操）：
 
 | 模块 | 实验 |
 |------|------|
@@ -79,7 +90,8 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | 04-microservice | 熔断状态机、令牌桶、滑动窗口 |
 | 05-scenarios | 秒杀防超卖、接口幂等 |
 | 06-agent-backend | Redis→Kafka→MySQL 完整闭环 |
+| 07-k8s | 纯 Go 模拟：HPA 控制循环/调度/滚动更新/Service 转发/探针（code/backend/07-k8s）；可选 kind 单机集群实操 |
 
 ## 待定（backlog）
 
-工程化底座（gRPC 深入 / Docker / K8s）、分布式进阶（分库分表 / 分布式事务 / 分布式锁）、etcd —— 后续单独规划。
+工程化底座（gRPC 深入 / Docker）、分布式进阶（分库分表 / 分布式事务 / 分布式锁）、etcd —— 后续单独规划。

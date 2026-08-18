@@ -186,6 +186,17 @@ export default withMermaid(defineConfig({
           items: [
             { text: '系统设计与串联', link: '/后端技术栈强化/06-agent-backend/系统设计与串联' }
           ]
+        },
+        {
+          text: 'S7 K8s 容器编排',
+          collapsed: false,
+          items: [
+            { text: '架构与核心对象', link: '/后端技术栈强化/07-k8s/架构与核心对象' },
+            { text: '调度与控制器', link: '/后端技术栈强化/07-k8s/调度与控制器' },
+            { text: '网络与存储', link: '/后端技术栈强化/07-k8s/网络与存储' },
+            { text: '高可用与故障排查', link: '/后端技术栈强化/07-k8s/高可用与故障排查' },
+            { text: '面试题集', link: '/后端技术栈强化/07-k8s/面试题集' }
+          ]
         }
       ],
       '/练习指南': [

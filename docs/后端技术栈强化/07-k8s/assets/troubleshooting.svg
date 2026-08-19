@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="460" viewBox="0 0 840 460" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <!-- 排障决策树：get 看状态 → 按状态分支 → describe/logs/检查 定位 -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#868e96"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- 起点（绿） -->
+  <g filter="url(#shadow)">
+    <rect x="270" y="30" width="300" height="70" rx="9" fill="#e6fcf5" stroke="#087f5b" stroke-width="2"/>
+  </g>
+  <text x="420" y="66" font-size="15" font-weight="bold" fill="#0b3d2e" text-anchor="middle">kubectl get pods</text>
+  <text x="420" y="88" font-size="11.5" fill="#495057" text-anchor="middle">先看整体状态</text>
+
+  <!-- 状态异常？（灰：判断） -->
+  <polygon points="320,150 420,110 520,150 420,190" fill="#f1f3f5" stroke="#495057" stroke-width="1.5"/>
+  <text x="420" y="146" font-size="15" font-weight="bold" fill="#212529" text-anchor="middle">状态异常？</text>
+  <text x="420" y="166" font-size="11.5" fill="#495057" text-anchor="middle">按状态分支</text>
+
+  <!-- 分支 1：Pending -->
+  <g filter="url(#shadow)">
+    <rect x="10" y="300" width="195" height="90" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="107" y="344" font-size="14" font-weight="bold" fill="#1864ab" text-anchor="middle">kubectl describe pod</text>
+  <text x="107" y="366" font-size="11.5" fill="#495057" text-anchor="middle">Events 找调度失败原因</text>
+
+  <!-- 分支 2：CrashLoopBackOff -->
+  <g filter="url(#shadow)">
+    <rect x="218" y="300" width="195" height="90" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="315" y="344" font-size="14" font-weight="bold" fill="#1864ab" text-anchor="middle">kubectl logs --previous</text>
+  <text x="315" y="366" font-size="11.5" fill="#495057" text-anchor="middle">看崩溃前的日志</text>
+
+  <!-- 分支 3：ImagePullBackOff -->
+  <g filter="url(#shadow)">
+    <rect x="426" y="300" width="195" height="90" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="523" y="344" font-size="14" font-weight="bold" fill="#1864ab" text-anchor="middle">检查镜像名</text>
+  <text x="523" y="366" font-size="11.5" fill="#495057" text-anchor="middle">与私有仓库鉴权</text>
+
+  <!-- 分支 4：Running 但有问题 -->
+  <g filter="url(#shadow)">
+    <rect x="634" y="300" width="195" height="90" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="731" y="344" font-size="14" font-weight="bold" fill="#1864ab" text-anchor="middle">kubectl exec 进容器</text>
+  <text x="731" y="366" font-size="11.5" fill="#495057" text-anchor="middle">或查 Service/Ingress</text>
+
+  <!-- 连线 -->
+  <path d="M 420 100 L 420 107" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 400 190 L 130 298" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="265" y="238" font-size="11" fill="#868e96" text-anchor="middle">Pending</text>
+  <path d="M 412 190 L 315 298" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="363" y="238" font-size="11" fill="#868e96" text-anchor="middle">CrashLoopBackOff</text>
+  <path d="M 428 190 L 525 298" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="476" y="238" font-size="11" fill="#868e96" text-anchor="middle">ImagePullBackOff</text>
+  <path d="M 440 190 L 730 298" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="585" y="238" font-size="11" fill="#868e96" text-anchor="middle">Running 但有问题</text>
+</svg>

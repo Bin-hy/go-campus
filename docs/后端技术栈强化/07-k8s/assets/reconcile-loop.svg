@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="280" viewBox="0 0 900 280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <!-- 控制循环 Reconcile Loop：期望状态 vs 实际状态，有差距就执行，执行后写回，继续对比 -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#868e96"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- 期望状态（绿：声明/目标） -->
+  <g filter="url(#shadow)">
+    <rect x="20" y="90" width="170" height="70" rx="9" fill="#e6fcf5" stroke="#087f5b" stroke-width="2"/>
+  </g>
+  <text x="105" y="120" font-size="15" font-weight="bold" fill="#0b3d2e" text-anchor="middle">期望状态</text>
+  <text x="105" y="141" font-size="11.5" fill="#495057" text-anchor="middle">YAML: replicas=3</text>
+
+  <!-- 有差距？（灰：判断） -->
+  <polygon points="240,125 315,90 390,125 315,160" fill="#f1f3f5" stroke="#495057" stroke-width="1.5"/>
+  <text x="315" y="122" font-size="15" font-weight="bold" fill="#212529" text-anchor="middle">有差距？</text>
+  <text x="315" y="143" font-size="11.5" fill="#495057" text-anchor="middle">对比</text>
+
+  <!-- 执行动作（蓝：动作） -->
+  <g filter="url(#shadow)">
+    <rect x="440" y="40" width="180" height="70" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="530" y="72" font-size="15" font-weight="bold" fill="#1864ab" text-anchor="middle">执行动作</text>
+  <text x="530" y="93" font-size="11.5" fill="#495057" text-anchor="middle">创建 / 删除 Pod</text>
+
+  <!-- 写回 etcd（蓝：动作） -->
+  <g filter="url(#shadow)">
+    <rect x="440" y="170" width="180" height="70" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="530" y="202" font-size="15" font-weight="bold" fill="#1864ab" text-anchor="middle">写回 etcd</text>
+  <text x="530" y="223" font-size="11.5" fill="#495057" text-anchor="middle">更新实际状态</text>
+
+  <!-- 实际状态（黄：实际/中间状态） -->
+  <g filter="url(#shadow)">
+    <rect x="670" y="90" width="170" height="70" rx="9" fill="#fff3bf" stroke="#f08c00" stroke-width="2"/>
+  </g>
+  <text x="755" y="120" font-size="15" font-weight="bold" fill="#5c3a00" text-anchor="middle">实际状态</text>
+  <text x="755" y="141" font-size="11.5" fill="#5c3a00" text-anchor="middle">etcd 里的 Pod 数</text>
+
+  <!-- 连线 -->
+  <path d="M 190 125 L 238 125" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 362 112 L 438 80" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="90" font-size="11" fill="#868e96" text-anchor="middle">有差距</text>
+  <path d="M 530 110 L 530 168" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 620 205 L 668 162" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="644" y="178" font-size="11" fill="#868e96" text-anchor="middle">写回</text>
+  <!-- 回环：实际状态回到对比，一致则维持，有差距则再执行 -->
+  <path d="M 755 160 C 715 245, 370 245, 317 158" stroke="#868e96" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="536" y="230" font-size="11" fill="#868e96" text-anchor="middle">一致 → 维持；有差距 → 再执行</text>
+</svg>

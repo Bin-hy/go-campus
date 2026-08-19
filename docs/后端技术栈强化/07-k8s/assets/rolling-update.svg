@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="150" viewBox="0 0 1000 150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <!-- 滚动更新：先起新、确认健康、再删旧，交替进行 -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#868e96"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- S1（蓝：动作） -->
+  <g filter="url(#shadow)">
+    <rect x="16" y="37" width="176" height="76" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="104" y="75" font-size="15" font-weight="bold" fill="#1864ab" text-anchor="middle">起 1 个新 Pod</text>
+  <text x="104" y="96" font-size="11.5" fill="#495057" text-anchor="middle">v2</text>
+
+  <!-- S2（蓝：动作） -->
+  <g filter="url(#shadow)">
+    <rect x="212" y="37" width="176" height="76" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="300" y="75" font-size="15" font-weight="bold" fill="#1864ab" text-anchor="middle">新 Pod 就绪</text>
+  <text x="300" y="96" font-size="11.5" fill="#495057" text-anchor="middle">删 1 个旧 Pod v1</text>
+
+  <!-- S3（蓝：动作） -->
+  <g filter="url(#shadow)">
+    <rect x="408" y="37" width="176" height="76" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="496" y="75" font-size="15" font-weight="bold" fill="#1864ab" text-anchor="middle">再起 1 个新 Pod</text>
+  <text x="496" y="96" font-size="11.5" fill="#495057" text-anchor="middle">v2</text>
+
+  <!-- S4（蓝：动作） -->
+  <g filter="url(#shadow)">
+    <rect x="604" y="37" width="176" height="76" rx="9" fill="#d0ebff" stroke="#1c7ed6" stroke-width="2"/>
+  </g>
+  <text x="692" y="75" font-size="15" font-weight="bold" fill="#1864ab" text-anchor="middle">再删 1 个旧 Pod</text>
+  <text x="692" y="96" font-size="11.5" fill="#495057" text-anchor="middle">v1</text>
+
+  <!-- S5（绿：完成） -->
+  <g filter="url(#shadow)">
+    <rect x="800" y="37" width="176" height="76" rx="9" fill="#e6fcf5" stroke="#087f5b" stroke-width="2"/>
+  </g>
+  <text x="888" y="75" font-size="15" font-weight="bold" fill="#0b3d2e" text-anchor="middle">交替进行</text>
+  <text x="888" y="96" font-size="11.5" fill="#495057" text-anchor="middle">直到全部换成 v2</text>
+
+  <!-- 连线 -->
+  <path d="M 192 75 L 210 75" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 388 75 L 406 75" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 584 75 L 602 75" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 780 75 L 798 75" stroke="#868e96" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

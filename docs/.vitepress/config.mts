@@ -76,6 +76,7 @@ export default withMermaid(defineConfig({
           { text: 'Go Context 详解', link: '/第一阶段-知识详解/Go Context 详解' },
           { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
           { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' },
+          { text: '第二阶段 · 分布式系统', link: '/第二阶段-知识详解/分布式系统面试详解' },
           { text: '后端技术栈强化', link: '/后端技术栈强化/' }
         ]
       },
@@ -219,6 +220,15 @@ export default withMermaid(defineConfig({
             { text: '高可用与故障排查', link: '/后端技术栈强化/07-k8s/高可用与故障排查' },
             { text: '面试题集', link: '/后端技术栈强化/07-k8s/面试题集' }
           ]
+        },
+        {
+          text: 'S8 分布式理论',
+          collapsed: false,
+          items: [
+            { text: 'CAP 与 BASE 理论', link: '/后端技术栈强化/08-distributed/CAP与BASE理论' },
+            { text: 'Raft 算法详解', link: '/后端技术栈强化/08-distributed/Raft算法详解' },
+            { text: '面试题集', link: '/后端技术栈强化/08-distributed/面试题集' }
+          ]
         }
       ],
       '/练习指南': [
@@ -242,7 +252,8 @@ export default withMermaid(defineConfig({
           text: '第二阶段 · 计算机基础',
           items: [
             { text: '操作系统面试详解', link: '/第二阶段-知识详解/操作系统面试详解' },
-            { text: '计算机网络面试详解', link: '/第二阶段-知识详解/计算机网络面试详解' }
+            { text: '计算机网络面试详解', link: '/第二阶段-知识详解/计算机网络面试详解' },
+            { text: '分布式系统面试详解', link: '/第二阶段-知识详解/分布式系统面试详解' }
           ]
         },
         {

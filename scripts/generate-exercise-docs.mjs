@@ -8,7 +8,8 @@ const outputRoot = resolve(repositoryRoot, 'docs', '习题集和答案')
 const phaseNames = {
   phase1: '第一阶段 · Go 语言深入',
   phase2: '第二阶段 · 计算机基础',
-  phase3: '第三阶段 · AI 应用开发'
+  phase3: '第三阶段 · AI 应用开发',
+  route: '路线专题 · 后端与计算机基础'
 }
 
 function findReadmes(directory) {
@@ -40,7 +41,7 @@ const phases = new Set()
 for (const readme of readmes) {
   const sourcePath = normalizePath(relative(codeRoot, readme))
   const parts = sourcePath.split('/')
-  if (!/^phase\d+$/.test(parts[0])) continue
+  if (!/^(phase\d+|route)$/.test(parts[0])) continue
   phases.add(parts[0])
 
   const pageDirectory = parts.slice(0, -1).join('/')

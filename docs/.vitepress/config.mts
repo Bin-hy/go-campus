@@ -51,6 +51,16 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: '路线专题',
+        items: [
+          { text: '30 天冲刺总览', link: '/路线专题/' },
+          { text: '算法专项训练', link: '/路线专题/01-算法专项训练' },
+          { text: '后端与计算机基础', link: '/路线专题/02-后端与计算机基础' },
+          { text: '大模型与 Agent 核心能力', link: '/路线专题/03-大模型与Agent核心能力' },
+          { text: '简历项目改造与面试实战', link: '/路线专题/04-简历项目改造与面试实战' }
+        ]
+      },
+      {
         text: '知识详解',
         items: [
           { text: '第一阶段 · Go 语言深入', link: '/第一阶段-知识点详解' },
@@ -87,6 +97,18 @@ export default withMermaid(defineConfig({
     ],
 
     sidebar: {
+      '/路线专题/': [
+        {
+          text: '30 天冲刺训练营',
+          items: [
+            { text: '专题总览', link: '/路线专题/' },
+            { text: '算法专项训练（Day 1-30）', link: '/路线专题/01-算法专项训练' },
+            { text: '后端与计算机基础（Day 1-7）', link: '/路线专题/02-后端与计算机基础' },
+            { text: '大模型与 Agent 核心能力（Day 8-17）', link: '/路线专题/03-大模型与Agent核心能力' },
+            { text: '简历项目改造与面试实战（Day 18-30）', link: '/路线专题/04-简历项目改造与面试实战' }
+          ]
+        }
+      ],
       '/学习计划安排/': [
         {
           text: '学习计划',

@@ -8,7 +8,8 @@ const codeRoot = resolve(repositoryRoot, 'code')
 const phaseNames: Record<string, string> = {
   phase1: '第一阶段 · Go 语言深入',
   phase2: '第二阶段 · 计算机基础',
-  phase3: '第三阶段 · AI 应用开发'
+  phase3: '第三阶段 · AI 应用开发',
+  route: '路线专题 · 后端与计算机基础'
 }
 
 const topicNames: Record<string, string> = {
@@ -33,7 +34,13 @@ const topicNames: Record<string, string> = {
   '01_llm_basics': 'LLM 基础',
   '02_prompt_engineering': 'Prompt Engineering',
   '03_embedding': 'Embedding',
-  '04_rag_project': 'RAG 项目'
+  '04_rag_project': 'RAG 项目',
+  '01_concurrency': 'Go 并发',
+  '02_io_multiplexing': 'IO 多路复用',
+  '03_network': '网络与 SSE',
+  '04_sql': 'SQL 优化',
+  '05_redis_cache': 'Redis 缓存',
+  '06_async_pipeline': 'MQ 异步管道'
 }
 
 export interface ExercisePage {
@@ -69,7 +76,7 @@ export function getExercisePages(): ExercisePage[] {
       const parts = sourcePath.split('/')
       const phase = parts[0]
 
-      if (!/^phase\d+$/.test(phase)) return undefined
+      if (!/^(phase\d+|route)$/.test(phase)) return undefined
 
       const pageDirectory = parts.slice(0, -1).join('/')
 

@@ -14,6 +14,7 @@
 | Day 4 · 4.6 慢 SQL 优化 | `04_sql/01_slow_query` | 纯 SQL 练习（无 Go 测试），explain 自测 |
 | Day 5 · 5.6 防击穿缓存重建 | `05_redis_cache/01_cache_breakdown` | 缓存接口抽象 + SETNX 互斥锁重建，离线可测 |
 | Day 6 · 6.5 AI 剪辑任务异步流程 | `06_async_pipeline/01_task_pipeline` | 任务队列 + 多 worker 消费 + 失败重试 + 结果事件 |
+| Day 1 · 1.6 Pydantic vs Go JSON | `07_python/01_pydantic_validation` | 双语言练习：`solution.go` + `solution.py`（待实现）、`solution_test.go` + `test_solution.py`（测试）、`answer/`（参考答案） |
 
 ## 运行
 
@@ -21,6 +22,11 @@
 cd code/route
 go test ./...                                   # 全部
 go test ./01_concurrency/01_worker_pool -v      # 单题
+
+# 07_python 双语言练习（实现 solution.go / solution.py 后跑测试）
+go test ./07_python/01_pydantic_validation -v                   # Go 侧
+cd 07_python/01_pydantic_validation
+python3 -m unittest test_solution.py -v        # Python 侧（需 pip install "pydantic>=2"）
 ```
 
 > 说明：`04_sql` 为纯 SQL 练习，无 Go 测试；`05_redis_cache` 用 `Cache` 接口抽象替代真实 Redis，方便离线自测（生产实现参考文档 5.6 的 go-redis 写法与 `code/backend/02-redis`）。

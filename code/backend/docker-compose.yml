@@ -1,6 +1,6 @@
 # Go 后端技术栈实验的中间件编排
 # 用法：docker compose up -d
-# 起 MySQL 8 / Redis 7 / Kafka（KRaft 模式，无需 Zookeeper）
+# 起 MySQL 8 / Redis 7 / Kafka（KRaft 模式，无需 Zookeeper）/ MinIO（S3 兼容对象存储）
 
 services:
   mysql:
@@ -40,6 +40,20 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
 
+  minio:
+    image: minio/minio
+    container_name: backend-minio
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # 控制台（浏览器访问 http://localhost:9001，账号密码均为 minioadmin）
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
 volumes:
   mysql_data:
   kafka_data:
+  minio_data:

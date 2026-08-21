@@ -1,6 +1,6 @@
 # 后端技术栈强化
 
-> 面向字节「后端 agent 决策」岗位的后端能力补齐。按 **S1 → S8** 依赖顺序学（S7 为工程化底座加分项，S8 为分布式理论兜底），共 14.5 周。
+> 面向字节「后端 agent 决策」岗位的后端能力补齐。按 **S1 → S9** 依赖顺序学（S7 为工程化底座加分项，S8 为分布式理论兜底，S9 为海量素材落地），共 16 周。
 
 ## 学习路径
 
@@ -8,6 +8,7 @@
 S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
         → S4 微服务（服务层）→ S5 高并发场景题（综合）→ S6 Agent Backend（串联）
         → S7 K8s（工程化底座）→ S8 分布式理论（共识与一致性兜底）
+        → S9 对象存储（海量素材落地）
 ```
 
 - 每个核心模块都要达到五级能力：**L1 原理 → L2 机制 → L3 故障 → L4 设计 → L5 追问**（能连续回答三层追问不卡壳）。
@@ -88,9 +89,21 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | [Raft 算法详解](./08-distributed/Raft算法详解) | 选举/日志复制/提交规则/安全性/成员变更/快照/线性一致读、etcd 工程实现 |
 | [面试题集](./08-distributed/面试题集) | 8 题追问 3 层 |
 
+## S9 对象存储（1.5 周）
+
+> 面向剪映/CapCut AI 剪辑的海量素材落地：对象存储原理、S3 API 实战、安全与生产实践。配套代码走真实 MinIO SDK（`minio-go/v7`），本地学、线上换 endpoint 即用于 TOS/OSS/COS。
+
+| 文章 | 内容 |
+|------|------|
+| [为什么需要对象存储](./09-object-storage/为什么需要对象存储) | 块/文件/对象三模型、扁平命名空间、对象不可变、S3 兼容生态 |
+| [架构与核心机制](./09-object-storage/架构与核心机制) | 三层架构、一致性哈希、多副本 vs 纠删码、multipart、一致性模型 |
+| [S3 API 与 Go 实战](./09-object-storage/S3-API与Go实战) | minio-go CRUD、手写分片三步协议、预签名 URL 直传直下、CDN 回源 |
+| [安全与生产实践](./09-object-storage/安全与生产实践) | 三层权限与最小化、预签名边界、加密、防盗刷、版本/对象锁、AIGC 校验 |
+| [面试题集](./09-object-storage/面试题集) | 6 题追问 3 层 |
+
 ## 配套实验
 
-实验代码在 `code/backend/`（MySQL/Redis/Kafka 实验需 `docker compose up -d` 起中间件，`go test ./...` 验证；07-k8s 为纯 Go 模拟，直接 `go test` 即可，可选装 kind 起单机集群 + `kubectl` 实操）：
+实验代码在 `code/backend/`（MySQL/Redis/Kafka 实验需 `docker compose up -d` 起中间件，`go test ./...` 验证；09-object-storage 需 `docker compose up -d minio` 起 MinIO 容器；07-k8s 为纯 Go 模拟，直接 `go test` 即可，可选装 kind 起单机集群 + `kubectl` 实操）：
 
 | 模块 | 实验 |
 |------|------|
@@ -101,6 +114,7 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | 05-scenarios | 秒杀防超卖、接口幂等 |
 | 06-agent-backend | Redis→Kafka→MySQL 完整闭环 |
 | 07-k8s | 纯 Go 模拟：HPA 控制循环/调度/滚动更新/Service 转发/探针（code/backend/07-k8s）；可选 kind 单机集群实操 |
+| 09-object-storage | 分片上传三步协议、预签名直传直下、最小权限桶策略（真实 MinIO SDK，需 MinIO 容器） |
 
 ## 待定（backlog）
 

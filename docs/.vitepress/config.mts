@@ -229,6 +229,17 @@ export default withMermaid(defineConfig({
             { text: 'Raft 算法详解', link: '/后端技术栈强化/08-distributed/Raft算法详解' },
             { text: '面试题集', link: '/后端技术栈强化/08-distributed/面试题集' }
           ]
+        },
+        {
+          text: 'S9 对象存储',
+          collapsed: false,
+          items: [
+            { text: '为什么需要对象存储', link: '/后端技术栈强化/09-object-storage/为什么需要对象存储' },
+            { text: '架构与核心机制', link: '/后端技术栈强化/09-object-storage/架构与核心机制' },
+            { text: 'S3 API 与 Go 实战', link: '/后端技术栈强化/09-object-storage/S3-API与Go实战' },
+            { text: '安全与生产实践', link: '/后端技术栈强化/09-object-storage/安全与生产实践' },
+            { text: '面试题集', link: '/后端技术栈强化/09-object-storage/面试题集' }
+          ]
         }
       ],
       '/练习指南': [

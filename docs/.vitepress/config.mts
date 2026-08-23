@@ -199,6 +199,7 @@ export default withMermaid(defineConfig({
           text: 'S5 高并发场景题',
           collapsed: false,
           items: [
+            { text: '一致性与故障边界（AP/CP 深挖）', link: '/后端技术栈强化/05-high-concurrency/一致性与故障边界' },
             { text: '场景题（上）：秒杀/红包/ID/一致性', link: '/后端技术栈强化/05-high-concurrency/场景题-上' },
             { text: '场景题（中）：锁/限流/幂等/消息', link: '/后端技术栈强化/05-high-concurrency/场景题-中' },
             { text: '场景题（下）：Feed/点赞/排行/短链', link: '/后端技术栈强化/05-high-concurrency/场景题-下' }

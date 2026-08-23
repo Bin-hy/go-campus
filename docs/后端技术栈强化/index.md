@@ -49,9 +49,10 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 
 | 文章 | 内容 |
 |------|------|
+| [单体拆分与边界设计](./04-microservice/单体拆分与边界设计) | 什么时候拆、边界（DDD 限界上下文/康威/database-per-service）、迁移技巧（绞杀者/防腐层/数据双写/避免 2PC/灰度） |
 | [架构与 gRPC](./04-microservice/架构与gRPC) | 拆分原则、Protobuf、HTTP/2、四种流 |
 | [治理与稳定性](./04-microservice/治理与稳定性) | 注册发现、负载均衡、可观测性、优雅上下线、熔断限流降级 |
-| [面试题集](./04-microservice/面试题集) | 6 题追问 3 层 |
+| [面试题集](./04-microservice/面试题集) | 8 题追问 3 层 |
 
 ## S5 高并发场景题（2.5 周）
 
@@ -87,7 +88,8 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 |------|------|
 | [CAP 与 BASE 理论](./08-distributed/CAP与BASE理论) | CAP 证明与误区、PACELC、CP/AP 选型、最终一致落地模式 |
 | [Raft 算法详解](./08-distributed/Raft算法详解) | 选举/日志复制/提交规则/安全性/成员变更/快照/线性一致读、etcd 工程实现 |
-| [面试题集](./08-distributed/面试题集) | 8 题追问 3 层 |
+| [etcd 详解与工程实践](./08-distributed/etcd详解与工程实践) | MVCC/Watch/Lease/事务 CAS、分布式锁、服务发现与注册中心、watch 风暴、K8s 场景 |
+| [面试题集](./08-distributed/面试题集) | 10 题追问 3 层 |
 
 ## S9 对象存储（1.5 周）
 
@@ -119,4 +121,4 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 
 ## 待定（backlog）
 
-分布式进阶（分库分表 / 分布式事务 / 分布式锁 / 一致性哈希）、etcd 手写实践 —— 后续单独规划。（分布式理论部分已由 S8 覆盖）
+分布式进阶（分库分表 / 分布式事务 / 一致性哈希）—— 后续单独规划。（分布式理论已由 S8 覆盖：CAP/BASE、Raft、etcd 详解与工程实践；etcd/分布式锁/RPC 治理的 Go 手写实践见 [路线专题 Day 8-9 代码集](/习题集和答案/route/)。）

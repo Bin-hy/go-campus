@@ -41,7 +41,8 @@ const topicNames: Record<string, string> = {
   '04_sql': 'SQL 优化',
   '05_redis_cache': 'Redis 缓存',
   '06_async_pipeline': 'MQ 异步管道',
-  '08_rpc_etcd': 'etcd 与 RPC'
+  '08_rpc_etcd': 'etcd 与 RPC',
+  '09_microservice': '微服务拆分与综合实战'
 }
 
 export interface ExercisePage {

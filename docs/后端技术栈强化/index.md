@@ -91,7 +91,7 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 
 ## S9 对象存储（1.5 周）
 
-> 面向剪映/CapCut AI 剪辑的海量素材落地：对象存储原理、S3 API 实战、安全与生产实践。配套代码走真实 MinIO SDK（`minio-go/v7`），本地学、线上换 endpoint 即用于 TOS/OSS/COS。
+> 面向剪映/CapCut AI 剪辑的海量素材落地：对象存储原理、S3 API 实战、安全与生产实践、STS 临时凭证。配套代码走真实 MinIO SDK（`minio-go/v7`），本地学、线上换 endpoint 即用于 TOS/OSS/COS。
 
 | 文章 | 内容 |
 |------|------|
@@ -99,6 +99,7 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | [架构与核心机制](./09-object-storage/架构与核心机制) | 三层架构、一致性哈希、多副本 vs 纠删码、multipart、一致性模型 |
 | [S3 API 与 Go 实战](./09-object-storage/S3-API与Go实战) | minio-go CRUD、手写分片三步协议、预签名 URL 直传直下、CDN 回源 |
 | [安全与生产实践](./09-object-storage/安全与生产实践) | 三层权限与最小化、预签名边界、加密、防盗刷、版本/对象锁、AIGC 校验 |
+| [STS 临时凭证](./09-object-storage/STS临时凭证) | 不下发长期 AK、AssumeRole 换临时三元组、会话策略取交集、客户端直传 scoped 凭证链路 |
 | [面试题集](./09-object-storage/面试题集) | 6 题追问 3 层 |
 
 ## 配套实验
@@ -114,7 +115,7 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | 05-scenarios | 秒杀防超卖、接口幂等 |
 | 06-agent-backend | Redis→Kafka→MySQL 完整闭环 |
 | 07-k8s | 纯 Go 模拟：HPA 控制循环/调度/滚动更新/Service 转发/探针（code/backend/07-k8s）；可选 kind 单机集群实操 |
-| 09-object-storage | 分片上传三步协议、预签名直传直下、最小权限桶策略（真实 MinIO SDK，需 MinIO 容器） |
+| 09-object-storage | 分片上传三步协议、预签名直传直下、最小权限桶策略、STS 最小权限临时凭证（真实 MinIO SDK，需 MinIO 容器） |
 
 ## 待定（backlog）
 

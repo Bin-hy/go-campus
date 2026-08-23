@@ -26,10 +26,16 @@ function normalizePath(path) {
   return path.split(sep).join('/')
 }
 
-function renderPage(sourcePath, answerPath) {
-  const answer = answerPath
-    ? `\n\n---\n\n## 参考答案\n\n::: details 点击展开参考答案\n\n<<< @/../code/${answerPath}\n\n:::`
-    : ''
+const answerExtLabels = { '.go': 'Go', '.py': 'Python' }
+
+function renderPage(sourcePath, answerPaths) {
+  const answer = (answerPaths || [])
+    .map((answerPath) => {
+      const label = answerExtLabels[answerPath.slice(answerPath.lastIndexOf('.'))] || ''
+      const heading = label ? `参考答案（${label}）` : '参考答案'
+      return `\n\n---\n\n## ${heading}\n\n::: details 点击展开参考答案\n\n<<< @/../code/${answerPath}\n\n:::`
+    })
+    .join('')
 
   return `<!-- 此文件由 scripts/generate-exercise-docs.mjs 自动生成，请编辑 code/ 中的原文件。 -->\n\n<!-- @include: @/../code/${sourcePath} -->${answer}\n`
 }
@@ -45,12 +51,11 @@ for (const readme of readmes) {
   phases.add(parts[0])
 
   const pageDirectory = parts.slice(0, -1).join('/')
-  const answerPath = `${pageDirectory}/answer/answer.go`
   const outputFile = resolve(outputRoot, pageDirectory, 'index.md')
-  const content = renderPage(
-    sourcePath,
-    existsSync(resolve(codeRoot, answerPath)) ? answerPath : undefined
-  )
+  const answerPaths = ['answer/answer.go', 'answer/answer.py']
+    .map((f) => `${pageDirectory}/${f}`)
+    .filter((p) => existsSync(resolve(codeRoot, p)))
+  const content = renderPage(sourcePath, answerPaths)
 
   mkdirSync(dirname(outputFile), { recursive: true })
   if (!existsSync(outputFile) || readFileSync(outputFile, 'utf8') !== content) {

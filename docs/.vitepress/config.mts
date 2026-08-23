@@ -238,6 +238,7 @@ export default withMermaid(defineConfig({
             { text: '架构与核心机制', link: '/后端技术栈强化/09-object-storage/架构与核心机制' },
             { text: 'S3 API 与 Go 实战', link: '/后端技术栈强化/09-object-storage/S3-API与Go实战' },
             { text: '安全与生产实践', link: '/后端技术栈强化/09-object-storage/安全与生产实践' },
+            { text: 'STS 临时凭证', link: '/后端技术栈强化/09-object-storage/STS临时凭证' },
             { text: '面试题集', link: '/后端技术栈强化/09-object-storage/面试题集' }
           ]
         }

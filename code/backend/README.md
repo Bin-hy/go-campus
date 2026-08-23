@@ -19,7 +19,7 @@ go test ./...
 
 > 注意：`solution.go` 是题目骨架。07-k8s 与 09-object-storage 模块的骨架已随仓库提交并设置 `skip-worktree`（本地填写答案后的改动会被忽略，不会误提交）；其余模块由 `.gitignore` 忽略。参考答案统一在 `answer/answer.go`。
 
-## 目录结构（25 个练习，全部对齐 phase1 结构）
+## 目录结构（26 个练习，全部对齐 phase1 结构）
 
 | 模块 | 练习 |
 |------|------|
@@ -30,7 +30,7 @@ go test ./...
 | 05-scenarios | 01_seckill、02_idempotent |
 | 06-agent-backend | 01_agent_flow |
 | 07-k8s | 01_reconcile、02_scheduler、03_rolling_update、04_service_lb、05_probe |
-| 09-object-storage | 01_multipart_upload、02_presigned_url、03_bucket_policy |
+| 09-object-storage | 01_multipart_upload、02_presigned_url、03_bucket_policy、04_sts_assume_role |
 
 每个练习目录结构统一：
 

@@ -65,6 +65,7 @@
   border-radius: 8px;
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-divider);
+  overflow-x: auto; /* 宽图横向滚动，避免被容器裁切 */
 }
 
 .dark .mermaid {
@@ -74,4 +75,14 @@
 .mermaid svg {
   max-width: 100%;
   height: auto;
+}
+
+/* 修复：mermaid 11 的节点/边标签内部用 <p> 包裹文本，
+   会被 VitePress 全局 .vp-doc p 的 line-height: 28px / margin: 16px 0 污染，
+   导致多行（2 行及以上）标签的实际行高/外边距超出 mermaid 预分配的节点盒 → 文字遮挡重叠。
+   这里把 mermaid 内部的 p 重置为 mermaid 布局假定的行高（1.5）与零外边距。 */
+.vp-doc .mermaid p,
+.vp-doc .mermaid summary {
+  margin: 0;
+  line-height: 1.5;
 }

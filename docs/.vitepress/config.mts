@@ -104,7 +104,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: '专题总览', link: '/路线专题/' },
             { text: '算法专项训练（Day 1-30）', link: '/路线专题/01-算法专项训练' },
-            { text: '后端与计算机基础（Day 1-7）', link: '/路线专题/02-后端与计算机基础' },
+            { text: '后端与计算机基础（Day 1-9）', link: '/路线专题/02-后端与计算机基础' },
             { text: '大模型与 Agent 核心能力（Day 8-17）', link: '/路线专题/03-大模型与Agent核心能力' },
             { text: '简历项目改造与面试实战（Day 18-30）', link: '/路线专题/04-简历项目改造与面试实战' }
           ]
@@ -189,6 +189,7 @@ export default withMermaid(defineConfig({
           text: 'S4 Go 微服务',
           collapsed: false,
           items: [
+            { text: '单体拆分与边界设计', link: '/后端技术栈强化/04-microservice/单体拆分与边界设计' },
             { text: '架构与 gRPC', link: '/后端技术栈强化/04-microservice/架构与gRPC' },
             { text: '治理与稳定性', link: '/后端技术栈强化/04-microservice/治理与稳定性' },
             { text: '面试题集', link: '/后端技术栈强化/04-microservice/面试题集' }
@@ -227,6 +228,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'CAP 与 BASE 理论', link: '/后端技术栈强化/08-distributed/CAP与BASE理论' },
             { text: 'Raft 算法详解', link: '/后端技术栈强化/08-distributed/Raft算法详解' },
+            { text: 'etcd 详解与工程实践', link: '/后端技术栈强化/08-distributed/etcd详解与工程实践' },
             { text: '面试题集', link: '/后端技术栈强化/08-distributed/面试题集' }
           ]
         },

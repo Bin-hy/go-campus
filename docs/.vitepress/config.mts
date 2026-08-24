@@ -77,7 +77,8 @@ export default withMermaid(defineConfig({
           { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
           { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' },
           { text: '第二阶段 · 分布式系统', link: '/第二阶段-知识详解/分布式系统面试详解' },
-          { text: '后端技术栈强化', link: '/后端技术栈强化/' }
+          { text: '后端技术栈强化', link: '/后端技术栈强化/' },
+          { text: 'S10 · 向量数据库 Milvus', link: '/后端技术栈强化/10-milvus/01-向量检索原理' }
         ]
       },
       {
@@ -154,12 +155,23 @@ export default withMermaid(defineConfig({
           ]
         },
         {
-          text: 'S1 MySQL 深入',
+          text: 'S1 MySQL · 基础篇（先过一遍）',
+          collapsed: false,
+          items: [
+            { text: 'MySQL 入门与库表操作', link: '/后端技术栈强化/01-mysql/基础-MySQL入门与库表操作' },
+            { text: 'SQL 语法详解', link: '/后端技术栈强化/01-mysql/基础-SQL语法详解' },
+            { text: '表设计与约束范式', link: '/后端技术栈强化/01-mysql/基础-表设计与约束范式' },
+            { text: '事务与索引入门', link: '/后端技术栈强化/01-mysql/基础-事务与索引入门' }
+          ]
+        },
+        {
+          text: 'S1 MySQL · 深入篇',
           collapsed: false,
           items: [
             { text: '存储引擎与 B+ 树', link: '/后端技术栈强化/01-mysql/存储引擎与B+树' },
             { text: '事务与 MVCC', link: '/后端技术栈强化/01-mysql/事务与MVCC' },
             { text: '索引与 SQL 优化', link: '/后端技术栈强化/01-mysql/索引与SQL优化' },
+            { text: '慢查询优化实战', link: '/后端技术栈强化/01-mysql/慢查询优化实战' },
             { text: '主从复制与高可用', link: '/后端技术栈强化/01-mysql/主从复制与高可用' },
             { text: '面试题集', link: '/后端技术栈强化/01-mysql/面试题集' }
           ]
@@ -243,6 +255,20 @@ export default withMermaid(defineConfig({
             { text: '安全与生产实践', link: '/后端技术栈强化/09-object-storage/安全与生产实践' },
             { text: 'STS 临时凭证', link: '/后端技术栈强化/09-object-storage/STS临时凭证' },
             { text: '面试题集', link: '/后端技术栈强化/09-object-storage/面试题集' }
+          ]
+        },
+        {
+          text: 'S10 向量数据库 Milvus',
+          collapsed: false,
+          items: [
+            { text: '向量检索原理', link: '/后端技术栈强化/10-milvus/01-向量检索原理' },
+            { text: 'Milvus 架构与核心概念', link: '/后端技术栈强化/10-milvus/02-Milvus架构与核心概念' },
+            { text: 'Collection 设计与数据写入', link: '/后端技术栈强化/10-milvus/03-Collection设计与数据写入' },
+            { text: '向量索引与检索', link: '/后端技术栈强化/10-milvus/04-向量索引与检索' },
+            { text: '一致性、事务与数据管理', link: '/后端技术栈强化/10-milvus/05-一致性事务与数据管理' },
+            { text: '部署、监控与生产实践', link: '/后端技术栈强化/10-milvus/06-部署监控与生产实践' },
+            { text: 'Milvus Go 实战', link: '/后端技术栈强化/10-milvus/07-Milvus-Go实战' },
+            { text: '面试题集', link: '/后端技术栈强化/10-milvus/08-面试题集' }
           ]
         }
       ],

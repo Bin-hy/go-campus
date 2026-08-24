@@ -479,6 +479,8 @@ func VerifyNormalized(embedding []float64) bool {
 
 ### 3.3 向量数据库概览
 
+> 📚 **配套精读**：向量检索原理（ANN/IVF/HNSW/PQ）、Milvus 架构与 Go 实战等完整章节见 [S10 向量数据库 Milvus](/后端技术栈强化/10-milvus/01-向量检索原理)（8 篇：原理 → 架构 → 数据 → 索引检索 → 一致性 → 部署 → Go 实战 → 面试题集）。本节是选型概览。
+
 **必须掌握的知识点：**
 
 | 数据库 | 特点 | 适用场景 |
@@ -734,6 +736,7 @@ code/phase3/04_rag_project/
 - [火山引擎/豆包 API 文档](https://www.volcengine.com/docs/82379) — 字节系 API
 
 ### 向量数据库
+- 📚 [S10 向量数据库 Milvus 精读章节](/后端技术栈强化/10-milvus/01-向量检索原理) — 向量检索原理 + Milvus 入门到深入（本站）
 - [Qdrant 快速入门](https://qdrant.tech/documentation/quick-start/) — 本地开发推荐
 - [Milvus 文档](https://milvus.io/docs) — 字节系生产常用
 

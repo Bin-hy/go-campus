@@ -20,3 +20,4 @@ docs/习题集和答案/route/
 .reasonix/
 # Go 模块/构建缓存（本地开发用，不入库）
 .go-cache/
+code/backend/volumes/

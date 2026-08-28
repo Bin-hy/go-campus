@@ -239,9 +239,17 @@ export default withMermaid(defineConfig({
           text: 'S8 分布式理论',
           collapsed: false,
           items: [
+            { text: '分布式系统能力全景', link: '/后端技术栈强化/08-distributed/分布式系统能力全景' },
             { text: 'CAP 与 BASE 理论', link: '/后端技术栈强化/08-distributed/CAP与BASE理论' },
+            { text: '底层存储与数据同步', link: '/后端技术栈强化/08-distributed/底层存储与数据同步' },
             { text: 'Raft 算法详解', link: '/后端技术栈强化/08-distributed/Raft算法详解' },
             { text: 'etcd 详解与工程实践', link: '/后端技术栈强化/08-distributed/etcd详解与工程实践' },
+            { text: '选主机制详解', link: '/后端技术栈强化/08-distributed/选主机制详解' },
+            { text: 'gRPC 负载均衡详解', link: '/后端技术栈强化/08-distributed/gRPC负载均衡详解' },
+            { text: '网络通信与降级方案', link: '/后端技术栈强化/08-distributed/网络通信与降级方案' },
+            { text: '限流与熔断', link: '/后端技术栈强化/08-distributed/限流与熔断' },
+            { text: '高可用机制全景', link: '/后端技术栈强化/08-distributed/高可用机制全景' },
+            { text: '容灾与备份恢复', link: '/后端技术栈强化/08-distributed/容灾与备份恢复' },
             { text: '面试题集', link: '/后端技术栈强化/08-distributed/面试题集' }
           ]
         },

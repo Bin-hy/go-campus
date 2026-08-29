@@ -51,6 +51,22 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: '导师学习路径',
+        items: [
+          { text: '总览与章节安排', link: '/导师学习路径/' },
+          { text: '01 · RAG 原理与 LLM 基础', link: '/导师学习路径/01-RAG原理与LLM基础' },
+          { text: '02 · RAG 完整原理与 Prompt 工程', link: '/导师学习路径/02-RAG完整原理与Prompt工程' },
+          { text: '03 · Function Calling 与 MCP', link: '/导师学习路径/03-FunctionCalling与MCP协议' },
+          { text: '04 · ReAct 与 Agent 规划', link: '/导师学习路径/04-ReAct与Agent规划' },
+          { text: '05 · Multi-Agent 编排与 LangGraph', link: '/导师学习路径/05-Multi-Agent编排与LangGraph' },
+          { text: '06 · Agent 记忆与评测体系', link: '/导师学习路径/06-Agent记忆与评测体系' },
+          { text: '07 · 文生视频与 Diffusion', link: '/导师学习路径/07-JD专题-文生视频与Diffusion模型' },
+          { text: '08 · LLM 推理优化', link: '/导师学习路径/08-JD专题-LLM推理优化' },
+          { text: '09 · LLM 训练流程与微调', link: '/导师学习路径/09-JD专题-LLM训练流程与微调' },
+          { text: '10 · AI 应用技术栈速通', link: '/导师学习路径/10-AI应用技术栈速通' }
+        ]
+      },
+      {
         text: '路线专题',
         items: [
           { text: '30 天冲刺总览', link: '/路线专题/' },
@@ -112,6 +128,24 @@ export default withMermaid(defineConfig({
             { text: '后端与计算机基础（Day 1-9）', link: '/路线专题/02-后端与计算机基础' },
             { text: '大模型与 Agent 核心能力（Day 8-17）', link: '/路线专题/03-大模型与Agent核心能力' },
             { text: '简历项目改造与面试实战（Day 18-30）', link: '/路线专题/04-简历项目改造与面试实战' }
+          ]
+        }
+      ],
+      '/导师学习路径/': [
+        {
+          text: '导师学习路径',
+          items: [
+            { text: '总览与章节安排', link: '/导师学习路径/' },
+            { text: '01 · RAG 原理与 LLM 基础', link: '/导师学习路径/01-RAG原理与LLM基础' },
+            { text: '02 · RAG 完整原理与 Prompt 工程', link: '/导师学习路径/02-RAG完整原理与Prompt工程' },
+            { text: '03 · Function Calling 与 MCP', link: '/导师学习路径/03-FunctionCalling与MCP协议' },
+            { text: '04 · ReAct 与 Agent 规划', link: '/导师学习路径/04-ReAct与Agent规划' },
+            { text: '05 · Multi-Agent 编排与 LangGraph', link: '/导师学习路径/05-Multi-Agent编排与LangGraph' },
+            { text: '06 · Agent 记忆与评测体系', link: '/导师学习路径/06-Agent记忆与评测体系' },
+            { text: '07 · 文生视频与 Diffusion', link: '/导师学习路径/07-JD专题-文生视频与Diffusion模型' },
+            { text: '08 · LLM 推理优化', link: '/导师学习路径/08-JD专题-LLM推理优化' },
+            { text: '09 · LLM 训练流程与微调', link: '/导师学习路径/09-JD专题-LLM训练流程与微调' },
+            { text: '10 · AI 应用技术栈速通', link: '/导师学习路径/10-AI应用技术栈速通' }
           ]
         }
       ],

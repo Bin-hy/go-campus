@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-rollout
+  labels:
+    app: nginx-rollout
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx-rollout
+  # 滚动更新策略：全程不宕机
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0   # 更新期间旧实例一个都不能先停
+      maxSurge: 1         # 最多允许超配 1 个新实例
+  template:
+    metadata:
+      labels:
+        app: nginx-rollout
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 2
+            periodSeconds: 3

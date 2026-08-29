@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web
+  namespace: default
+  annotations:
+    counter.example.com/desired: "3"
+data:
+  app: "counter-controller demo"

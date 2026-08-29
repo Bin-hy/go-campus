@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80          # Service 端口（集群内访问）
+      targetPort: 80    # 转发到 Pod 的端口
+  type: ClusterIP       # 默认，集群内虚拟 IP

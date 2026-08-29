@@ -82,6 +82,10 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: 'K8s Code 教程',
+        link: '/k8s-code教程/'
+      },
+      {
         text: '项目实战',
         items: [
           { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' },
@@ -277,6 +281,28 @@ export default withMermaid(defineConfig({
             { text: '部署、监控与生产实践', link: '/后端技术栈强化/10-milvus/06-部署监控与生产实践' },
             { text: 'Milvus Go 实战', link: '/后端技术栈强化/10-milvus/07-Milvus-Go实战' },
             { text: '面试题集', link: '/后端技术栈强化/10-milvus/08-面试题集' }
+          ]
+        }
+      ],
+      '/k8s-code教程/': [
+        {
+          text: 'K8s Code 教程',
+          items: [
+            { text: '教程首页与路线图', link: '/k8s-code教程/' },
+            { text: '01 环境准备与 kubectl 速查', link: '/k8s-code教程/01-环境准备与kubectl速查' },
+            { text: '02 Pod 与容器生命周期', link: '/k8s-code教程/02-Pod与容器生命周期' },
+            { text: '03 Deployment 与滚动发布', link: '/k8s-code教程/03-Deployment与滚动发布' },
+            { text: '04 Service/Ingress/DNS', link: '/k8s-code教程/04-Service-Ingress与DNS' },
+            { text: '05 配置与存储', link: '/k8s-code教程/05-配置与存储-ConfigMap-Secret-PV' },
+            { text: '06 资源管理与 HPA/Job', link: '/k8s-code教程/06-资源管理与HPA-Job' },
+            { text: '07 client-go：连接与 CRUD', link: '/k8s-code教程/07-client-go编程-连接与CRUD' },
+            { text: '08 client-go：Informer 与 Workqueue', link: '/k8s-code教程/08-client-go编程-Informer与Workqueue' },
+            { text: '09 手写 Controller', link: '/k8s-code教程/09-手写Controller实战' },
+            { text: '10 CRD 与 Operator', link: '/k8s-code教程/10-CRD与Operator开发' },
+            { text: '11 调度器深入', link: '/k8s-code教程/11-调度器深入' },
+            { text: '12 网络与安全深入', link: '/k8s-code教程/12-网络与安全深入' },
+            { text: '13 故障排查与生产实践', link: '/k8s-code教程/13-故障排查与生产实践' },
+            { text: '14 面试题集', link: '/k8s-code教程/14-面试题集' }
           ]
         }
       ],

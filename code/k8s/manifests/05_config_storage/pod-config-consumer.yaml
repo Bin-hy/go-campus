@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-consumer
+spec:
+  containers:
+    - name: app
+      image: busybox:1.36
+      command: ["sh", "-c", "env | grep APP_ && cat /etc/config/config.yaml && sleep 3600"]
+      env:
+        # 方式一：env 注入
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_ENV
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: DB_PASSWORD
+      envFrom:
+        # 方式二：整个 ConfigMap 注入
+        - configMapRef:
+            name: app-config
+      volumeMounts:
+        # 方式三：挂载为文件
+        - name: config-vol
+          mountPath: /etc/config
+          readOnly: true
+  volumes:
+    - name: config-vol
+      configMap:
+        name: app-config

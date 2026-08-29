@@ -1,0 +1,40 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: webapps.apps.example.com
+spec:
+  group: apps.example.com
+  names:
+    kind: WebApp
+    listKind: WebAppList
+    plural: webapps
+    singular: webapp
+    shortNames:
+      - wa
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      # 声明 schema：spec 必填 replicas 与 image，status 放实际副本数
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required: ["replicas", "image"]
+              properties:
+                replicas:
+                  type: integer
+                  minimum: 1
+                image:
+                  type: string
+            status:
+              type: object
+              properties:
+                readyReplicas:
+                  type: integer
+      # 开启 status 子资源：允许控制器单独更新 status
+      subresources:
+        status: {}

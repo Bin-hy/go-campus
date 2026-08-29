@@ -95,6 +95,8 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | [高可用与故障排查](./07-k8s/高可用与故障排查) | 探针、OOM、get/describe/logs 排障、etcd 高可用 |
 | [面试题集](./07-k8s/面试题集) | 6 题追问 3 层 |
 
+> **进阶：想从"会用"到"能写"** —— 理论篇讲"为什么"，配套的 [K8s Code 编程教程](/k8s-code教程/) 讲"怎么写怎么跑"：核心对象 YAML → client-go 编程 → 手写 Controller → CRD/Operator → 面试题集（15+ 题），代码在 `code/k8s/`，直接对着 minikube 实操。
+
 ---
 
 ## S8 分布式理论（2 周）

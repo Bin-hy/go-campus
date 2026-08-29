@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-demo
+  labels:
+    app: init
+spec:
+  initContainers:
+    # 先下载数据，完成后主容器才启动
+    - name: fetch-data
+      image: busybox:1.36
+      command:
+        - sh
+        - -c
+        - echo "downloading..." && sleep 3 && echo "data ready" > /data/ready.txt
+      volumeMounts:
+        - name: data
+          mountPath: /data
+  containers:
+    - name: app
+      image: busybox:1.36
+      command: ["sh", "-c", "cat /data/ready.txt && sleep 3600"]
+      volumeMounts:
+        - name: data
+          mountPath: /data
+  volumes:
+    - name: data
+      emptyDir: {}

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-cron
+spec:
+  schedule: "*/1 * * * *"   # 每分钟一次
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hello
+              image: busybox:1.36
+              command: ["sh", "-c", "date; echo hello from cron"]
+          restartPolicy: OnFailure

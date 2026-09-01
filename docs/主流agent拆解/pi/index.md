@@ -108,10 +108,10 @@ flowchart BT
 
 | 篇章 | 内容 | 面试价值 |
 |------|------|---------|
-| [01 核心机制：Agent Loop](/phase3/pi-harness/核心机制) | 双层循环、事件流、Tool Calling 全管线、状态双队列 | ★★★★★ 必考：agent 循环怎么设计 |
-| [02 LLM 抽象层](/phase3/pi-harness/LLM抽象层) | StreamFn 契约、EventStream、多供应商统一、thinking 预算 | ★★★★ 常考：多模型切换怎么做 |
-| [03 工程化落地](/phase3/pi-harness/工程化落地) | compaction 压缩、会话持久化、CBOR RPC、TUI 差分渲染、扩展系统 | ★★★★ 加分：工程深度 |
-| [04 Go 落地与面试](/phase3/pi-harness/Go落地与面试) | Go/Eino 映射、面试话术、快速记忆卡 | ★★★★★ 直接用于面试 |
+| [01 核心机制：Agent Loop](/主流agent拆解/pi/核心机制) | 双层循环、事件流、Tool Calling 全管线、状态双队列 | ★★★★★ 必考：agent 循环怎么设计 |
+| [02 LLM 抽象层](/主流agent拆解/pi/LLM抽象层) | StreamFn 契约、EventStream、多供应商统一、thinking 预算 | ★★★★ 常考：多模型切换怎么做 |
+| [03 工程化落地](/主流agent拆解/pi/工程化落地) | compaction 压缩、会话持久化、CBOR RPC、TUI 差分渲染、扩展系统 | ★★★★ 加分：工程深度 |
+| [04 Go 落地与面试](/主流agent拆解/pi/Go落地与面试) | Go/Eino 映射、面试话术、快速记忆卡 | ★★★★★ 直接用于面试 |
 
 ---
 

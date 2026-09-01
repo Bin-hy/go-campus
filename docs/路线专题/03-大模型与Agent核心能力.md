@@ -423,7 +423,7 @@ func Example() {
 }
 ```
 
-> 关联阅读：/phase3/pi-harness/LLM抽象层.md（LLM 客户端抽象怎么做）、/phase3/pi-harness/工程化落地.md（接口分层）、/后端技术栈强化/06-agent-backend/系统设计与串联.md。
+> 关联阅读：/主流agent拆解/pi/LLM抽象层.md（LLM 客户端抽象怎么做）、/主流agent拆解/pi/工程化落地.md（接口分层）、/后端技术栈强化/06-agent-backend/系统设计与串联.md。
 
 ## 八股文要点
 
@@ -1344,7 +1344,7 @@ func RunMultiAgent(ctx context.Context, req string) ([]Task, error) {
 }
 ```
 
-> 关联阅读：/phase3/agent-harness/项目设计.md（一个完整 Agent 系统的模块划分）、/phase3/pi-harness/核心机制.md（Agent Loop 状态管理）、/phase3/pi-harness/Go落地与面试.md（pi → Go 的完整对照表）。
+> 关联阅读：/phase3/agent-harness/项目设计.md（一个完整 Agent 系统的模块划分）、/主流agent拆解/pi/核心机制.md（Agent Loop 状态管理）、/主流agent拆解/pi/Go落地与面试.md（pi → Go 的完整对照表）。
 
 ## 八股文要点
 
@@ -1969,4 +1969,4 @@ flowchart TB
 | 16 | 监控与评估 | 监控中间件 + 评估集跑分 + Bad Case 闭环 | 成本失控防线；RAG 效果衡量 |
 | 17 | 整合复盘 | 可演示项目 + STAR 话术 + 自测题 | — |
 
-> 持续迭代：把本专题与 /phase3/pi-harness/Go落地与面试.md（字节 Eino 对照）、/后端技术栈强化/06-agent-backend/系统设计与串联.md 结合，形成「架构模式 → Go 实现 → 面试表达」的完整闭环。
+> 持续迭代：把本专题与 /主流agent拆解/pi/Go落地与面试.md（字节 Eino 对照）、/后端技术栈强化/06-agent-backend/系统设计与串联.md 结合，形成「架构模式 → Go 实现 → 面试表达」的完整闭环。

@@ -6,6 +6,8 @@
 - **学习笔记**：相关知识点整理
 - **项目设计**：系统架构与实现方案
 
+> 开源 Agent 框架拆解（pi / Eino / LangGraph）已独立成模块，见 [主流 Agent 拆解](/主流agent拆解/)。实战项目与框架拆解配合食用：拆解指导自研，自研验证拆解。
+
 ---
 
 ## 项目列表
@@ -25,16 +27,6 @@
 - [项目首页](/phase3/agent-harness/)
 - [学习笔记](/phase3/agent-harness/学习笔记)
 - [项目设计](/phase3/agent-harness/项目设计)
-
-### 3. pi 开源 Harness 深度拆解
-
-深度拆解 [earendil-works/pi](https://github.com/earendil-works/pi)（85k+ stars 的开源 Agent 工具链），理解 Agent Harness 在生产中的真实落地形态：Agent Loop、Tool Calling、LLM 抽象、上下文压缩、会话持久化、RPC 协议、TUI 差分渲染与扩展系统。含 Go/Eino 对照与面试速答。
-
-- [项目全景](/phase3/pi-harness/)
-- [01 核心机制：Agent Loop](/phase3/pi-harness/核心机制)
-- [02 LLM 抽象层](/phase3/pi-harness/LLM抽象层)
-- [03 工程化落地](/phase3/pi-harness/工程化落地)
-- [04 Go 落地与面试](/phase3/pi-harness/Go落地与面试)
 
 ---
 

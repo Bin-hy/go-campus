@@ -105,8 +105,16 @@ export default withMermaid(defineConfig({
         text: '项目实战',
         items: [
           { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' },
-          { text: 'AI Agent Harness', link: '/phase3/agent-harness/' },
-          { text: 'pi 开源 Harness 拆解', link: '/phase3/pi-harness/' }
+          { text: 'AI Agent Harness', link: '/phase3/agent-harness/' }
+        ]
+      },
+      {
+        text: '主流 Agent 拆解',
+        items: [
+          { text: '拆解总览与三框架对照', link: '/主流agent拆解/' },
+          { text: 'pi · 开源 Agent Harness', link: '/主流agent拆解/pi/' },
+          { text: 'Eino · Go 编排框架', link: '/主流agent拆解/eino/' },
+          { text: 'LangGraph · Python 编排框架', link: '/主流agent拆解/langgraph/' }
         ]
       },
       {
@@ -392,23 +400,48 @@ export default withMermaid(defineConfig({
           ]
         }
       ],
-      '/phase3/pi-harness/': [
+      '/主流agent拆解/': [
         {
-          text: 'pi 开源 Harness 拆解',
+          text: '主流 Agent 拆解',
           items: [
-            { text: '项目全景', link: '/phase3/pi-harness/' },
-            { text: '01 核心机制：Agent Loop', link: '/phase3/pi-harness/核心机制' },
-            { text: '02 LLM 抽象层', link: '/phase3/pi-harness/LLM抽象层' },
-            { text: '03 工程化落地', link: '/phase3/pi-harness/工程化落地' },
-            { text: '04 Go 落地与面试', link: '/phase3/pi-harness/Go落地与面试' }
+            { text: '拆解总览与三框架对照', link: '/主流agent拆解/' }
+          ]
+        },
+        {
+          text: 'pi · 开源 Agent Harness',
+          collapsed: false,
+          items: [
+            { text: '项目全景', link: '/主流agent拆解/pi/' },
+            { text: '01 核心机制：Agent Loop', link: '/主流agent拆解/pi/核心机制' },
+            { text: '02 LLM 抽象层', link: '/主流agent拆解/pi/LLM抽象层' },
+            { text: '03 工程化落地', link: '/主流agent拆解/pi/工程化落地' },
+            { text: '04 Go 落地与面试', link: '/主流agent拆解/pi/Go落地与面试' }
+          ]
+        },
+        {
+          text: 'Eino · Go 编排框架',
+          collapsed: false,
+          items: [
+            { text: '① 全景图', link: '/主流agent拆解/eino/' },
+            { text: '② 核心机制', link: '/主流agent拆解/eino/核心机制' },
+            { text: '③ 对照与面试', link: '/主流agent拆解/eino/对照与面试' }
+          ]
+        },
+        {
+          text: 'LangGraph · Python 编排框架',
+          collapsed: false,
+          items: [
+            { text: '① 全景图', link: '/主流agent拆解/langgraph/' },
+            { text: '② 核心机制', link: '/主流agent拆解/langgraph/核心机制' },
+            { text: '③ 对照与面试', link: '/主流agent拆解/langgraph/对照与面试' }
           ]
         },
         {
           text: '相关链接',
           items: [
-            { text: '阶段学习计划', link: '/学习计划安排/第三阶段-AI应用开发基础' },
             { text: '第三阶段总览', link: '/phase3/' },
-            { text: 'AI Agent Harness 项目', link: '/phase3/agent-harness/' }
+            { text: 'AI Agent Harness 项目', link: '/phase3/agent-harness/' },
+            { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' }
           ]
         }
       ],
@@ -439,7 +472,7 @@ export default withMermaid(defineConfig({
             { text: '阶段总览', link: '/phase3/' },
             { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' },
             { text: 'AI Agent Harness', link: '/phase3/agent-harness/' },
-            { text: 'pi 开源 Harness 拆解', link: '/phase3/pi-harness/' }
+            { text: '主流 Agent 拆解', link: '/主流agent拆解/' }
           ]
         }
       ]

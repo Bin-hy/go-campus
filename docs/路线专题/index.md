@@ -88,7 +88,7 @@ flowchart TB
 
 - **Go 原理**：/第一阶段-知识详解/（GMP、GC、内存、Context、并发）
 - **八股**：/第二阶段-知识详解/（OS、网络）、/后端技术栈强化/（MySQL、Redis、Kafka、微服务、高并发、K8s）
-- **AI 项目**：/phase3/docs-rag/、/phase3/agent-harness/、/phase3/pi-harness/（简历项目改造的素材来源）
+- **AI 项目**：/phase3/docs-rag/、/phase3/agent-harness/、/主流agent拆解/pi/（简历项目改造的素材来源）
 - **代码练习**：/练习指南、code/ 目录（Go 练习题）；Day 1-9 实战代码集见 `code/route/`（[习题集和答案/route](/习题集和答案/route/)，含 Day 8 etcd 分布式锁与 RPC 治理、Day 9 单体拆分与生产级微服务骨架）
 
 ## 使用方法

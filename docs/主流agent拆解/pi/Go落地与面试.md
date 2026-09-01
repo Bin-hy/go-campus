@@ -253,3 +253,10 @@ type OpenAICompatProvider struct{ BaseURL, APIKey string }
 **Go 五词**：context（取消）、channel（事件）、errgroup（并行）、jsonschema（校验）、JSONL+replay（持久化）。
 
 **Eino 一句**：ReActAgent ≈ agent loop，中间件 ≈ 钩子，ChatModel ≈ StreamFn。
+
+---
+
+## 延伸阅读
+
+- [Eino 拆解 · 全景图](/主流agent拆解/eino/)：把本篇的 Go 映射落到 CloudWeGo Eino 的真实 API 上
+- [LangGraph 拆解 · 全景图](/主流agent拆解/langgraph/)：Python 生态最主流 Agent 编排框架，面试高频对照对象

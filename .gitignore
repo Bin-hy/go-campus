@@ -29,3 +29,4 @@ code/k8s/01_connect
 code/k8s/02_crud
 code/k8s/03_watch
 code/k8s/04_workqueue
+.vitepress/cache/

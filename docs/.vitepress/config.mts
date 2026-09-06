@@ -226,6 +226,7 @@ export default withMermaid(defineConfig({
           text: 'S2 Redis 深入',
           collapsed: false,
           items: [
+            { text: '数据类型与常见用法', link: '/后端技术栈强化/02-redis/数据类型与常见用法' },
             { text: '数据结构底层', link: '/后端技术栈强化/02-redis/数据结构底层' },
             { text: '持久化与高可用', link: '/后端技术栈强化/02-redis/持久化与高可用' },
             { text: '缓存问题与一致性', link: '/后端技术栈强化/02-redis/缓存问题与一致性' },

@@ -19,11 +19,11 @@ go test ./...
 
 > 注意：`solution.go` 是题目骨架。07-k8s 与 09-object-storage 模块的骨架已随仓库提交并设置 `skip-worktree`（本地填写答案后的改动会被忽略，不会误提交）；其余模块由 `.gitignore` 忽略。参考答案统一在 `answer/answer.go`。
 
-## 目录结构（26 个练习，全部对齐 phase1 结构）
+## 目录结构（30 个练习，全部对齐 phase1 结构）
 
 | 模块 | 练习 |
 |------|------|
-| 01-mysql | 01_isolation、02_explain、03_mvcc、04_deadlock |
+| 01-mysql | 01_isolation、02_explain、03_mvcc、04_deadlock、05_isolation_levels、06_phantom_read、07_gap_lock、08_snapshot_timing |
 | 02-redis | 01_encoding、02_cache、03_lock、04_consistency |
 | 03-kafka | 01_produce_consume、02_manual_commit、03_order、04_idempotent |
 | 04-microservice | 01_circuit_breaker、02_ratelimit |

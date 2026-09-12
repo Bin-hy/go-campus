@@ -1,3 +1,6 @@
 [submodule "projects/docs-rag"]
 	path = projects/docs-rag
 	url = https://github.com/Bin-hy/documentsRag.git
+[submodule "projects/EasyCoding"]
+	path = projects/EasyCoding
+	url = git@github.com:Bin-hy/EasyCoding.git

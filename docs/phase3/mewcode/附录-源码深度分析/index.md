@@ -1,0 +1,76 @@
+# 附录 · 源码深度分析笔记
+
+> 这一组文档是**逐文件精读源码后产出的原始分析笔记**（共约 4800 行），与前面 01-13 章的关系是：
+>
+> | | 01-13 章（面试讲解） | 本附录（源码分析） |
+> |---|---|---|
+> | 组织方式 | 按**面试阅读逻辑**（问题 → 设计 → 追问 → 企业级） | 按**模块 + 文件** |
+> | 目的 | 能在面试里讲出来 | 能查到任何一处实现细节 |
+> | 内容 | 精选 + 提炼 + 话术 | 全量 + 原始 + 带完整行号引用 |
+> | 篇幅 | 约 8700 行 | 约 4800 行 |
+>
+> **什么时候看附录**：
+> - 面试官追问到「这个函数的第 37 行具体做了什么」→ 查附录
+> - 想确认某个常量/字段/分支的真实取值 → 查附录
+> - 想通读某个模块的全部实现细节（包括主文档没展开的边角）→ 查附录
+>
+> **读法提醒**：附录是**原始笔记**，包含大量「源码未体现」「不确定」的诚实标注——这些标注本身就是有价值的信息（说明该处没有实现或行为未定义）。
+
+---
+
+## 笔记清单
+
+| 文档 | 覆盖范围 | 规模 | 对应面试章节 |
+|---|---|---|---|
+| [A1 · LLM 协议层](/phase3/mewcode/附录-源码深度分析/A1-LLM协议层) | `internal/llm/`（provider / anthropic / openai）、`internal/config/`、`internal/conversation/` | 470 行 | [10 · 多协议抽象与提示工程](/phase3/mewcode/10-多协议抽象与提示工程) |
+| [A2 · 权限系统](/phase3/mewcode/附录-源码深度分析/A2-权限系统) | `internal/permission/` 全部 9 文件 + `agent/permission_upgrade.go` | 960 行 | [05 · 权限与安全护栏](/phase3/mewcode/05-权限与安全护栏) |
+| [A3 · 上下文与记忆](/phase3/mewcode/附录-源码深度分析/A3-上下文与记忆) | `internal/compact/`、`session/`、`memory/`、`instructions/` | 918 行 | [06 · 上下文工程与压缩](/phase3/mewcode/06-上下文工程与压缩) / [07 · 记忆、会话与项目指令](/phase3/mewcode/07-记忆会话与项目指令) |
+| [A4 · 扩展机制](/phase3/mewcode/附录-源码深度分析/A4-扩展机制) | `internal/mcp/`、`skills/`、`hook/`、`subagent/`、`task/` 共 25 个源文件 | 676 行 | [08 · 扩展机制](/phase3/mewcode/08-扩展机制-MCP-Skill-Hook) / [09 · SubAgent 与后台任务](/phase3/mewcode/09-SubAgent与后台任务) |
+| [A5 · 工具系统](/phase3/mewcode/附录-源码深度分析/A5-工具系统) | `internal/tool/` 全部 12 文件（1662 行） | 1119 行 | [04 · 工具系统与执行编排](/phase3/mewcode/04-工具系统与执行编排) |
+| [A6 · TUI 与提示工程](/phase3/mewcode/附录-源码深度分析/A6-TUI与提示工程) | `internal/tui/`、`internal/command/`、`internal/prompt/`、`cmd/mewcode/main.go`、`cmd/smoke/` | 677 行 | [11 · TUI 与 Go 并发模型](/phase3/mewcode/11-TUI与Go并发模型) |
+
+---
+
+## 六份笔记共同的结构
+
+每份都按同一模板组织，方便横向查阅：
+
+```
+## 模块职责
+## 关键类型与接口        （贴真实代码 + 文件:行号）
+## 关键流程              （编号步骤，含分支与异常路径）
+## 设计决策与权衡        （决策 → 为什么 → 替代方案）
+## 边界与容错            （硬编码常量清单 + 异常路径清单 + 「本模块没有的东西」）
+## 面试官可能追问        （15-27 条，含答案要点）
+## 企业级对应方案        （与业界做法的差异与补齐点）
+## 附：源码未体现的点    （诚实清单）
+```
+
+---
+
+## 分析过程中发现的最有价值的几个事实
+
+这些是**只有逐行读代码才能发现**的，已被吸收进对应面试章节，此处集中列出便于复习：
+
+| # | 发现 | 出处 |
+|---|---|---|
+| 1 | `edit_file` 用 `file_path` 参数而权限层读 `m["path"]` → **核心编辑工具在主路径下一律被 Deny** | A5 / A2 |
+| 2 | `manageAuto` 每轮无条件 `ReplaceMessages` → `onReplace` 每轮写 compact 标记 + **全量重写历史**，写放大 = 轮数 × 历史长度 | A3 |
+| 3 | `UsageAnchor` 必须包含 `CacheRead`+`CacheWrite`，否则 Anthropic 缓存命中时 token 估算严重偏低、压缩永不触发 | A1 |
+| 4 | MCP / 未知工具的 `extractTarget` 返回空 → **完全绕过沙箱与黑名单**，且 `Allow(mcp__srv__*)` 通配匹配不上 | A2 |
+| 5 | `bash` 工具完全不受沙箱约束——「最危险的通道防护最弱」 | A2 |
+| 6 | Agent 工具的 120s 转后台阈值被外层 `tool.DefaultTimeout=30s` 抢先，且 `Execute` 返回即 `cancel()` → 后台任务 ctx 启动即失效 | A4 / A9 章 |
+| 7 | `escapeGlob` 的转义与 `matchCommandPattern` 的无转义比较语义不匹配 → 含 `*?[]` 的命令「永久允许」后规则永不命中 | A2 |
+| 8 | `filter.go` 的白名单写 `"load_skill"` 而注册名是 `"LoadSkill"` → 后台子 Agent 的 Skill 工具被静默剔除 | A5 |
+| 9 | Anthropic 的 `thinking` 一旦历史里出现过工具调用就**永久关闭**（因为 `Message` 结构不存 thinking block） | A1 |
+| 10 | `WithApprovalUpgrader` 定义了但**从未接线** → 子 Agent 遇 Ask 可能永久阻塞 | A4 / A6 |
+| 11 | `IsForkContext` 全仓零调用点；`EventSessionResume` 定义但从未派发 | A4 / A6 |
+| 12 | `instructions` 的路径逃逸检测是**字符串前缀比较** → `/proj-evil` 可绕过 | A3 |
+
+---
+
+> 这些发现构成了 [项目设计 · 已知缺陷清单](/phase3/mewcode/项目设计#_8-2-已知缺陷清单-按严重度) 的来源。**面试时主动讲其中 3-4 条，比背功能列表有说服力得多。**
+
+---
+
+- [返回项目首页](/phase3/mewcode/)

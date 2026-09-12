@@ -104,6 +104,7 @@ export default withMermaid(defineConfig({
       {
         text: '项目实战',
         items: [
+          { text: 'MewCode · 终端 AI Agent（主讲）', link: '/phase3/mewcode/' },
           { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' },
           { text: 'AI Agent Harness', link: '/phase3/agent-harness/' }
         ]
@@ -401,6 +402,61 @@ export default withMermaid(defineConfig({
           ]
         }
       ],
+      '/phase3/mewcode/': [
+        {
+          text: 'MewCode · 终端 AI Agent',
+          items: [
+            { text: '项目首页', link: '/phase3/mewcode/' },
+            { text: '项目设计（ADR）', link: '/phase3/mewcode/项目设计' }
+          ]
+        },
+        {
+          text: '面试讲解（按阅读顺序）',
+          collapsed: false,
+          items: [
+            { text: '01 · 项目全景与面试开场', link: '/phase3/mewcode/01-项目全景与面试开场' },
+            { text: '02 · 架构分层与依赖设计', link: '/phase3/mewcode/02-架构分层与依赖设计' },
+            { text: '03 · Agent 内核与 ReAct 循环', link: '/phase3/mewcode/03-Agent内核与ReAct循环' },
+            { text: '04 · 工具系统与执行编排', link: '/phase3/mewcode/04-工具系统与执行编排' },
+            { text: '05 · 权限与安全护栏', link: '/phase3/mewcode/05-权限与安全护栏' },
+            { text: '06 · 上下文工程与压缩', link: '/phase3/mewcode/06-上下文工程与压缩' },
+            { text: '07 · 记忆、会话与项目指令', link: '/phase3/mewcode/07-记忆会话与项目指令' },
+            { text: '08 · 扩展机制：MCP / Skill / Hook', link: '/phase3/mewcode/08-扩展机制-MCP-Skill-Hook' },
+            { text: '09 · SubAgent 与后台任务', link: '/phase3/mewcode/09-SubAgent与后台任务' },
+            { text: '10 · 多协议抽象与提示工程', link: '/phase3/mewcode/10-多协议抽象与提示工程' },
+            { text: '11 · TUI 与 Go 并发模型', link: '/phase3/mewcode/11-TUI与Go并发模型' }
+          ]
+        },
+        {
+          text: '冲刺与进阶',
+          collapsed: false,
+          items: [
+            { text: '12 · 面试追问题库（120 问）', link: '/phase3/mewcode/12-面试追问题库' },
+            { text: '13 · 企业级 Agent 平台方案', link: '/phase3/mewcode/13-企业级Agent平台方案' }
+          ]
+        },
+        {
+          text: '附录 · 源码深度分析',
+          collapsed: true,
+          items: [
+            { text: '附录说明与索引', link: '/phase3/mewcode/附录-源码深度分析/' },
+            { text: 'A1 · LLM 协议层', link: '/phase3/mewcode/附录-源码深度分析/A1-LLM协议层' },
+            { text: 'A2 · 权限系统', link: '/phase3/mewcode/附录-源码深度分析/A2-权限系统' },
+            { text: 'A3 · 上下文与记忆', link: '/phase3/mewcode/附录-源码深度分析/A3-上下文与记忆' },
+            { text: 'A4 · 扩展机制', link: '/phase3/mewcode/附录-源码深度分析/A4-扩展机制' },
+            { text: 'A5 · 工具系统', link: '/phase3/mewcode/附录-源码深度分析/A5-工具系统' },
+            { text: 'A6 · TUI 与提示工程', link: '/phase3/mewcode/附录-源码深度分析/A6-TUI与提示工程' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: '第三阶段总览', link: '/phase3/' },
+            { text: 'AI Agent Harness 蓝图', link: '/phase3/agent-harness/' },
+            { text: '主流 Agent 拆解', link: '/主流agent拆解/' }
+          ]
+        }
+      ],
       '/主流agent拆解/': [
         {
           text: '主流 Agent 拆解',
@@ -471,6 +527,7 @@ export default withMermaid(defineConfig({
           text: '第三阶段 · AI 应用开发',
           items: [
             { text: '阶段总览', link: '/phase3/' },
+            { text: 'MewCode · 终端 AI Agent', link: '/phase3/mewcode/' },
             { text: 'RAG 文档问答系统', link: '/phase3/docs-rag/' },
             { text: 'AI Agent Harness', link: '/phase3/agent-harness/' },
             { text: '主流 Agent 拆解', link: '/主流agent拆解/' }

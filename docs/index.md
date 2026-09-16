@@ -32,6 +32,11 @@ features:
     details: 每个专题配有测试与参考答案，用 go test 形成即时反馈。
     link: /练习指南
     linkText: 开始动手练习
+  - icon: 🏛️
+    title: 架构师修炼（新）
+    details: 从单体到百万 QPS：QPS 分级选型、Redis/MySQL/Kafka/etcd 真实落地、一致性设计与故障兜底，配 15 个可复现实验。
+    link: /架构师修炼/
+    linkText: 开始修炼
   - icon: 🔎
     title: 全文搜索
     details: 使用右上角搜索框快速定位概念、题目与面试要点，支持键盘操作。
@@ -52,6 +57,7 @@ features:
 11. 按阶段同步完成对应代码练习，每周用自己的语言复述并记录薄弱项。
 12. 想从"会用 K8s"进阶到"能写 K8s"：进入 [K8s Code 编程教程](/k8s-code教程/)——环境 → 核心对象 YAML → client-go 编程 → 手写 Controller → CRD/Operator → 调度/网络/存储 → 排障 → 面试题集，配套 `code/k8s/` 可运行 Go 代码，直接对着本机 minikube 实操。
 13. 拿到导师的《Agent 学习路径》后，进入[导师学习路径](/导师学习路径/)——已把原始提纲提炼为 10 个章节的知识地图（RAG 原理 → Prompt 工程 → Function Calling/MCP → ReAct → Multi-Agent → 记忆/评测 → Diffusion → 推理优化 → 训练流程 → 技术栈），每章含知识点提炼、mermaid 流程图、面试问答（带参考答案）与自测清单，按 Day 1-7 主线排布可在一周内过完第一遍。
+14. 想成为架构师（而不只是"会用组件"）：进入[架构师修炼](/架构师修炼/)——先读 [00 方法论](/架构师修炼/00-架构师思维与设计方法论) 与 [01 QPS 分级地图](/架构师修炼/01-QPS分级与架构演进地图) 建立判断力，再按「演进六阶段 → 一致性专题 → 稳定性 → 案例」推进；配套 [`code/architect/`](https://github.com/Bin-hy/go-campus/tree/main/code/architect) 的 MySQL 主从 / Redis 哨兵 / etcd 三节点 / Kafka 集群编排，按 [18 实验手册](/架构师修炼/18-实验手册-Go落地实验) 亲手复现丢数据窗口、哨兵丢写、缓存雪崩打挂 DB 等真实故障，最后用 [17 白板面试](/架构师修炼/17-面试-白板架构设计与追问链) 收口。
 
 ::: tip 学习建议
 文档用于建立知识框架，代码练习用于暴露理解偏差。每学完一个小节，先独立完成练习，再查看参考答案。

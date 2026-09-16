@@ -1,0 +1,269 @@
+# 架构师修炼 · 实验环境编排
+#
+# 用法：
+#   cd code/architect
+#   docker compose up -d                     # 基础：MySQL 主从 / Redis 主从+哨兵 / etcd 三节点 / Kafka 单节点
+#   docker compose --profile cluster up -d   # 追加：Kafka 三副本集群（E09 丢消息实验需要）
+#   bash scripts/init-replication.sh         # 配置 MySQL 主从复制（首次必须执行）
+#   docker compose down -v                   # 清空重来
+#
+# 对应文档：docs/架构师修炼/18-实验手册-Go落地实验.md
+
+services:
+  # ============ MySQL 主从（E02 / E03 / E04）============
+  mysql-master:
+    image: mysql:8.0
+    container_name: arch-mysql-master
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: demo
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./conf/mysql/master.cnf:/etc/mysql/conf.d/arch.cnf:ro
+      - ./conf/mysql/master-init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - mysql_master_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot123"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  mysql-replica:
+    image: mysql:8.0
+    container_name: arch-mysql-replica
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: demo
+    ports:
+      - "3307:3306"
+    depends_on:
+      mysql-master:
+        condition: service_healthy
+    volumes:
+      - ./conf/mysql/replica.cnf:/etc/mysql/conf.d/arch.cnf:ro
+      - mysql_replica_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot123"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # ============ Redis 主从 + 哨兵（E05 / E06 / E07 / E08）============
+  redis-master:
+    image: redis:7
+    container_name: arch-redis-master
+    ports:
+      - "6380:6379"
+    command: >
+      redis-server
+      --appendonly yes
+      --appendfsync everysec
+      --save ""
+      --min-replicas-to-write 1
+      --min-replicas-max-lag 10
+
+  redis-replica:
+    image: redis:7
+    container_name: arch-redis-replica
+    ports:
+      - "6381:6379"
+    depends_on:
+      - redis-master
+    command: >
+      redis-server
+      --replicaof redis-master 6379
+      --replica-read-only yes
+      --appendonly yes
+      --appendfsync everysec
+
+  sentinel-1:
+    image: redis:7
+    container_name: arch-sentinel-1
+    ports:
+      - "26379:26379"
+    depends_on:
+      - redis-master
+      - redis-replica
+    volumes:
+      - ./conf/redis/sentinel.conf:/conf/sentinel.conf:ro
+    command: >
+      sh -c "sed 's/__PORT__/26379/g' /conf/sentinel.conf > /tmp/sentinel.conf && redis-server /tmp/sentinel.conf --sentinel"
+
+  sentinel-2:
+    image: redis:7
+    container_name: arch-sentinel-2
+    ports:
+      - "26380:26380"
+    depends_on:
+      - redis-master
+      - redis-replica
+    volumes:
+      - ./conf/redis/sentinel.conf:/conf/sentinel.conf:ro
+    command: >
+      sh -c "sed 's/__PORT__/26380/g' /conf/sentinel.conf > /tmp/sentinel.conf && redis-server /tmp/sentinel.conf --sentinel"
+
+  sentinel-3:
+    image: redis:7
+    container_name: arch-sentinel-3
+    ports:
+      - "26381:26381"
+    depends_on:
+      - redis-master
+      - redis-replica
+    volumes:
+      - ./conf/redis/sentinel.conf:/conf/sentinel.conf:ro
+    command: >
+      sh -c "sed 's/__PORT__/26381/g' /conf/sentinel.conf > /tmp/sentinel.conf && redis-server /tmp/sentinel.conf --sentinel"
+
+  # ============ etcd 三节点（E12 选主 / Lease / fencing）============
+  etcd-1:
+    image: quay.io/coreos/etcd:v3.5.13
+    container_name: arch-etcd-1
+    ports:
+      - "12379:2379"
+    command: >
+      /usr/local/bin/etcd
+      --name etcd-1
+      --data-dir /etcd-data
+      --listen-client-urls http://0.0.0.0:2379
+      --advertise-client-urls http://etcd-1:2379
+      --listen-peer-urls http://0.0.0.0:2380
+      --initial-advertise-peer-urls http://etcd-1:2380
+      --initial-cluster etcd-1=http://etcd-1:2380,etcd-2=http://etcd-2:2380,etcd-3=http://etcd-3:2380
+      --initial-cluster-state new
+      --initial-cluster-token gocampus
+      --auto-compaction-retention 1
+
+  etcd-2:
+    image: quay.io/coreos/etcd:v3.5.13
+    container_name: arch-etcd-2
+    ports:
+      - "12380:2379"
+    command: >
+      /usr/local/bin/etcd
+      --name etcd-2
+      --data-dir /etcd-data
+      --listen-client-urls http://0.0.0.0:2379
+      --advertise-client-urls http://etcd-2:2379
+      --listen-peer-urls http://0.0.0.0:2380
+      --initial-advertise-peer-urls http://etcd-2:2380
+      --initial-cluster etcd-1=http://etcd-1:2380,etcd-2=http://etcd-2:2380,etcd-3=http://etcd-3:2380
+      --initial-cluster-state new
+      --initial-cluster-token gocampus
+      --auto-compaction-retention 1
+
+  etcd-3:
+    image: quay.io/coreos/etcd:v3.5.13
+    container_name: arch-etcd-3
+    ports:
+      - "12381:2379"
+    command: >
+      /usr/local/bin/etcd
+      --name etcd-3
+      --data-dir /etcd-data
+      --listen-client-urls http://0.0.0.0:2379
+      --advertise-client-urls http://etcd-3:2379
+      --listen-peer-urls http://0.0.0.0:2380
+      --initial-advertise-peer-urls http://etcd-3:2380
+      --initial-cluster etcd-1=http://etcd-1:2380,etcd-2=http://etcd-2:2380,etcd-3=http://etcd-3:2380
+      --initial-cluster-state new
+      --initial-cluster-token gocampus
+      --auto-compaction-retention 1
+
+  # ============ Kafka（E09 / E10 / E11）============
+  # 单节点 KRaft：够用于 E10/E11；E09 的副本丢失实验请用下方 cluster profile
+  kafka:
+    image: apache/kafka:3.7.0
+    container_name: arch-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE: "false"
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+  # 三副本集群（可选）：docker compose --profile cluster up -d
+  # E09 里 kill 掉一个 broker 观察 ISR 收缩与生产端报错，需要这个 profile
+  kafka-1:
+    profiles: ["cluster"]
+    image: apache/kafka:3.7.0
+    container_name: arch-kafka-1
+    ports:
+      - "19092:9094"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:9092,EXTERNAL://localhost:19092
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE: "false"
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+  kafka-2:
+    profiles: ["cluster"]
+    image: apache/kafka:3.7.0
+    container_name: arch-kafka-2
+    ports:
+      - "19093:9094"
+    environment:
+      KAFKA_NODE_ID: 2
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-2:9092,EXTERNAL://localhost:19093
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE: "false"
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+  kafka-3:
+    profiles: ["cluster"]
+    image: apache/kafka:3.7.0
+    container_name: arch-kafka-3
+    ports:
+      - "19094:9094"
+    environment:
+      KAFKA_NODE_ID: 3
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-3:9092,EXTERNAL://localhost:19094
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE: "false"
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+volumes:
+  mysql_master_data:
+  mysql_replica_data:

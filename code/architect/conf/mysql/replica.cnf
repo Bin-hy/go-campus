@@ -1,0 +1,23 @@
+[mysqld]
+server-id                      = 2
+relay-log                      = relay-bin
+gtid_mode                      = ON
+enforce_gtid_consistency       = ON
+log_replica_updates            = ON
+
+# 从库只读（E03 里可以临时 SET GLOBAL super_read_only = OFF 做故障注入）
+read_only                      = ON
+super_read_only                = ON
+
+# ---- 并行复制：E02 用它对比"延迟是否改善"----
+replica_parallel_workers       = 4
+replica_parallel_type          = LOGICAL_CLOCK
+replica_preserve_commit_order  = ON
+
+# ---- 半同步从端（可 SET GLOBAL rpl_semi_sync_slave_enabled = OFF 模拟从库不响应）----
+plugin-load-add                = rpl_semi_sync_slave.so
+rpl_semi_sync_slave_enabled    = ON
+
+slow_query_log                 = 1
+long_query_time                = 1
+max_connections                = 300

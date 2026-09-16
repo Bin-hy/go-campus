@@ -1,0 +1,27 @@
+[mysqld]
+# ---- 复制三件套（E02/E03/E04 的实验基础）----
+server-id                    = 1
+log-bin                      = mysql-bin
+binlog_format                = ROW
+binlog_row_image             = FULL
+gtid_mode                    = ON
+enforce_gtid_consistency     = ON
+log_replica_updates          = ON
+binlog_expire_logs_seconds   = 604800
+
+# ---- 落盘策略：sync_binlog=1 + flush_log_at_trx_commit=1 是"不丢已提交事务"的前提 ----
+sync_binlog                  = 1
+innodb_flush_log_at_trx_commit = 1
+
+# ---- 半同步（E04 用 SET GLOBAL rpl_semi_sync_master_enabled = OFF 对比异步）----
+plugin-load-add              = rpl_semi_sync_master.so
+rpl_semi_sync_master_enabled = ON
+rpl_semi_sync_master_timeout = 10000
+
+# ---- 慢查询观测（配合 E01/E03）----
+slow_query_log               = 1
+long_query_time              = 1
+slow_query_log_file          = /var/lib/mysql/slow.log
+
+# ---- 供实验使用 ----
+max_connections              = 300

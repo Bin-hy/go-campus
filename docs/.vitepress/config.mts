@@ -119,7 +119,22 @@ export default withMermaid(defineConfig({
           { text: '15 · 案例：AI 剪辑任务平台', link: '/架构师修炼/15-案例-AI剪辑任务平台架构' },
           { text: '16 · 案例：Feed 与社区互动', link: '/架构师修炼/16-案例-Feed与社区互动架构' },
           { text: '17 · 面试：白板架构设计与追问链', link: '/架构师修炼/17-面试-白板架构设计与追问链' },
-          { text: '18 · 实验手册：Go 落地实验', link: '/架构师修炼/18-实验手册-Go落地实验' }
+          { text: '18 · 实验手册：Go 落地实验', link: '/架构师修炼/18-实验手册-Go落地实验' },
+          { text: '19 · pprof 实战：从火焰图到架构决策', link: '/架构师修炼/19-pprof实战/' }
+        ]
+      },
+      {
+        text: 'pprof 性能调优',
+        items: [
+          { text: '总览：从火焰图到架构决策', link: '/架构师修炼/19-pprof实战/' },
+          { text: '01 · 观测体系与 pprof 原理', link: '/架构师修炼/19-pprof实战/01-观测体系与pprof原理' },
+          { text: '02 · CPU 火焰图实战', link: '/架构师修炼/19-pprof实战/02-CPU火焰图实战' },
+          { text: '03 · 内存与 GC 实战', link: '/架构师修炼/19-pprof实战/03-内存与GC实战' },
+          { text: '04 · goroutine 与锁阻塞实战', link: '/架构师修炼/19-pprof实战/04-goroutine与锁阻塞实战' },
+          { text: '05 · 常见问题排查手册', link: '/架构师修炼/19-pprof实战/05-常见问题排查手册' },
+          { text: '06 · 生产环境 pprof 实践', link: '/架构师修炼/19-pprof实战/06-生产环境pprof实践' },
+          { text: '07 · 实战案例集', link: '/架构师修炼/19-pprof实战/07-实战案例集' },
+          { text: '08 · 面试题与追问链', link: '/架构师修炼/19-pprof实战/08-面试题与追问链' }
         ]
       },
       {
@@ -407,6 +422,21 @@ export default withMermaid(defineConfig({
             { text: '16 案例：Feed 与社区互动架构', link: '/架构师修炼/16-案例-Feed与社区互动架构' },
             { text: '17 面试：白板架构设计与追问链', link: '/架构师修炼/17-面试-白板架构设计与追问链' },
             { text: '18 实验手册：Go 落地实验', link: '/架构师修炼/18-实验手册-Go落地实验' }
+          ]
+        },
+        {
+          text: 'F · 性能调优实战（pprof）',
+          collapsed: false,
+          items: [
+            { text: '19 总览：从火焰图到架构决策', link: '/架构师修炼/19-pprof实战/' },
+            { text: '01 观测体系与 pprof 原理', link: '/架构师修炼/19-pprof实战/01-观测体系与pprof原理' },
+            { text: '02 CPU 火焰图实战', link: '/架构师修炼/19-pprof实战/02-CPU火焰图实战' },
+            { text: '03 内存与 GC 实战', link: '/架构师修炼/19-pprof实战/03-内存与GC实战' },
+            { text: '04 goroutine 与锁阻塞实战', link: '/架构师修炼/19-pprof实战/04-goroutine与锁阻塞实战' },
+            { text: '05 常见问题排查手册', link: '/架构师修炼/19-pprof实战/05-常见问题排查手册' },
+            { text: '06 生产环境 pprof 实践', link: '/架构师修炼/19-pprof实战/06-生产环境pprof实践' },
+            { text: '07 实战案例集', link: '/架构师修炼/19-pprof实战/07-实战案例集' },
+            { text: '08 面试题与追问链', link: '/架构师修炼/19-pprof实战/08-面试题与追问链' }
           ]
         },
         {

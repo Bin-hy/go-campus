@@ -44,7 +44,7 @@
 | 🐹 **第一阶段 · Go 语言深入** | 10 篇 | Slice/Map/Interface/String 内存布局、函数调用栈、内存分配、GC、GMP、并发、Context | [知识点总览](docs/第一阶段-知识点详解.md) |
 | 🧱 **第二阶段 · 计算机基础** | 3 篇 | 操作系统、计算机网络、分布式系统面试详解 | [分布式系统](docs/第二阶段-知识详解/分布式系统面试详解.md) |
 | 🏗️ **后端技术栈强化** | 61 篇 | S1 MySQL → S2 Redis → S3 Kafka → S4 微服务 → S5 高并发场景 → S6 Agent Backend → S7 K8s → S8 分布式 → S9 对象存储 → S10 Milvus | [模块总览](docs/后端技术栈强化/index.md) |
-| 🏛️ **架构师修炼** ⭐ | 20 篇 | **QPS 六道坎驱动的架构演进**：不同量级下 Redis/MySQL/Kafka/etcd 的落地参数、一致性设计、故障兜底 + 15 个可复现实验 | [栏目总览](docs/架构师修炼/index.md) |
+| 🏛️ **架构师修炼** ⭐ | 29 篇 | **QPS 六道坎驱动的架构演进**：不同量级下 Redis/MySQL/Kafka/etcd 的落地参数、一致性设计、故障兜底 + 15 个可复现实验；子栏目 **19 pprof 实战**（8 篇 + 8 个可跑性能实验） | [栏目总览](docs/架构师修炼/index.md) · [pprof 实战](docs/架构师修炼/19-pprof实战/index.md) |
 | ☸️ **K8s Code 教程** | 15 篇 | 从「会用 kubectl」到「能手写 Controller / Operator」，配 client-go 实战代码 | [教程首页](docs/k8s-code教程/index.md) |
 | 🧠 **导师学习路径** | 11 篇 | RAG → Prompt → Function Calling/MCP → ReAct → Multi-Agent → 记忆评测 → Diffusion/推理优化/微调 | [总览](docs/导师学习路径/index.md) |
 | 🧩 **主流 Agent 拆解** | 12 篇 | 拆 pi / Eino / LangGraph 的架构、核心机制与可借鉴设计 | [拆解总览](docs/主流agent拆解/index.md) |
@@ -77,7 +77,7 @@ flowchart LR
 | 二 | 计算机基础强化 | 数据结构与算法、操作系统、网络 | `code/phase2/`（25 道） |
 | 三 | AI 应用开发基础 | LLM API、Prompt 工程、RAG、Agent 架构 | `code/phase3/` |
 | 四 | 后端技术栈强化 | MySQL/Redis/Kafka/微服务/K8s/Milvus | `code/backend/`（39 道，需 Docker） |
-| 五 | **架构师修炼** | 从单体到百万 QPS 的演进决策与故障兜底 | [`code/architect/`](code/architect/README.md)（可跑中间件集群） |
+| 五 | **架构师修炼** | 从单体到百万 QPS 的演进决策与故障兜底 | [`code/architect/`](code/architect/README.md)（可跑中间件集群）· [`code/perf/pprof-lab/`](code/perf/pprof-lab/README.md)（8 个零依赖性能实验） |
 | 加分 | K8s 编程 | client-go、Informer、手写控制器与 CRD/Operator | `code/k8s/`（5 道，可选 minikube） |
 
 ---
@@ -192,8 +192,9 @@ NN_topic/
 - **一致性专题**：缓存与 DB 一致性的失败窗口、分布式事务选型矩阵、幂等与 Exactly-Once 的真实边界。
 - **每个组件都有「故障与一致性边界」表**：挂了 → 现象 → 降级 → **丢数据的窗口在哪** → 靠对账如何发现。
 - **15 个可复现实验**：[实验手册](docs/架构师修炼/18-实验手册-Go落地实验.md) + [`code/architect/`](code/architect/README.md)，亲手制造主从延迟、哨兵丢写、缓存雪崩打挂 DB、Kafka 丢消息与重复消费、etcd 假死双写、不停机迁移校验。
+- **性能调优取证能力（子栏目 19 pprof 实战）**：[从火焰图到架构决策](docs/架构师修炼/19-pprof实战/index.md) —— 观测决策图（现象 → 该抓哪个 profile）→ CPU 火焰图 / 内存与 GC / goroutine 与锁阻塞 → 27 条常见问题手册 → 生产环境安全采集与开销自测 → 7 个完整案例 → 30 道面试题；配套 [`code/perf/pprof-lab/`](code/perf/pprof-lab/README.md)：**8 个零依赖可跑实验**（自带压测器、`-fix` 一键对比修复前后，业务端口 1808N / pprof 端口 1908N）。
 
-推荐顺序：[00 方法论](docs/架构师修炼/00-架构师思维与设计方法论.md) → [01 QPS 地图](docs/架构师修炼/01-QPS分级与架构演进地图.md) → 演进六阶段（02~07）→ 一致性（08~11）→ 稳定性（12~14）→ 案例（15~16）→ [17 白板面试](docs/架构师修炼/17-面试-白板架构设计与追问链.md) → [18 实验](docs/架构师修炼/18-实验手册-Go落地实验.md)。
+推荐顺序：[00 方法论](docs/架构师修炼/00-架构师思维与设计方法论.md) → [01 QPS 地图](docs/架构师修炼/01-QPS分级与架构演进地图.md) → 演进六阶段（02~07）→ 一致性（08~11）→ 稳定性（12~14）→ 案例（15~16）→ [17 白板面试](docs/架构师修炼/17-面试-白板架构设计与追问链.md) → [18 实验](docs/架构师修炼/18-实验手册-Go落地实验.md) → [19 pprof 实战](docs/架构师修炼/19-pprof实战/index.md)。
 
 </details>
 

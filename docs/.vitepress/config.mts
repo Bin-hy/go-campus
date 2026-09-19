@@ -159,6 +159,25 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: '面试项目深挖',
+        items: [
+          { text: '栏目总览与选材建议', link: '/面试项目深挖/' },
+          { text: 'Vistack · 分布式视频平台（Go 后端）', link: '/面试项目深挖/Vistack/' },
+          { text: 'BinRag · RAG 知识库问答（RAG / MCP）', link: '/面试项目深挖/BinRag/' },
+          { text: 'EasyCoding · 终端 AI Agent（Agent 运行时）', link: '/面试项目深挖/EasyCoding/' },
+          { text: 'ShatangAI · 电商 AI 视频生成平台（异步 + 资金一致性）', link: '/面试项目深挖/ShatangAI/' },
+          {
+            text: '考前速背三连',
+            items: [
+              { text: 'Vistack · 速答题库与背诵卡', link: '/面试项目深挖/Vistack/10-速答题库与背诵卡' },
+              { text: 'BinRag · 口袋速背卡片', link: '/面试项目深挖/BinRag/09-口袋速背卡片' },
+              { text: 'EasyCoding · 口袋速背卡片', link: '/面试项目深挖/EasyCoding/08-口袋速背卡片' },
+              { text: 'ShatangAI · 速背卡片', link: '/面试项目深挖/ShatangAI/12-速背卡片' }
+            ]
+          }
+        ]
+      },
+      {
         text: '代码练习',
         items: [
           { text: '练习指南', link: '/练习指南' },
@@ -168,6 +187,96 @@ export default withMermaid(defineConfig({
     ],
 
     sidebar: {
+      '/面试项目深挖/': [
+        {
+          text: '栏目总览',
+          items: [
+            { text: '选材建议与阅读路线（先读）', link: '/面试项目深挖/' }
+          ]
+        },
+        {
+          text: 'Vistack 视频平台 · 字节面试专项',
+          items: [
+            { text: '项目入口与事实底盘（先读）', link: '/面试项目深挖/Vistack/' },
+            { text: '01 · 项目全景与三版口述稿', link: '/面试项目深挖/Vistack/01-项目全景与三版口述稿' },
+            { text: '02 · 上传链路与对象存储', link: '/面试项目深挖/Vistack/02-上传链路与对象存储' },
+            { text: '03 · DASH 转码与 ABR 自适应码率', link: '/面试项目深挖/Vistack/03-DASH转码与ABR自适应码率' },
+            { text: '04 · gRPC 远程转码与 etcd 服务发现', link: '/面试项目深挖/Vistack/04-gRPC远程转码与etcd服务发现' },
+            { text: '05 · Kafka 异步编排与任务可靠性', link: '/面试项目深挖/Vistack/05-Kafka异步编排与任务可靠性' },
+            { text: '06 · 缓存限流与高并发计数', link: '/面试项目深挖/Vistack/06-缓存限流与高并发计数' },
+            { text: '07 · 鉴权与安全防线', link: '/面试项目深挖/Vistack/07-鉴权与安全防线' },
+            { text: '08 · 面试官追问链实战', link: '/面试项目深挖/Vistack/08-面试官追问链实战' },
+            { text: '09 · 风险点与诚实话术（必读）', link: '/面试项目深挖/Vistack/09-风险点与诚实话术' },
+            { text: '10 · 速答题库与背诵卡', link: '/面试项目深挖/Vistack/10-速答题库与背诵卡' },
+            { text: '11 · 代码地图与事实索引', link: '/面试项目深挖/Vistack/11-代码地图与事实索引' }
+          ]
+        },
+        {
+          text: 'BinRag 文档知识库问答 · 字节面试专项',
+          items: [
+            { text: '项目入口与阅读路线（先读）', link: '/面试项目深挖/BinRag/' },
+            { text: '00 · 使用说明与阅读路线', link: '/面试项目深挖/BinRag/00-使用说明与阅读路线' },
+            { text: '01 · 项目口述介绍', link: '/面试项目深挖/BinRag/01-项目口述介绍' },
+            { text: '02 · 入库链路深挖问答', link: '/面试项目深挖/BinRag/02-入库链路深挖问答' },
+            { text: '03 · 检索与重排深挖问答（主战场）', link: '/面试项目深挖/BinRag/03-检索与重排深挖问答' },
+            { text: '04 · LLM 问答链路深挖问答', link: '/面试项目深挖/BinRag/04-LLM问答链路深挖问答' },
+            { text: '05 · MCP Server 深挖问答', link: '/面试项目深挖/BinRag/05-MCP-Server深挖问答' },
+            { text: '06 · 认证权限与多租户深挖问答', link: '/面试项目深挖/BinRag/06-认证权限与多租户深挖问答' },
+            { text: '07 · 工程化部署与评估深挖问答', link: '/面试项目深挖/BinRag/07-工程化部署与评估深挖问答' },
+            { text: '08 · 压力面：量化指标与反问', link: '/面试项目深挖/BinRag/08-压力面-量化指标与反问' },
+            { text: '09 · 口袋速背卡片', link: '/面试项目深挖/BinRag/09-口袋速背卡片' }
+          ]
+        },
+        {
+          text: 'BinRag · 源码档案（逐行核对用）',
+          collapsed: true,
+          items: [
+            { text: '01 · 检索与向量存储', link: '/面试项目深挖/BinRag/_源码档案（逐行核对用）/01-retrieval' },
+            { text: '02 · 文档入库链路', link: '/面试项目深挖/BinRag/_源码档案（逐行核对用）/02-ingest' },
+            { text: '03 · RAG 问答编排', link: '/面试项目深挖/BinRag/_源码档案（逐行核对用）/03-rag-engine' },
+            { text: '04 · API / 认证 / 存储', link: '/面试项目深挖/BinRag/_源码档案（逐行核对用）/04-api-auth-store' },
+            { text: '05 · MCP Server', link: '/面试项目深挖/BinRag/_源码档案（逐行核对用）/05-mcp' },
+            { text: '06 · 工程化 / 部署 / 评估', link: '/面试项目深挖/BinRag/_源码档案（逐行核对用）/06-engineering' }
+          ]
+        },
+        {
+          text: 'EasyCoding 终端 AI Agent · 字节面试专项',
+          items: [
+            { text: '项目入口与事实校正（先读）', link: '/面试项目深挖/EasyCoding/' },
+            { text: '00 · 导读与简历事实校正', link: '/面试项目深挖/EasyCoding/00-导读-项目速览与事实校正' },
+            { text: '01 · 项目口述稿（多版本）', link: '/面试项目深挖/EasyCoding/01-项目口述稿-多版本' },
+            { text: '02 · 简历五大技术点拆解', link: '/面试项目深挖/EasyCoding/02-简历五大技术点拆解' },
+            { text: '03 · 题库：协议与 Agent 循环', link: '/面试项目深挖/EasyCoding/03-面试题库-协议与Agent循环' },
+            { text: '04 · 题库：权限与安全（重点）', link: '/面试项目深挖/EasyCoding/04-面试题库-权限与安全' },
+            { text: '05 · 题库：MCP 与会话压缩', link: '/面试项目深挖/EasyCoding/05-面试题库-MCP与会话压缩' },
+            { text: '06 · 压力面与陷阱题（必读）', link: '/面试项目深挖/EasyCoding/06-压力面-陷阱题与简历修正' },
+            { text: '07 · 白板手写题与反问', link: '/面试项目深挖/EasyCoding/07-白板手写题与反问收尾' },
+            { text: '08 · 口袋速背卡片', link: '/面试项目深挖/EasyCoding/08-口袋速背卡片' }
+          ]
+        },
+        {
+          text: 'ShatangAI 电商 AI 视频生成平台 · 字节面试专项',
+          items: [
+            { text: '项目入口与诚实边界（先读）', link: '/面试项目深挖/ShatangAI/' },
+            { text: '00 · 使用说明与事实校正（先读）', link: '/面试项目深挖/ShatangAI/00-使用说明与事实校正' },
+            { text: '01 · 项目口述介绍（多版本）', link: '/面试项目深挖/ShatangAI/01-项目口述介绍-多版本' },
+            { text: '02 · 架构全景与一次生成的完整时序', link: '/面试项目深挖/ShatangAI/02-架构全景与一次生成的完整时序' },
+            { text: '03 · 简历四条主线拆解', link: '/面试项目深挖/ShatangAI/03-简历四条主线拆解' },
+            { text: '04 · 题库：任务队列与状态机（主战场）', link: '/面试项目深挖/ShatangAI/04-任务队列与状态机深挖问答' },
+            { text: '05 · 题库：多供应商与多段一致性', link: '/面试项目深挖/ShatangAI/05-多供应商与多段一致性深挖问答' },
+            { text: '06 · 题库：积分计费与支付', link: '/面试项目深挖/ShatangAI/06-积分计费与支付深挖问答' },
+            { text: '07 · 题库：前端与管理后台', link: '/面试项目深挖/ShatangAI/07-前端架构与管理后台深挖问答' },
+            { text: '08 · 题库：基础设施与部署', link: '/面试项目深挖/ShatangAI/08-基础设施与部署深挖问答' },
+            { text: '09 · 生产事故与踩坑故事集（弹药库）', link: '/面试项目深挖/ShatangAI/09-生产事故与踩坑故事集' },
+            { text: '10 · 压力面与简历修正话术（必读）', link: '/面试项目深挖/ShatangAI/10-压力面与简历修正话术' },
+            { text: '11 · 白板手写题与设计题', link: '/面试项目深挖/ShatangAI/11-白板手写题与设计题' },
+            { text: '12 · 速背卡片（考前只看这个）', link: '/面试项目深挖/ShatangAI/12-速背卡片' },
+            { text: '13 · 代码地图与事实索引', link: '/面试项目深挖/ShatangAI/13-代码地图与事实索引' },
+            { text: '14 · 题库：Agent 对话与 Skill 体系', link: '/面试项目深挖/ShatangAI/14-Agent对话与Skill体系深挖问答' },
+            { text: '15 · 题库：长视频分段生成与一致性', link: '/面试项目深挖/ShatangAI/15-长视频分段生成与一致性深挖问答' }
+          ]
+        }
+      ],
       '/路线专题/': [
         {
           text: '30 天冲刺训练营',

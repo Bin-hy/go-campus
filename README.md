@@ -97,6 +97,7 @@ GoCampus/
 │   ├── 主流agent拆解/               # pi · Eino · LangGraph 源码级拆解
 │   ├── phase3/                     # 项目实战文档
 │   ├── 路线专题/                    # 30 天冲刺路线
+│   ├── 面试项目深挖/ ⭐              # 字节面试深挖包（Vistack · BinRag · EasyCoding）
 │   ├── 习题集和答案/                # 自动生成，与代码同步
 │   ├── .vitepress/                 # 站点配置、mermaid、主题与本地搜索
 │   └── index.md                    # 首页

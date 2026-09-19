@@ -25,6 +25,28 @@ export default withMermaid(defineConfig({
       fontFamily: 'system-ui, -apple-system, sans-serif',
       nodeTextColor: '#212529',
     },
+    // 关闭「自动缩放到容器宽度」：mermaid 默认 useMaxWidth: true 会把整张 SVG（含文字）
+    // 等比压进正文列宽，节点一多文字就小到看不清。
+    // 这里保留原始尺寸 → 超宽时在 .mermaid 内横向滚动，看不全再点「放大查看」（见 theme/mermaid-zoom.ts）。
+    flowchart: { useMaxWidth: false },
+    sequence: { useMaxWidth: false },
+    class: { useMaxWidth: false },
+    state: { useMaxWidth: false },
+    er: { useMaxWidth: false },
+    gantt: { useMaxWidth: false },
+    journey: { useMaxWidth: false },
+    pie: { useMaxWidth: false },
+    quadrantChart: { useMaxWidth: false },
+    xyChart: { useMaxWidth: false },
+    mindmap: { useMaxWidth: false },
+    timeline: { useMaxWidth: false },
+    gitGraph: { useMaxWidth: false },
+    block: { useMaxWidth: false },
+    packet: { useMaxWidth: false },
+    architecture: { useMaxWidth: false },
+    c4: { useMaxWidth: false },
+    requirement: { useMaxWidth: false },
+    kanban: { useMaxWidth: false },
   },
   mermaidPlugin: {
     class: 'mermaid',

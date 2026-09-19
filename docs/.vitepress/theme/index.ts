@@ -5,6 +5,7 @@ import Artalk from 'artalk'
 import 'artalk/Artalk.css'
 import { h, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRoute, useData } from 'vitepress'
+import { installMermaidZoom, closeMermaidZoom } from './mermaid-zoom'
 import './custom.css'
 
 /**
@@ -35,6 +36,7 @@ export default {
     const { isDark } = useData()
     let viewer: Viewer | null = null
     let artalk: Artalk | null = null
+    let disposeMermaidZoom: (() => void) | null = null
 
     const initViewer = () => {
       viewer?.destroy()
@@ -85,11 +87,14 @@ export default {
     onMounted(() => {
       initViewer()
       initArtalk()
+      // 给 mermaid 图补「放大查看」入口（宽图在窄列里不再被缩小，细节靠全屏查看）
+      disposeMermaidZoom = installMermaidZoom()
     })
 
     watch(
       () => route.path,
       () => nextTick(() => {
+        closeMermaidZoom()
         initViewer()
         initArtalk()
       })
@@ -103,6 +108,8 @@ export default {
       viewer = null
       artalk?.destroy()
       artalk = null
+      disposeMermaidZoom?.()
+      disposeMermaidZoom = null
     })
   }
 }

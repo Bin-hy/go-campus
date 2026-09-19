@@ -60,6 +60,7 @@
 
 /* Mermaid 图表样式 */
 .mermaid {
+  position: relative;
   margin: 1.5rem 0;
   padding: 1rem;
   border-radius: 8px;
@@ -72,9 +73,147 @@
   background: var(--vp-c-bg-soft);
 }
 
+/* 关键：不要用 max-width: 100% 压缩 SVG。
+   节点一多图就变宽，容器再把它等比缩小，会把节点文字一起缩小到看不清。
+   这里保留原始尺寸，超宽部分交给上面的 overflow-x 滚动 +「放大查看」全屏查看。 */
 .mermaid svg {
-  max-width: 100%;
+  max-width: none;
   height: auto;
+}
+
+/* 小屏放不下原始尺寸时仍按宽度适配，细节用「放大查看」看 */
+@media (max-width: 768px) {
+  .mermaid svg {
+    max-width: 100%;
+  }
+}
+
+/* 图上方悬浮的工具条：sticky 保证横向滚动时按钮不会滑出视野 */
+.mermaid-zoom-toolbar {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.mermaid-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: zoom-in;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.mermaid:hover .mermaid-zoom-btn,
+.mermaid-zoom-btn:focus-visible {
+  opacity: 1;
+  border-color: var(--vp-c-brand-2);
+}
+
+/* 不支持 hover 的设备（手机 / 平板）常显，方便发现 */
+@media (hover: none) {
+  .mermaid-zoom-btn {
+    opacity: 0.9;
+  }
+}
+
+/* ===== 全屏放大查看器（见 theme/mermaid-zoom.ts） ===== */
+html.mermaid-zoom-open,
+html.mermaid-zoom-open body {
+  overflow: hidden;
+}
+
+.mermaid-zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  background: rgba(17, 20, 22, 0.92);
+}
+
+.mermaid-zoom[hidden] {
+  display: none;
+}
+
+.mermaid-zoom__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  color: #f1f3f5;
+  font-size: 12px;
+}
+
+.mermaid-zoom__hint {
+  opacity: 0.75;
+}
+
+.mermaid-zoom__actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.mermaid-zoom__btn {
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8f9fa;
+  font-size: 12px;
+  line-height: 1.6;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.mermaid-zoom__btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-zoom__btn--close {
+  border-color: var(--vp-c-brand-3);
+  color: #63e6be;
+}
+
+.mermaid-zoom__stage {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none; /* 双指缩放交给 pointer 事件处理 */
+}
+
+.mermaid-zoom__stage.is-grabbing {
+  cursor: grabbing;
+}
+
+.mermaid-zoom__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* 覆盖层里按原始尺寸渲染；底色跟随站点主题（暗色模式下 mermaid 也用暗色主题） */
+.mermaid-zoom__canvas svg {
+  max-width: none;
+  background: var(--vp-c-bg);
+  border-radius: 6px;
 }
 
 /* 修复：mermaid 11 的节点/边标签内部用 <p> 包裹文本，

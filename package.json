@@ -8,7 +8,9 @@
     "docs:dev": "vitepress dev docs --host 127.0.0.1",
     "predocs:build": "npm run docs:sync-exercises",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs --host 127.0.0.1"
+    "docs:preview": "vitepress preview docs --host 127.0.0.1",
+    "docs:check-mermaid": "node scripts/check-mermaid-size.mjs",
+    "docs:check-mermaid:strict": "node scripts/check-mermaid-size.mjs --strict"
   },
   "devDependencies": {
     "mermaid": "^11.16.0",

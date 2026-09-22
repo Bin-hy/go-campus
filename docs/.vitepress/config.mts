@@ -85,7 +85,8 @@ export default withMermaid(defineConfig({
           { text: '07 · 文生视频与 Diffusion', link: '/导师学习路径/07-JD专题-文生视频与Diffusion模型' },
           { text: '08 · LLM 推理优化', link: '/导师学习路径/08-JD专题-LLM推理优化' },
           { text: '09 · LLM 训练流程与微调', link: '/导师学习路径/09-JD专题-LLM训练流程与微调' },
-          { text: '10 · AI 应用技术栈速通', link: '/导师学习路径/10-AI应用技术栈速通' }
+          { text: '10 · AI 应用技术栈速通', link: '/导师学习路径/10-AI应用技术栈速通' },
+          { text: '11 · 生成原理零基础学习方案', link: '/导师学习路径/11-JD专题-生成原理零基础学习方案' }
         ]
       },
       {
@@ -325,7 +326,8 @@ export default withMermaid(defineConfig({
             { text: '07 · 文生视频与 Diffusion', link: '/导师学习路径/07-JD专题-文生视频与Diffusion模型' },
             { text: '08 · LLM 推理优化', link: '/导师学习路径/08-JD专题-LLM推理优化' },
             { text: '09 · LLM 训练流程与微调', link: '/导师学习路径/09-JD专题-LLM训练流程与微调' },
-            { text: '10 · AI 应用技术栈速通', link: '/导师学习路径/10-AI应用技术栈速通' }
+            { text: '10 · AI 应用技术栈速通', link: '/导师学习路径/10-AI应用技术栈速通' },
+            { text: '11 · 生成原理零基础学习方案', link: '/导师学习路径/11-JD专题-生成原理零基础学习方案' }
           ]
         }
       ],

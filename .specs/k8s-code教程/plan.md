@@ -22,9 +22,10 @@ docs/k8s-code教程/
 ├── 11-调度器深入.md
 ├── 12-网络与安全深入.md
 ├── 13-故障排查与生产实践.md
-├── 14-面试题集.md
-└── _meta/              # spec/plan/task/checklist（不参与导航）
+└── 14-面试题集.md
 ```
+
+> spec / plan / task / checklist 等过程产物已统一移至仓库根 `.specs/k8s-code教程/`，不在栏目目录内，也不参与站点导航。
 
 ```
 code/k8s/

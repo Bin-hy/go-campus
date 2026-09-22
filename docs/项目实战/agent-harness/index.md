@@ -61,5 +61,5 @@
 
 ---
 
-- [学习笔记](/phase3/agent-harness/学习笔记)
-- [项目设计](/phase3/agent-harness/项目设计)
+- [学习笔记](/项目实战/agent-harness/学习笔记)
+- [项目设计](/项目实战/agent-harness/项目设计)

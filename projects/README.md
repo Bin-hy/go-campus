@@ -2,7 +2,7 @@
 
 - docs-rag: [基于Rag，构建一个文档知识库，支持LLM对话，文档内容检索。](https://github.com/Bin-hy/documentsRag)
 - EasyCoding: [MewCode — 从零手写的终端 AI Agent（Go）。13 章 / 1.78 万行，含 ReAct 循环、五层权限、两层上下文压缩、MCP/Skill/Hook/SubAgent 扩展。](https://github.com/Bin-hy/EasyCoding)
-  - 讲解文档见 [项目实战 · MewCode](/phase3/mewcode/)
+  - 讲解文档见 [项目实战 · MewCode](/项目实战/mewcode/)
 
 ## 子模块操作
 

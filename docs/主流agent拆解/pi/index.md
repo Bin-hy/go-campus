@@ -12,7 +12,7 @@
 | **组件完整** | 从 LLM 抽象、Agent 循环、工具系统、会话持久化到 TUI、RPC 协议全链路都有 |
 | **架构清晰** | 5 个 monorepo 包严格分层，每层接口契约明确，是教科书级的"分层"样本 |
 | **与目标岗位相关** | 剪映 AI 剪辑本质是"多工具编排的 agent 系统"，pi 的 Tool Calling、状态管理、扩展机制直接可迁移 |
-| **可对照实现** | 自己用 Go 写 [agent-harness 项目](/phase3/agent-harness/) 时，pi 是绝佳的设计参照物 |
+| **可对照实现** | 自己用 Go 写 [agent-harness 项目](/项目实战/agent-harness/) 时，pi 是绝佳的设计参照物 |
 
 > 技术栈说明：pi 是 TypeScript/Bun 项目。拆解它**不是为了学 TS**，而是为了提炼**语言无关的 Agent 系统设计模式**——这些模式在 Go 里用接口、goroutine、channel 同样能落地（见《Go 落地与面试》篇）。
 

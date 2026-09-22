@@ -220,7 +220,7 @@ type OpenAICompatProvider struct{ BaseURL, APIKey string }
 
 ## 6. 从 pi 到"我的项目"：Go 落地清单
 
-对照自己的 [agent-harness 项目](/phase3/agent-harness/)，逐项自检：
+对照自己的 [agent-harness 项目](/项目实战/agent-harness/)，逐项自检：
 
 | 能力 | pi 的做法 | 你项目的状态 | 差距 |
 |------|-----------|-------------|------|

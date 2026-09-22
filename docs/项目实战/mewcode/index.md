@@ -152,28 +152,28 @@ go test -race ./internal/agent/... ./internal/mcp/... ./internal/tui/...
 ## 七、阅读顺序建议（按面试准备节奏）
 
 **第一遍（建立全景，约 1 小时）**
-1. [项目全景与面试开场](/phase3/mewcode/01-项目全景与面试开场) — 三档自我介绍 + 简历写法
-2. [架构分层与依赖设计](/phase3/mewcode/02-架构分层与依赖设计) — 一张图讲清全部模块
+1. [项目全景与面试开场](/项目实战/mewcode/01-项目全景与面试开场) — 三档自我介绍 + 简历写法
+2. [架构分层与依赖设计](/项目实战/mewcode/02-架构分层与依赖设计) — 一张图讲清全部模块
 
 **第二遍（吃透内核，约 3 小时）**
-3. [Agent 内核：ReAct 循环](/phase3/mewcode/03-Agent内核与ReAct循环) — 面试最高频
-4. [工具系统与执行编排](/phase3/mewcode/04-工具系统与执行编排)
-5. [权限与安全护栏](/phase3/mewcode/05-权限与安全护栏)
+3. [Agent 内核：ReAct 循环](/项目实战/mewcode/03-Agent内核与ReAct循环) — 面试最高频
+4. [工具系统与执行编排](/项目实战/mewcode/04-工具系统与执行编排)
+5. [权限与安全护栏](/项目实战/mewcode/05-权限与安全护栏)
 
 **第三遍（拉开差距，约 4 小时）**
-6. [上下文工程与压缩](/phase3/mewcode/06-上下文工程与压缩) — 最能体现深度
-7. [记忆、会话与项目指令](/phase3/mewcode/07-记忆会话与项目指令)
-8. [扩展机制：MCP / Skill / Hook](/phase3/mewcode/08-扩展机制-MCP-Skill-Hook)
-9. [SubAgent 与后台任务](/phase3/mewcode/09-SubAgent与后台任务)
-10. [多协议抽象与提示工程](/phase3/mewcode/10-多协议抽象与提示工程)
-11. [TUI 与 Go 并发模型](/phase3/mewcode/11-TUI与Go并发模型)
+6. [上下文工程与压缩](/项目实战/mewcode/06-上下文工程与压缩) — 最能体现深度
+7. [记忆、会话与项目指令](/项目实战/mewcode/07-记忆会话与项目指令)
+8. [扩展机制：MCP / Skill / Hook](/项目实战/mewcode/08-扩展机制-MCP-Skill-Hook)
+9. [SubAgent 与后台任务](/项目实战/mewcode/09-SubAgent与后台任务)
+10. [多协议抽象与提示工程](/项目实战/mewcode/10-多协议抽象与提示工程)
+11. [TUI 与 Go 并发模型](/项目实战/mewcode/11-TUI与Go并发模型)
 
 **冲刺（面试前 1 天）**
-12. [面试追问题库（120 问）](/phase3/mewcode/12-面试追问题库)
-13. [企业级 Agent 平台方案](/phase3/mewcode/13-企业级Agent平台方案)
+12. [面试追问题库（120 问）](/项目实战/mewcode/12-面试追问题库)
+13. [企业级 Agent 平台方案](/项目实战/mewcode/13-企业级Agent平台方案)
 
 **随时查阅**
-- [项目设计（ADR 决策记录）](/phase3/mewcode/项目设计)
+- [项目设计（ADR 决策记录）](/项目实战/mewcode/项目设计)
 
 ---
 

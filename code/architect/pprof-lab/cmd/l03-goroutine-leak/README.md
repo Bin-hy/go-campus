@@ -1,6 +1,6 @@
 # L03 · goroutine 只增不减：Ticker 未停 + 没有退出信号
 
-> 模块根目录 `code/perf/pprof-lab`，下面所有命令都在该目录下执行；零第三方依赖，只用标准库。
+> 模块根目录 `code/architect/pprof-lab`，下面所有命令都在该目录下执行；零第三方依赖，只用标准库。
 
 ## 这个样例演示什么
 

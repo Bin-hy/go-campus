@@ -22,12 +22,12 @@
 
 | 文档 | 覆盖范围 | 规模 | 对应面试章节 |
 |---|---|---|---|
-| [A1 · LLM 协议层](/phase3/mewcode/附录-源码深度分析/A1-LLM协议层) | `internal/llm/`（provider / anthropic / openai）、`internal/config/`、`internal/conversation/` | 470 行 | [10 · 多协议抽象与提示工程](/phase3/mewcode/10-多协议抽象与提示工程) |
-| [A2 · 权限系统](/phase3/mewcode/附录-源码深度分析/A2-权限系统) | `internal/permission/` 全部 9 文件 + `agent/permission_upgrade.go` | 960 行 | [05 · 权限与安全护栏](/phase3/mewcode/05-权限与安全护栏) |
-| [A3 · 上下文与记忆](/phase3/mewcode/附录-源码深度分析/A3-上下文与记忆) | `internal/compact/`、`session/`、`memory/`、`instructions/` | 918 行 | [06 · 上下文工程与压缩](/phase3/mewcode/06-上下文工程与压缩) / [07 · 记忆、会话与项目指令](/phase3/mewcode/07-记忆会话与项目指令) |
-| [A4 · 扩展机制](/phase3/mewcode/附录-源码深度分析/A4-扩展机制) | `internal/mcp/`、`skills/`、`hook/`、`subagent/`、`task/` 共 25 个源文件 | 676 行 | [08 · 扩展机制](/phase3/mewcode/08-扩展机制-MCP-Skill-Hook) / [09 · SubAgent 与后台任务](/phase3/mewcode/09-SubAgent与后台任务) |
-| [A5 · 工具系统](/phase3/mewcode/附录-源码深度分析/A5-工具系统) | `internal/tool/` 全部 12 文件（1662 行） | 1119 行 | [04 · 工具系统与执行编排](/phase3/mewcode/04-工具系统与执行编排) |
-| [A6 · TUI 与提示工程](/phase3/mewcode/附录-源码深度分析/A6-TUI与提示工程) | `internal/tui/`、`internal/command/`、`internal/prompt/`、`cmd/mewcode/main.go`、`cmd/smoke/` | 677 行 | [11 · TUI 与 Go 并发模型](/phase3/mewcode/11-TUI与Go并发模型) |
+| [A1 · LLM 协议层](/项目实战/mewcode/附录-源码深度分析/A1-LLM协议层) | `internal/llm/`（provider / anthropic / openai）、`internal/config/`、`internal/conversation/` | 470 行 | [10 · 多协议抽象与提示工程](/项目实战/mewcode/10-多协议抽象与提示工程) |
+| [A2 · 权限系统](/项目实战/mewcode/附录-源码深度分析/A2-权限系统) | `internal/permission/` 全部 9 文件 + `agent/permission_upgrade.go` | 960 行 | [05 · 权限与安全护栏](/项目实战/mewcode/05-权限与安全护栏) |
+| [A3 · 上下文与记忆](/项目实战/mewcode/附录-源码深度分析/A3-上下文与记忆) | `internal/compact/`、`session/`、`memory/`、`instructions/` | 918 行 | [06 · 上下文工程与压缩](/项目实战/mewcode/06-上下文工程与压缩) / [07 · 记忆、会话与项目指令](/项目实战/mewcode/07-记忆会话与项目指令) |
+| [A4 · 扩展机制](/项目实战/mewcode/附录-源码深度分析/A4-扩展机制) | `internal/mcp/`、`skills/`、`hook/`、`subagent/`、`task/` 共 25 个源文件 | 676 行 | [08 · 扩展机制](/项目实战/mewcode/08-扩展机制-MCP-Skill-Hook) / [09 · SubAgent 与后台任务](/项目实战/mewcode/09-SubAgent与后台任务) |
+| [A5 · 工具系统](/项目实战/mewcode/附录-源码深度分析/A5-工具系统) | `internal/tool/` 全部 12 文件（1662 行） | 1119 行 | [04 · 工具系统与执行编排](/项目实战/mewcode/04-工具系统与执行编排) |
+| [A6 · TUI 与提示工程](/项目实战/mewcode/附录-源码深度分析/A6-TUI与提示工程) | `internal/tui/`、`internal/command/`、`internal/prompt/`、`cmd/mewcode/main.go`、`cmd/smoke/` | 677 行 | [11 · TUI 与 Go 并发模型](/项目实战/mewcode/11-TUI与Go并发模型) |
 
 ---
 
@@ -69,8 +69,8 @@
 
 ---
 
-> 这些发现构成了 [项目设计 · 已知缺陷清单](/phase3/mewcode/项目设计#_8-2-已知缺陷清单-按严重度) 的来源。**面试时主动讲其中 3-4 条，比背功能列表有说服力得多。**
+> 这些发现构成了 [项目设计 · 已知缺陷清单](/项目实战/mewcode/项目设计#_8-2-已知缺陷清单-按严重度) 的来源。**面试时主动讲其中 3-4 条，比背功能列表有说服力得多。**
 
 ---
 
-- [返回项目首页](/phase3/mewcode/)
+- [返回项目首页](/项目实战/mewcode/)

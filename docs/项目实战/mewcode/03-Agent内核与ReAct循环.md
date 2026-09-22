@@ -586,5 +586,5 @@ Fork         cloneMessages + fixPendingToolCalls + ForkBoilerplate（借 Prompt 
 
 ---
 
-- [上一篇：架构分层与依赖设计](/phase3/mewcode/02-架构分层与依赖设计)
-- [下一篇：工具系统与执行编排](/phase3/mewcode/04-工具系统与执行编排)
+- [上一篇：架构分层与依赖设计](/项目实战/mewcode/02-架构分层与依赖设计)
+- [下一篇：工具系统与执行编排](/项目实战/mewcode/04-工具系统与执行编排)

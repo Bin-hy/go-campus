@@ -80,7 +80,7 @@
 - [x] T9.1.8 `07-实战案例集.md`：7 个完整案例（AI 剪辑业务语境，对应 L01~L07）+ 案例复盘总表
 - [x] T9.1.9 `08-面试题与追问链.md`：30 道题（基础/定位/优化/生产/陷阱）+ 常见错误回答 + 10 条追问链 + 评分表 + 命令默写清单
 
-## T9.2 代码层 · `code/perf/pprof-lab/`
+## T9.2 代码层 · `code/architect/pprof-lab/`
 
 - [x] T9.2.1 独立 module（`module gocampus/perf/pprof-lab`，go 1.22），**零第三方依赖**，`go build ./... && go vet ./... && go test ./...` 全绿
 - [x] T9.2.2 8 个样例：L01 CPU 热点 / L02 分配与 GC / L03 goroutine 泄漏 / L04 锁竞争 / L05 channel 阻塞 / L06 内存滞留 / L07 IO 与序列化 + `cmd/load` 自建压测器

@@ -192,7 +192,7 @@ for h in hits:
 | RAG 场景选谁 | 需要 Agent + RAG 混合时 | 纯知识库问答优先 |
 | 面试结论 | **都用过/至少理解**：RAG 场景两者都能做，LangChain 生态更广，LlamaIndex 数据管线更顺 | |
 
-> 关联阅读：/phase3/docs-rag/学习笔记.md、/phase3/docs-rag/项目设计.md 有基于这两类框架的落地笔记。
+> 关联阅读：/项目实战/docs-rag/学习笔记.md、/项目实战/docs-rag/项目设计.md 有基于这两类框架的落地笔记。
 
 ## Go 侧落地（岗位核心）
 
@@ -653,7 +653,7 @@ func RunRAG(ctx context.Context, store VectorStore, llm LLMClient, question stri
 
 **Chunk Overlap（重叠）**：切块时保留前后 50-100 字符重叠，避免「关键句恰好被切在边界上」导致检索丢信息。**核心权衡**：chunk 越大 → 上下文信息越全但噪音越多、检索粒度粗；chunk 越小 → 检索精准但单块信息量不足。经验起点：**500-800 字符 + 10% 重叠**。
 
-> 13 种分块策略完整版见：/phase3/docs-rag/Rag的13种分块策略.md（含 RAPTOR、Multi-representation 等进阶方案）。
+> 13 种分块策略完整版见：/项目实战/docs-rag/Rag的13种分块策略.md（含 RAPTOR、Multi-representation 等进阶方案）。
 
 Python 两种切法（可运行）：
 
@@ -978,7 +978,7 @@ func TwoStageRetrieve(ctx context.Context, store VectorStore, rerankerURL, query
 | 「错误处理和 panic」 | 检索到但答案不完整 | 相关片段分散在多个块 | 增大 chunk 或引入「父子块」检索（父块进上下文） |
 | 专业名词（如「RRF」） | 检索不到 | Embedding 对缩写不敏感 | 混合检索加 BM25；或加同义词扩展 |
 
-> 完整优化策略树见：/phase3/docs-rag/落地化的RAG系统优化策略.md（从索引、检索、生成三层排查）。
+> 完整优化策略树见：/项目实战/docs-rag/落地化的RAG系统优化策略.md（从索引、检索、生成三层排查）。
 
 ## 八股文要点
 
@@ -1344,7 +1344,7 @@ func RunMultiAgent(ctx context.Context, req string) ([]Task, error) {
 }
 ```
 
-> 关联阅读：/phase3/agent-harness/项目设计.md（一个完整 Agent 系统的模块划分）、/主流agent拆解/pi/核心机制.md（Agent Loop 状态管理）、/主流agent拆解/pi/Go落地与面试.md（pi → Go 的完整对照表）。
+> 关联阅读：/项目实战/agent-harness/项目设计.md（一个完整 Agent 系统的模块划分）、/主流agent拆解/pi/核心机制.md（Agent Loop 状态管理）、/主流agent拆解/pi/Go落地与面试.md（pi → Go 的完整对照表）。
 
 ## 八股文要点
 
@@ -1791,7 +1791,7 @@ flowchart TD
 | 检索不到 | 索引/文档 | 检查文档解析、重建索引、Hybrid Search |
 | 答「未找到」但库里其实有 | 召回不足 | 调 top-k、降阈值、加多路召回 |
 
-> 关联阅读：/phase3/docs-rag/落地化的RAG系统优化策略.md（完整优化决策树）、/phase3/docs-rag/多模态文档处理逻辑.md（PDF/图片类文档的解析与评估难点）。
+> 关联阅读：/项目实战/docs-rag/落地化的RAG系统优化策略.md（完整优化决策树）、/项目实战/docs-rag/多模态文档处理逻辑.md（PDF/图片类文档的解析与评估难点）。
 
 ## 八股文要点
 

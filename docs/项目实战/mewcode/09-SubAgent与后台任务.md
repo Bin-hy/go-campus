@@ -2130,5 +2130,5 @@ Fork 三件事    cloneMessages 深拷贝（ToolCalls/ToolResults 切片）
 
 ---
 
-- [上一篇：扩展机制：MCP / Skill / Hook](/phase3/mewcode/08-扩展机制-MCP-Skill-Hook)
-- [下一篇：多协议抽象与提示工程](/phase3/mewcode/10-多协议抽象与提示工程)
+- [上一篇：扩展机制：MCP / Skill / Hook](/项目实战/mewcode/08-扩展机制-MCP-Skill-Hook)
+- [下一篇：多协议抽象与提示工程](/项目实战/mewcode/10-多协议抽象与提示工程)

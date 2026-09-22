@@ -3,7 +3,7 @@
 > 属于「架构师修炼」· 19 pprof 实战 · 第 2 篇：CPU 火焰图定位热点
 > 上一篇：[01 观测体系与 pprof 原理](./01-观测体系与pprof原理)｜下一篇：[03 内存与 GC 实战](./03-内存与GC实战)｜栏目总览：[架构师修炼](../)
 
-> **这篇解决什么问题**：CPU 打到 90%，P99 从 30ms 涨到 800ms，你把业务代码从头读了一遍——「逻辑没问题啊」。这一篇给一条**可复现的四步流程**：**① 分诊**（应用自耗还是等下游）→ **② 采集**（拿一份可信的 CPU profile）→ **③ 读图**（先 cum 找链路，再 flat 找自耗，最后 list 到行号）→ **④ 修复对比**（用同一套压测证明收益）。全程只用标准库 + `go tool pprof`；实验代码对应冻结清单里的 `code/perf/pprof-lab/`（独立 module `gocampus/perf/pprof-lab`，仅标准库），**本文只引用清单里的端口、flag 与命令，不虚构任何文件与输出**。
+> **这篇解决什么问题**：CPU 打到 90%，P99 从 30ms 涨到 800ms，你把业务代码从头读了一遍——「逻辑没问题啊」。这一篇给一条**可复现的四步流程**：**① 分诊**（应用自耗还是等下游）→ **② 采集**（拿一份可信的 CPU profile）→ **③ 读图**（先 cum 找链路，再 flat 找自耗，最后 list 到行号）→ **④ 修复对比**（用同一套压测证明收益）。全程只用标准库 + `go tool pprof`；实验代码对应冻结清单里的 `code/architect/pprof-lab/`（独立 module `gocampus/perf/pprof-lab`，仅标准库），**本文只引用清单里的端口、flag 与命令，不虚构任何文件与输出**。
 
 ---
 
@@ -81,7 +81,7 @@ gc 14 @12.345s 5%: 0.12+1.3+0.008 ms clock, 0.96+2.1/3.4/2.2+0.064 ms cpu, 120->
 ### 2.1 三条采集命令
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # ① 一条命令搞定：采集 + 直接拉起浏览器 UI（本地实验最常用）
 go tool pprof -http=:9090 'http://127.0.0.1:19081/debug/pprof/profile?seconds=30'
@@ -189,7 +189,7 @@ flowchart LR
 ### 3.3 四个定位命令的用途
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # 行级定位：哪个函数的哪一行在烧（正则匹配函数名）
 go tool pprof -list=render cpu-before.pb.gz
@@ -298,7 +298,7 @@ func good(items []Item) string {
 
 ```bash
 # 终端 1：进入实验模块并起被测服务
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go run ./cmd/l01-cpu-hotspot
 
 # 终端 2：先起压测（50 并发；40s 是为了完整覆盖 30s 的采集窗口）
@@ -358,7 +358,7 @@ go tool pprof -http=:9090 -base cpu-before.pb.gz cpu-after.pb.gz
 ### 6.1 完整命令
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # 终端 1：起 L07 服务（业务 18087 / pprof 19087）
 go run ./cmd/l07-io-serialization
@@ -404,7 +404,7 @@ go run ./cmd/l07-io-serialization -fix
 ### 7.1 用 `-base` / `-diff_base` 对比两份 profile
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # 最常用：看「优化前后差了什么」。负值 = 被削掉的成本，正值 = 新增成本
 go tool pprof -http=:9090 -base cpu-before.pb.gz cpu-after.pb.gz
@@ -441,7 +441,7 @@ go tool pprof -top -base cpu-before.pb.gz cpu-after.pb.gz
 ### 7.3 用 benchmark 做回归防护（防止「优化」被后续需求吃回去）
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # 只跑 benchmark，不跑单元测试：-run='^$' 跳过所有 Test；-benchmem 带上分配次数与字节数
 go test -run='^$' -bench=. -benchmem ./...

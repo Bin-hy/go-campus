@@ -3,7 +3,7 @@
 > 配套练习：[Context 超时控制](/习题集和答案/phase1/07_context/01_timeout_http/)、
 > [可取消任务](/习题集和答案/phase1/07_context/02_cancelable_task/)、
 > [值传递与链路追踪](/习题集和答案/phase1/07_context/03_trace_propagation/)。
-> 建议先阅读[知识点总览 · 2.4 Context 详解](/第一阶段-知识点详解#24-context-详解)建立框架，再对照本文深入源码与易错点。
+> 建议先阅读[知识点总览 · 2.4 Context 详解](/第一阶段-知识详解/#24-context-详解)建立框架，再对照本文深入源码与易错点。
 
 ---
 

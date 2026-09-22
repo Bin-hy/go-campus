@@ -327,7 +327,7 @@ pprofMux.HandleFunc("/debug/pprof/trace", pprof.Trace)
 
 ## 八、实验清单总表
 
-本栏目**所有实例都在 `code/perf/pprof-lab/`**（独立 go module：`module gocampus/perf/pprof-lab`，`go 1.22`，仅标准库、零第三方依赖）。统一约定：
+本栏目**所有实例都在 `code/architect/pprof-lab/`**（独立 go module：`module gocampus/perf/pprof-lab`，`go 1.22`，仅标准库、零第三方依赖）。统一约定：
 
 - **业务端口 `1808N`，pprof 管理端口 `1908N`（= 业务端口 + 1000）**，`N` 为样例编号；
 - flag：`-addr`（默认 `127.0.0.1:1808N`）、`-pprof-addr`（默认 `127.0.0.1:1908N`）、`-fix`（默认 `false`，开启后使用修复实现）；
@@ -347,7 +347,7 @@ pprofMux.HandleFunc("/debug/pprof/trace", pprof.Trace)
 ### 8.1 一次完整闭环（以 L01 为例）
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # 终端 A：启动被测服务（业务 18081 + pprof 管理 19081）
 go run ./cmd/l01-cpu-hotspot

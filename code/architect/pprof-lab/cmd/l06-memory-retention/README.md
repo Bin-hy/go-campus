@@ -1,6 +1,6 @@
 # L06 · 内存只涨不降：全局 map 长期持有
 
-> 模块根目录 `code/perf/pprof-lab`，下面所有命令都在该目录下执行；零第三方依赖，只用标准库（LRU 用 `container/list`）。
+> 模块根目录 `code/architect/pprof-lab`，下面所有命令都在该目录下执行；零第三方依赖，只用标准库（LRU 用 `container/list`）。
 
 ## 这个样例演示什么
 

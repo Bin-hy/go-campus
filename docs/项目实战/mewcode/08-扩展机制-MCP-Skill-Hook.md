@@ -1460,5 +1460,5 @@ async      context.Background()（脱离父 ctx）/ 不进 InjectedPrompts / 不
 ```
 ---
 
-- [上一篇：记忆、会话与项目指令](/phase3/mewcode/07-记忆会话与项目指令)
-- [下一篇：SubAgent 与后台任务](/phase3/mewcode/09-SubAgent与后台任务)
+- [上一篇：记忆、会话与项目指令](/项目实战/mewcode/07-记忆会话与项目指令)
+- [下一篇：SubAgent 与后台任务](/项目实战/mewcode/09-SubAgent与后台任务)

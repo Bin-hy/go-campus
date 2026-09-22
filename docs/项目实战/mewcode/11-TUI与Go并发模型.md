@@ -1265,5 +1265,5 @@ handleAgentEvent 顺序即语义：Compact > Err > Approval > Tool(Start) > Tool
 
 ---
 
-- [上一篇：多协议抽象与提示工程](/phase3/mewcode/10-多协议抽象与提示工程)
-- [下一篇：面试追问题库](/phase3/mewcode/12-面试追问题库)
+- [上一篇：多协议抽象与提示工程](/项目实战/mewcode/10-多协议抽象与提示工程)
+- [下一篇：面试追问题库](/项目实战/mewcode/12-面试追问题库)

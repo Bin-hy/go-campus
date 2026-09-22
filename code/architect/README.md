@@ -104,10 +104,10 @@ docker exec -it arch-kafka /opt/kafka/bin/kafka-consumer-groups.sh --bootstrap-s
 
 ## 配套：性能定位实验包（不需要 Docker）
 
-E01「压测找拐点 + pprof 定位」的完整版在 [`code/perf/pprof-lab/`](../perf/pprof-lab/README.md)：**8 个零依赖 Go 样例**（CPU 打满 / GC 抖动 / goroutine 泄漏 / 锁竞争 / channel 阻塞 / 内存滞留 / syscall 高 / 自带压测器），只用标准库，`go run` 直接跑，加 `-fix` 即可跑修复版做前后对比；业务端口 `1808N`、pprof 端口 `1908N`。
+E01「压测找拐点 + pprof 定位」的完整版在 [`code/architect/pprof-lab/`](../perf/pprof-lab/README.md)：**8 个零依赖 Go 样例**（CPU 打满 / GC 抖动 / goroutine 泄漏 / 锁竞争 / channel 阻塞 / 内存滞留 / syscall 高 / 自带压测器），只用标准库，`go run` 直接跑，加 `-fix` 即可跑修复版做前后对比；业务端口 `1808N`、pprof 端口 `1908N`。
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go run ./cmd/l01-cpu-hotspot &                                     # 业务 :18081，pprof :19081
 go run ./cmd/load -url='http://127.0.0.1:18081/api/render?n=2000' -c=50 -d=20s
 go tool pprof -http=:9090 'http://127.0.0.1:19081/debug/pprof/profile?seconds=30'

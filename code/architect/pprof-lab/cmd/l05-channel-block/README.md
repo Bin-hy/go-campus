@@ -1,6 +1,6 @@
 # L05 · 无缓冲 channel + 单 worker：请求阻塞在 chansend / chanrecv
 
-> 模块根目录 `code/perf/pprof-lab`，所有命令都在该目录下执行。零第三方依赖，只用标准库；`go run` 直接跑，加 `-fix` 切换修复实现。
+> 模块根目录 `code/architect/pprof-lab`，所有命令都在该目录下执行。零第三方依赖，只用标准库；`go run` 直接跑，加 `-fix` 切换修复实现。
 
 ## 这个样例演示什么
 
@@ -13,7 +13,7 @@
 ## 启动
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # bug 模式：业务 :18085，pprof :19085（Ctrl-C 优雅退出：先停业务入口 → 收敛 worker → 停 pprof）
 go run ./cmd/l05-channel-block

@@ -28,8 +28,10 @@ docs/架构师修炼/
 ├── 16-案例-Feed与社区互动架构.md             # E 实战：推拉结合 / 计数 / 热点
 ├── 17-面试-白板架构设计与追问链.md           # E 实战：7 步答题 + 6 道题 + 10 类追问模板
 ├── 18-实验手册-Go落地实验.md                 # E 实战：15 个可复现实验 + 简历写法
-└── _meta/                                   # spec/plan/task/checklist（不参与导航）
+└── 19-pprof实战/                             # 子栏目：8 篇 + 8 个可跑性能实验
 ```
+
+> spec / plan / task / checklist 等过程产物已统一移至仓库根 `.specs/架构师修炼/`，不在栏目目录内，也不参与站点导航。
 
 ```
 code/architect/
@@ -39,7 +41,8 @@ code/architect/
 ├── conf/mysql/master-init.sql       # repl 账号 + account/big_table/迁移库
 ├── conf/redis/sentinel.conf         # 哨兵模板（__PORT__ 占位）
 ├── scripts/init-replication.sh      # GTID 自动定位建立主从
-└── README.md                        # 端口表 / 配置要点 / 故障注入速查 / 记录模板
+├── README.md                        # 端口表 / 配置要点 / 故障注入速查 / 记录模板
+└── pprof-lab/                       # 19 pprof 实战配套：独立 module（gocampus/architect/pprof-lab），8 个零依赖实验
 ```
 
 ## 篇章依赖关系
@@ -76,6 +79,6 @@ flowchart LR
 | 风险 | 对策 |
 |------|------|
 | 与 S1/S2/S3/S8 内容重复 | 写作规范强制「原理只链接」，每篇开头声明「原理见 XX」 |
-| 篇章过多导致维护成本 | 统一模板 + 统一导航块 + `_meta` 记录设计意图 |
+| 篇章过多导致维护成本 | 统一模板 + 统一导航块 + `.specs/` 记录设计意图 |
 | 参数失真（版本差异） | 参数均标注组件与版本语境（MySQL 8.0 / Redis 7 / Kafka 3.7 / etcd 3.5），并给「验证方式」 |
 | 编排在本机拉镜像慢 | README 给出「只起需要的服务」的最小命令 |

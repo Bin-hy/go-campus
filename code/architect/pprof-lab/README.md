@@ -1,4 +1,4 @@
-# pprof 调优实验包（code/perf/pprof-lab）
+# pprof 调优实验包（code/architect/pprof-lab）
 
 > 配套文档：[架构师修炼 · 19 pprof 实战](/架构师修炼/19-pprof实战/)（观测体系 · CPU 火焰图 · 内存与 GC · goroutine 与锁 · 常见问题手册 · 生产实践 · 7 个案例 · 30 道面试题）
 
@@ -16,7 +16,7 @@
 ## 快速开始（30 秒）
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # 终端 A：起一个有问题的服务（bug 模式）
 go run ./cmd/l01-cpu-hotspot

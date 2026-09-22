@@ -16,20 +16,20 @@
 
 使用 Go 从零实现的终端 Coding Agent（对标 Claude Code）：单二进制、双协议（Anthropic + OpenAI）、多轮 ReAct 循环、保序分批并发、五层权限护栏、两层上下文压缩、MCP 工具生态、Skill / Hook / SubAgent 三级扩展。**13 个功能章节、115 个 Go 文件、约 1.78 万行**，全部手写、不用任何 Agent 框架。
 
-- [项目首页](/phase3/mewcode/)
-- [项目设计（ADR）](/phase3/mewcode/项目设计)
-- [面试讲解（01-11 章）](/phase3/mewcode/01-项目全景与面试开场)
-- [面试追问题库（120 问）](/phase3/mewcode/12-面试追问题库)
-- [企业级 Agent 平台方案](/phase3/mewcode/13-企业级Agent平台方案)
+- [项目首页](/项目实战/mewcode/)
+- [项目设计（ADR）](/项目实战/mewcode/项目设计)
+- [面试讲解（01-11 章）](/项目实战/mewcode/01-项目全景与面试开场)
+- [面试追问题库（120 问）](/项目实战/mewcode/12-面试追问题库)
+- [企业级 Agent 平台方案](/项目实战/mewcode/13-企业级Agent平台方案)
 - 源码：[projects/EasyCoding](https://github.com/Bin-hy/EasyCoding)（git submodule）
 
 ### 2. RAG 文档问答系统
 
 使用 Go 实现的文档 RAG 系统，支持对多类型文档内容的存储和知识问答。
 
-- [项目首页](/phase3/docs-rag/)
-- [学习笔记](/phase3/docs-rag/学习笔记)
-- [项目设计](/phase3/docs-rag/项目设计)
+- [项目首页](/项目实战/docs-rag/)
+- [学习笔记](/项目实战/docs-rag/学习笔记)
+- [项目设计](/项目实战/docs-rag/项目设计)
 
 ### 3. AI Agent Harness — 智能视频剪辑 Agent
 
@@ -37,9 +37,9 @@
 
 > MewCode 是该蓝图的**已落地实现**（且更完整）：Harness 讲「应该怎么做」，MewCode 讲「我做到了哪一步、哪里没做到」。
 
-- [项目首页](/phase3/agent-harness/)
-- [学习笔记](/phase3/agent-harness/学习笔记)
-- [项目设计](/phase3/agent-harness/项目设计)
+- [项目首页](/项目实战/agent-harness/)
+- [学习笔记](/项目实战/agent-harness/学习笔记)
+- [项目设计](/项目实战/agent-harness/项目设计)
 
 ---
 

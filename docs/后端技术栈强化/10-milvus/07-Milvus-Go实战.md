@@ -270,7 +270,7 @@ if err := c.DropCollection(ctx, "doc_chunks"); err != nil {
 
 ## 三、完整项目：本地文档 RAG 语义检索
 
-光会调 API 不算数，把它放进一个真实链路才算掌握。下面是"本地文档语义检索"小项目骨架——它就是你 docs-rag（`projects/docs-rag`，见 /phase3/docs-rag）里向量存储模块的最小版本：
+光会调 API 不算数，把它放进一个真实链路才算掌握。下面是"本地文档语义检索"小项目骨架——它就是你 docs-rag（`projects/docs-rag`，见 /项目实战/docs-rag）里向量存储模块的最小版本：
 
 ```text
 doc-rag/

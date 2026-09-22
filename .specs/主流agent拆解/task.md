@@ -16,7 +16,7 @@
 | 新建 | `docs/主流agent拆解/langgraph/核心机制.md` | LangGraph ② 四大机制 |
 | 新建 | `docs/主流agent拆解/langgraph/对照与面试.md` | LangGraph ③ 对照 + 面试速答 + 速记卡 |
 | 修改 | `docs/.vitepress/config.mts` | nav + sidebar 更新 |
-| 修改 | `docs/phase3/index.md` | 移除 pi 条目，加新模块指引 |
+| 修改 | `docs/项目实战/index.md` | 移除 pi 条目，加新模块指引 |
 | 修改 | `docs/路线专题/04-简历项目改造与面试实战.md` | 3 处 pi-harness 文本提及更新措辞 |
 | 删除 | `docs/phase3/pi-harness/` | 迁移后空目录清理（git mv 自动处理） |
 
@@ -28,7 +28,7 @@
 1. `mkdir -p docs/主流agent拆解`
 2. `git mv docs/phase3/pi-harness docs/主流agent拆解/pi`
 3. 在 5 篇迁移文档中全局替换链接：`/phase3/pi-harness` → `/主流agent拆解/pi`
-4. 确认对 `/phase3/agent-harness/` 等其他路径的引用保持不变
+4. 确认对 `/项目实战/agent-harness/` 等其他路径的引用保持不变
 
 **验证：** `grep -rn "phase3/pi-harness" docs/主流agent拆解/` 输出为空；`ls docs/主流agent拆解/pi/` 有 5 个 md 文件；`git status` 显示 rename 而非 delete+add
 
@@ -166,13 +166,13 @@
 2. nav 新增「主流 Agent 拆解」顶级下拉（总览 + 三框架入口，位于「项目实战」之后）
 3. sidebar 删除 `'/phase3/pi-harness/'` 分组
 4. sidebar 新增 `'/主流agent拆解/'`：三个 collapsed 分组（pi 5 篇 / eino 3 篇 / langgraph 3 篇）+ 模块首页链接 + 「相关」组（phase3 两个实战项目）
-5. 检查 `'/phase3/agent-harness/'` 与 `'/phase3/docs-rag/'` sidebar 中「相关」列表，如有 pi 链接则更新为新路径
+5. 检查 `'/项目实战/agent-harness/'` 与 `'/项目实战/docs-rag/'` sidebar 中「相关」列表，如有 pi 链接则更新为新路径
 
 **验证：** `npm run docs:dev` 起服务后导航与侧边栏显示正确；配置无语法错误（构建通过）
 
 ## T12: 存量页面清理
 
-**文件：** `docs/phase3/index.md`、`docs/路线专题/04-简历项目改造与面试实战.md`
+**文件：** `docs/项目实战/index.md`、`docs/路线专题/04-简历项目改造与面试实战.md`
 **依赖：** T1
 **步骤：**
 1. `phase3/index.md`：删除 pi 拆解条目，文末「后续项目」前加一行指引（框架拆解已移至主流 Agent 拆解模块）

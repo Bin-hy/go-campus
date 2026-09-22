@@ -5,7 +5,7 @@
 
 > **这篇解决什么问题**：本机采 profile 只是 `curl` 一下，线上采 profile 要回答四个问题——**① 怎么开才不会被公网扫到**；**② 开销到底多大、能不能长期开**；**③ 容器/K8s 里没有 go 工具链怎么采**；**④ 故障过去之后还能不能拿到当时的现场**。这一篇给可以直接照抄的管理面代码、自己量开销的对照实验方法、K8s 采集路径、持续 profiling 的取舍，以及一次 P99 劣化的 5 分钟排障 SOP。
 >
-> 前置：[01 观测体系与 pprof 原理](./01-观测体系与pprof原理)、[02 CPU 火焰图实战](./02-CPU火焰图实战)、[03 内存与 GC 实战](./03-内存与GC实战)、[04 goroutine 与锁阻塞实战](./04-goroutine与锁阻塞实战)。实验样例见 `code/perf/pprof-lab`（`L01`~`L07`，业务端口 `1808N`、pprof 管理端口 `1908N`）。
+> 前置：[01 观测体系与 pprof 原理](./01-观测体系与pprof原理)、[02 CPU 火焰图实战](./02-CPU火焰图实战)、[03 内存与 GC 实战](./03-内存与GC实战)、[04 goroutine 与锁阻塞实战](./04-goroutine与锁阻塞实战)。实验样例见 `code/architect/pprof-lab`（`L01`~`L07`，业务端口 `1808N`、pprof 管理端口 `1908N`）。
 
 **一句话结论**：**本机随便开，线上必须设计**——pprof 不进公网、采集有上限、每次留证据、结论绑版本。做不到这四条，你采到的不是数据，是一个待爆的安全事故。
 
@@ -66,7 +66,7 @@ flowchart TD
 
 ### 2.2 生产形态的管理面（可直接用）
 
-业务 `:18081` 与管理面 `:19081` 分端口，管理面只绑 loopback，只显式注册三个 profile。下面这段是**生产形态示例**（不属于 `code/perf/pprof-lab` 的冻结样例，是给业务服务加管理面时照抄的模板）：
+业务 `:18081` 与管理面 `:19081` 分端口，管理面只绑 loopback，只显式注册三个 profile。下面这段是**生产形态示例**（不属于 `code/architect/pprof-lab` 的冻结样例，是给业务服务加管理面时照抄的模板）：
 
 ```go
 // cmd/pprofadmin/main.go —— 生产形态的 pprof 管理面（只开 heap / goroutine / profile）
@@ -226,7 +226,7 @@ spec:
 
 ```bash
 # 干扰组：先起服务（业务 :18081，管理面 :19081），再跑压测
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go run ./cmd/l01-cpu-hotspot &
 go run ./cmd/load -url=http://127.0.0.1:18081/api/render?n=2000 -c=50 -d=60s
 
@@ -408,7 +408,7 @@ flowchart TD
 
 ```bash
 # 终端 1：起被测服务（业务 :18081，管理面 :19081）
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go run ./cmd/l01-cpu-hotspot
 
 # 终端 2：逐级加压 —— 50 / 200 / 400 并发，各记录 QPS 与 P50/P95/P99
@@ -452,7 +452,7 @@ go run ./cmd/load -url=http://127.0.0.1:18081/api/render?n=2000 -c=200 -d=20s
 
 ```bash
 # 编译时写入 VCS 信息（仓库需是 git 工作区，且是干净状态）
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go build -buildvcs=true -o bin/render ./cmd/l01-cpu-hotspot
 go version -m bin/render | grep -E 'mod|vcs'   # 看到 vcs.revision=xxxx 即为成功
 ```

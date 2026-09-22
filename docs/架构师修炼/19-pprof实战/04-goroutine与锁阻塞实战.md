@@ -3,7 +3,7 @@
 > 属于「架构师修炼」· 19 pprof 实战 · 第 4 篇：goroutine 泄漏、锁竞争与阻塞定位
 > 上一篇：[03 内存与 GC 实战](./03-内存与GC实战)｜下一篇：[05 常见问题排查手册](./05-常见问题排查手册)｜栏目总览：[架构师修炼](../)
 
-> **这篇解决什么问题**：上一章解决"内存涨"，这一章解决**"CPU 不高，但 QPS 上不去、P99 一直抖"**。这类问题火焰图上找不到热点——因为耗时不在计算上，而在**等**上：等锁、等 channel、等下游、或者 goroutine 只增不减最终把内存和调度压垮。本篇按"分诊 → 三种 profile 抓法 → 六种泄漏形态 → 锁优化对照表 → 死锁定位 → 三个完整实验"的顺序，把"等"变成可测量的数字。所有实验只用冻结样例目录 `code/perf/pprof-lab/` 里的 L03 / L04 / L05 与 `cmd/load`。
+> **这篇解决什么问题**：上一章解决"内存涨"，这一章解决**"CPU 不高，但 QPS 上不去、P99 一直抖"**。这类问题火焰图上找不到热点——因为耗时不在计算上，而在**等**上：等锁、等 channel、等下游、或者 goroutine 只增不减最终把内存和调度压垮。本篇按"分诊 → 三种 profile 抓法 → 六种泄漏形态 → 锁优化对照表 → 死锁定位 → 三个完整实验"的顺序，把"等"变成可测量的数字。所有实验只用冻结样例目录 `code/architect/pprof-lab/` 里的 L03 / L04 / L05 与 `cmd/load`。
 
 ---
 
@@ -56,7 +56,7 @@ flowchart TD
 需要把两者分到同一张时间轴上时用 trace：
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 # 抓 5 秒执行 trace（端口按样例：L04 为 19084）
 curl -o trace.out 'http://127.0.0.1:19084/debug/pprof/trace?seconds=5'
 go tool trace trace.out
@@ -70,7 +70,7 @@ go tool trace trace.out
 ### 2.1 三种视图，各有用途
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # ① 交互式：按 goroutine 数聚合，可 top / peek / traces / list（L03 样例的 pprof 端口）
 go tool pprof -http=:9090 'http://127.0.0.1:19083/debug/pprof/goroutine'
@@ -241,7 +241,7 @@ go tool pprof -http=:9090 -seconds=20 'http://127.0.0.1:19085/debug/pprof/block'
 ### 3.3 读法：宽栈就是瓶颈
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go tool pprof -http=:9090 'http://127.0.0.1:19085/debug/pprof/block'
 # 只聚焦 channel 相关栈
 go tool pprof -http=:9090 -focus='chan' 'http://127.0.0.1:19085/debug/pprof/block'
@@ -269,7 +269,7 @@ runtime.SetMutexProfileFraction(1)
 ```
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go tool pprof -http=:9090 'http://127.0.0.1:19084/debug/pprof/mutex'
 go tool pprof -top -nodecount=10 -sample_index=contentions 'http://127.0.0.1:19084/debug/pprof/mutex'
 ```
@@ -407,7 +407,7 @@ Go **没有**内置的"锁顺序检查器"；`go vet` 与 `-race` 都不检测�
 **终端 A**：
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go run ./cmd/l03-goroutine-leak   # 业务端口 18083，pprof 端口 19083
 ```
 
@@ -465,7 +465,7 @@ curl -s 'http://127.0.0.1:18083/api/task/stop'; echo         # 预期 released =
 **终端 A**：
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go run ./cmd/l04-lock-contention   # 业务端口 18084，pprof 端口 19084
 ```
 
@@ -522,7 +522,7 @@ go run ./cmd/load -url='http://127.0.0.1:18084/api/counter?k=hot' -c=100 -d=30s
 **终端 A**：
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 go run ./cmd/l05-channel-block   # 业务端口 18085，pprof 端口 19085
 ```
 

@@ -22,7 +22,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gocampus/perf/pprof-lab/internal/labkit"
+	"gocampus/architect/pprof-lab/internal/labkit"
 )
 
 var (

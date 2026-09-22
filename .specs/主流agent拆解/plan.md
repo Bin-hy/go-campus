@@ -6,7 +6,7 @@
 
 1. **新模块目录** `docs/主流agent拆解/`：模块首页 + 三个框架子目录（pi / eino / langgraph），每个框架一组拆解文档
 2. **站点配置** `docs/.vitepress/config.mts`：顶部导航新增入口、新模块侧边栏、移除 phase3 中的 pi 条目
-3. **存量内容迁移**：`docs/phase3/pi-harness/` 5 篇文档原样迁入（仅修链接），`docs/phase3/index.md` 移除 pi 条目
+3. **存量内容迁移**：`docs/phase3/pi-harness/` 5 篇文档原样迁入（仅修链接），`docs/项目实战/index.md` 移除 pi 条目
 
 ## 核心「数据结构」= 每篇文档的统一模板
 
@@ -93,7 +93,7 @@
      { text: 'LangGraph · Python 编排框架', link: '/主流agent拆解/langgraph/' }
    ]}
    ```
-2. `config.mts` sidebar：删除 `'/phase3/pi-harness/'` 分组；新增 `'/主流agent拆解/'` 分组（三个框架各一个 collapsed 分组 + 底部「相关」组链接 phase3 实战项目）；`'/phase3/agent-harness/'` 与 `'/phase3/docs-rag/'` 分组的「相关」列表中如有 pi 链接则更新
+2. `config.mts` sidebar：删除 `'/phase3/pi-harness/'` 分组；新增 `'/主流agent拆解/'` 分组（三个框架各一个 collapsed 分组 + 底部「相关」组链接 phase3 实战项目）；`'/项目实战/agent-harness/'` 与 `'/项目实战/docs-rag/'` 分组的「相关」列表中如有 pi 链接则更新
 3. `phase3/index.md`：移除 pi 拆解条目，文末加一行指向新模块
 4. `路线专题/04-简历项目改造与面试实战.md`：纯文本提及 pi-harness（3 处，无链接），将措辞更新为「主流 Agent 拆解 · pi」保持指引有效
 5. 全站 grep 兜底：`grep -rn "phase3/pi-harness"` 必须为空

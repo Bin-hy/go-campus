@@ -2,7 +2,7 @@
 
 ## 背景
 
-当前 VitePress 文档站 `docs/phase3/`（第三阶段：AI 应用开发）混合了两类内容：
+当前 VitePress 文档站 `docs/项目实战/`（第三阶段：AI 应用开发）混合了两类内容：
 
 - **自研实战项目**：docs-rag（RAG 问答）、agent-harness（自研剪辑 Agent 运行时）
 - **开源框架拆解**：pi-harness（对 pi 开源 Agent 工具链的深度拆解）

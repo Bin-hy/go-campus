@@ -1,6 +1,6 @@
 # L07 · 逐行 fmt.Fprintf 导出 CSV：反射格式化 + 海量分配
 
-> 模块根目录 `code/perf/pprof-lab`，所有命令都在该目录下执行。零第三方依赖，只用标准库；`go run` 直接跑，加 `-fix` 切换修复实现。
+> 模块根目录 `code/architect/pprof-lab`，所有命令都在该目录下执行。零第三方依赖，只用标准库；`go run` 直接跑，加 `-fix` 切换修复实现。
 
 ## 这个样例演示什么
 
@@ -14,7 +14,7 @@
 ## 启动
 
 ```bash
-cd code/perf/pprof-lab
+cd code/architect/pprof-lab
 
 # bug 模式：业务 :18087，pprof :19087（Ctrl-C 优雅退出：停业务入口 → 停 pprof）
 go run ./cmd/l07-io-serialization

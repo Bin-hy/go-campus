@@ -64,151 +64,64 @@ export default withMermaid(defineConfig({
     nav: [
       { text: '首页', link: '/' },
       {
-        text: '学习计划',
+        text: '学习路线',
         items: [
           { text: '总体规划', link: '/学习计划安排/总体规划' },
           { text: '第一阶段 · Go 语言深入', link: '/学习计划安排/第一阶段-Go语言深入' },
           { text: '第二阶段 · 计算机基础', link: '/学习计划安排/第二阶段-计算机基础强化' },
-          { text: '第三阶段 · AI 应用开发', link: '/学习计划安排/第三阶段-AI应用开发基础' }
+          { text: '第三阶段 · AI 应用开发', link: '/学习计划安排/第三阶段-AI应用开发基础' },
+          { text: '30 天冲刺训练营', link: '/路线专题/' },
+          { text: '导师学习路径（RAG / Agent）', link: '/导师学习路径/' }
         ]
       },
       {
-        text: '导师学习路径',
+        text: '转岗大模型算法',
         items: [
-          { text: '总览与章节安排', link: '/导师学习路径/' },
-          { text: '01 · RAG 原理与 LLM 基础', link: '/导师学习路径/01-RAG原理与LLM基础' },
-          { text: '02 · RAG 完整原理与 Prompt 工程', link: '/导师学习路径/02-RAG完整原理与Prompt工程' },
-          { text: '03 · Function Calling 与 MCP', link: '/导师学习路径/03-FunctionCalling与MCP协议' },
-          { text: '04 · ReAct 与 Agent 规划', link: '/导师学习路径/04-ReAct与Agent规划' },
-          { text: '05 · Multi-Agent 编排与 LangGraph', link: '/导师学习路径/05-Multi-Agent编排与LangGraph' },
-          { text: '06 · Agent 记忆与评测体系', link: '/导师学习路径/06-Agent记忆与评测体系' },
-          { text: '07 · 文生视频与 Diffusion', link: '/导师学习路径/07-JD专题-文生视频与Diffusion模型' },
-          { text: '08 · LLM 推理优化', link: '/导师学习路径/08-JD专题-LLM推理优化' },
-          { text: '09 · LLM 训练流程与微调', link: '/导师学习路径/09-JD专题-LLM训练流程与微调' },
-          { text: '10 · AI 应用技术栈速通', link: '/导师学习路径/10-AI应用技术栈速通' },
-          { text: '11 · 生成原理零基础学习方案', link: '/导师学习路径/11-JD专题-生成原理零基础学习方案' }
-        ]
-      },
-      {
-        text: '路线专题',
-        items: [
-          { text: '30 天冲刺总览', link: '/路线专题/' },
-          { text: '算法专项训练', link: '/路线专题/01-算法专项训练' },
-          { text: '后端与计算机基础', link: '/路线专题/02-后端与计算机基础' },
-          { text: '大模型与 Agent 核心能力', link: '/路线专题/03-大模型与Agent核心能力' },
-          { text: '简历项目改造与面试实战', link: '/路线专题/04-简历项目改造与面试实战' }
+          { text: '总览 · 作战地图', link: '/转岗大模型算法/' },
+          { text: '01 · 岗位分层与差距诊断', link: '/转岗大模型算法/01-目标岗位分层与差距诊断' },
+          { text: '02 · 数学地基最小集', link: '/转岗大模型算法/02-数学地基最小集' },
+          { text: '03 · PyTorch 与训练工程地基', link: '/转岗大模型算法/03-PyTorch与训练工程地基' },
+          { text: '04 · Transformer 与 LLM 原理手推', link: '/转岗大模型算法/04-Transformer与LLM原理手推' },
+          { text: '05 · 多模态原理与架构谱系', link: '/转岗大模型算法/05-多模态原理与架构谱系' },
+          { text: '06 · 核心项目：多模态小模型从零训练', link: '/转岗大模型算法/06-核心项目-多模态小模型从零训练' },
+          { text: '07 · 训练与推理工程进阶', link: '/转岗大模型算法/07-训练与推理工程进阶' },
+          { text: '08 · 评测体系与技术报告', link: '/转岗大模型算法/08-评测体系与技术报告' },
+          { text: '09 · 京东实习期的算法筹码经营', link: '/转岗大模型算法/09-京东实习期的算法筹码经营' },
+          { text: '10 · 大模型算法日常实习投递与面试', link: '/转岗大模型算法/10-大模型算法日常实习投递与面试' },
+          { text: '11 · 2028 届秋招规划与简历转化', link: '/转岗大模型算法/11-2028届秋招规划与简历转化' },
+          { text: '12 · 资源、算力与弹性周计划', link: '/转岗大模型算法/12-资源算力与弹性周计划' }
         ]
       },
       {
         text: '知识详解',
         items: [
-          { text: '第一阶段 · Go 语言深入', link: '/第一阶段-知识详解/' },
-          { text: 'Slice、Map 与内存布局', link: '/第一阶段-知识详解/Slice-Map与内存布局' },
-          { text: 'Interface 底层原理', link: '/第一阶段-知识详解/Interface底层原理' },
-          { text: 'String 与字节切片', link: '/第一阶段-知识详解/String与字节切片' },
-          { text: 'Go 函数调用与栈详解', link: '/第一阶段-知识详解/Go函数调用与栈详解' },
-          { text: 'Go 内存分配详解', link: '/第一阶段-知识详解/Go内存分配详解' },
-          { text: 'Go GC 详解', link: '/第一阶段-知识详解/Go GC 详解' },
-          { text: 'Go 并发编程详解', link: '/第一阶段-知识详解/Go并发编程详解' },
-          { text: 'Go GMP 调度详解', link: '/第一阶段-知识详解/Go GMP 调度详解' },
-          { text: 'Go 并发编程问答集', link: '/第一阶段-知识详解/Go并发编程问答集' },
-          { text: 'Go Context 详解', link: '/第一阶段-知识详解/Go Context 详解' },
+          { text: 'Go 语言底层原理（11 篇）', link: '/第一阶段-知识详解/' },
           { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
           { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' },
           { text: '第二阶段 · 分布式系统', link: '/第二阶段-知识详解/分布式系统面试详解' },
-          { text: '后端技术栈强化', link: '/后端技术栈强化/' },
+          { text: '后端技术栈强化（S1-S10）', link: '/后端技术栈强化/' },
           { text: 'S10 · 向量数据库 Milvus', link: '/后端技术栈强化/10-milvus/01-向量检索原理' }
         ]
       },
       {
-        text: '架构师修炼',
+        text: '架构与工程',
         items: [
-          { text: '总览：从单体到百万 QPS', link: '/架构师修炼/' },
-          { text: '00 · 架构师思维与设计方法论', link: '/架构师修炼/00-架构师思维与设计方法论' },
-          { text: '01 · QPS 分级与架构演进地图', link: '/架构师修炼/01-QPS分级与架构演进地图' },
-          { text: '02 · 单体架构的极限与分层', link: '/架构师修炼/02-单体架构的极限与分层' },
-          { text: '03 · MySQL 主从与读写分离落地', link: '/架构师修炼/03-MySQL主从与读写分离落地' },
-          { text: '04 · Redis 高可用与缓存体系落地', link: '/架构师修炼/04-Redis高可用与缓存体系落地' },
-          { text: '05 · Kafka 削峰与可靠投递落地', link: '/架构师修炼/05-Kafka削峰与可靠投递落地' },
-          { text: '06 · 分库分表与在线迁移双写', link: '/架构师修炼/06-分库分表与在线迁移双写' },
-          { text: '07 · 多活容灾与全球化架构', link: '/架构师修炼/07-多活容灾与全球化架构' },
-          { text: '08 · 缓存与 DB 一致性落地', link: '/架构师修炼/08-缓存与DB一致性落地' },
-          { text: '09 · 分布式事务与最终一致落地', link: '/架构师修炼/09-分布式事务与最终一致落地' },
-          { text: '10 · etcd 与 Raft 选主租约落地', link: '/架构师修炼/10-etcd与Raft选主租约落地' },
-          { text: '11 · 幂等去重与 Exactly-Once', link: '/架构师修炼/11-幂等去重与ExactlyOnce' },
-          { text: '12 · 限流熔断降级与背压', link: '/架构师修炼/12-限流熔断降级与背压' },
-          { text: '13 · 容量规划压测与故障演练', link: '/架构师修炼/13-容量规划压测与故障演练' },
-          { text: '14 · 备份恢复与故障复盘', link: '/架构师修炼/14-备份恢复与故障复盘' },
-          { text: '15 · 案例：AI 剪辑任务平台', link: '/架构师修炼/15-案例-AI剪辑任务平台架构' },
-          { text: '16 · 案例：Feed 与社区互动', link: '/架构师修炼/16-案例-Feed与社区互动架构' },
-          { text: '17 · 面试：白板架构设计与追问链', link: '/架构师修炼/17-面试-白板架构设计与追问链' },
-          { text: '18 · 实验手册：Go 落地实验', link: '/架构师修炼/18-实验手册-Go落地实验' },
-          { text: '19 · pprof 实战：从火焰图到架构决策', link: '/架构师修炼/19-pprof实战/' }
+          { text: '架构师修炼 · 总览', link: '/架构师修炼/' },
+          { text: '19 · pprof 性能调优实战', link: '/架构师修炼/19-pprof实战/' },
+          { text: 'K8s Code 编程教程', link: '/k8s-code教程/' }
         ]
       },
       {
-        text: 'pprof 性能调优',
+        text: '项目与面试',
         items: [
-          { text: '总览：从火焰图到架构决策', link: '/架构师修炼/19-pprof实战/' },
-          { text: '01 · 观测体系与 pprof 原理', link: '/架构师修炼/19-pprof实战/01-观测体系与pprof原理' },
-          { text: '02 · CPU 火焰图实战', link: '/架构师修炼/19-pprof实战/02-CPU火焰图实战' },
-          { text: '03 · 内存与 GC 实战', link: '/架构师修炼/19-pprof实战/03-内存与GC实战' },
-          { text: '04 · goroutine 与锁阻塞实战', link: '/架构师修炼/19-pprof实战/04-goroutine与锁阻塞实战' },
-          { text: '05 · 常见问题排查手册', link: '/架构师修炼/19-pprof实战/05-常见问题排查手册' },
-          { text: '06 · 生产环境 pprof 实践', link: '/架构师修炼/19-pprof实战/06-生产环境pprof实践' },
-          { text: '07 · 实战案例集', link: '/架构师修炼/19-pprof实战/07-实战案例集' },
-          { text: '08 · 面试题与追问链', link: '/架构师修炼/19-pprof实战/08-面试题与追问链' }
-        ]
-      },
-      {
-        text: 'K8s Code 教程',
-        link: '/k8s-code教程/'
-      },
-      {
-        text: '项目实战',
-        items: [
-          { text: 'MewCode · 终端 AI Agent（主讲）', link: '/项目实战/mewcode/' },
-          { text: 'RAG 文档问答系统', link: '/项目实战/docs-rag/' },
-          { text: 'AI Agent Harness', link: '/项目实战/agent-harness/' }
-        ]
-      },
-      {
-        text: '主流 Agent 拆解',
-        items: [
-          { text: '拆解总览与三框架对照', link: '/主流agent拆解/' },
-          { text: 'pi · 开源 Agent Harness', link: '/主流agent拆解/pi/' },
-          { text: 'Eino · Go 编排框架', link: '/主流agent拆解/eino/' },
-          { text: 'LangGraph · Python 编排框架', link: '/主流agent拆解/langgraph/' }
-        ]
-      },
-      {
-        text: '面试项目深挖',
-        items: [
-          { text: '栏目总览与选材建议', link: '/面试项目深挖/' },
-          { text: 'Vistack · 分布式视频平台（Go 后端）', link: '/面试项目深挖/Vistack/' },
-          { text: 'BinRag · RAG 知识库问答（RAG / MCP）', link: '/面试项目深挖/BinRag/' },
-          { text: 'EasyCoding · 终端 AI Agent（Agent 运行时）', link: '/面试项目深挖/EasyCoding/' },
-          { text: 'ShatangAI · 电商 AI 视频生成平台（异步 + 资金一致性）', link: '/面试项目深挖/ShatangAI/' },
-          {
-            text: '考前速背三连',
-            items: [
-              { text: 'Vistack · 速答题库与背诵卡', link: '/面试项目深挖/Vistack/10-速答题库与背诵卡' },
-              { text: 'BinRag · 口袋速背卡片', link: '/面试项目深挖/BinRag/09-口袋速背卡片' },
-              { text: 'EasyCoding · 口袋速背卡片', link: '/面试项目深挖/EasyCoding/08-口袋速背卡片' },
-              { text: 'ShatangAI · 速背卡片', link: '/面试项目深挖/ShatangAI/12-速背卡片' }
-            ]
-          }
-        ]
-      },
-      {
-        text: '代码练习',
-        items: [
-          { text: '练习指南', link: '/练习指南' },
+          { text: '项目实战（MewCode / RAG / Harness）', link: '/项目实战/' },
+          { text: '主流 Agent 拆解（pi / Eino / LangGraph）', link: '/主流agent拆解/' },
+          { text: '面试项目深挖（四项目深挖包）', link: '/面试项目深挖/' },
+          { text: '代码练习指南', link: '/练习指南' },
           { text: '习题集和答案', link: '/习题集和答案/' }
         ]
       }
     ],
-
     sidebar: {
       '/面试项目深挖/': [
         {
@@ -297,6 +210,52 @@ export default withMermaid(defineConfig({
             { text: '13 · 代码地图与事实索引', link: '/面试项目深挖/ShatangAI/13-代码地图与事实索引' },
             { text: '14 · 题库：Agent 对话与 Skill 体系', link: '/面试项目深挖/ShatangAI/14-Agent对话与Skill体系深挖问答' },
             { text: '15 · 题库：长视频分段生成与一致性', link: '/面试项目深挖/ShatangAI/15-长视频分段生成与一致性深挖问答' }
+          ]
+        }
+      ],
+      '/转岗大模型算法/': [
+        {
+          text: '总览',
+          items: [
+            { text: '从 Agent 后端到算法岗的作战地图（先读）', link: '/转岗大模型算法/' },
+            { text: '01 · 目标岗位分层与差距诊断', link: '/转岗大模型算法/01-目标岗位分层与差距诊断' }
+          ]
+        },
+        {
+          text: 'A · 原理地基（P0 预热与双线期）',
+          collapsed: false,
+          items: [
+            { text: '02 · 数学地基最小集', link: '/转岗大模型算法/02-数学地基最小集' },
+            { text: '03 · PyTorch 与训练工程地基', link: '/转岗大模型算法/03-PyTorch与训练工程地基' },
+            { text: '04 · Transformer 与 LLM 原理手推', link: '/转岗大模型算法/04-Transformer与LLM原理手推' },
+            { text: '05 · 多模态原理与架构谱系', link: '/转岗大模型算法/05-多模态原理与架构谱系' }
+          ]
+        },
+        {
+          text: 'B · 主项目与工程（核心）',
+          collapsed: false,
+          items: [
+            { text: '06 · 核心项目：多模态小模型从零训练', link: '/转岗大模型算法/06-核心项目-多模态小模型从零训练' },
+            { text: '07 · 训练与推理工程进阶', link: '/转岗大模型算法/07-训练与推理工程进阶' },
+            { text: '08 · 评测体系与技术报告', link: '/转岗大模型算法/08-评测体系与技术报告' }
+          ]
+        },
+        {
+          text: 'C · 实习、投递与秋招',
+          collapsed: false,
+          items: [
+            { text: '09 · 京东实习期的算法筹码经营', link: '/转岗大模型算法/09-京东实习期的算法筹码经营' },
+            { text: '10 · 大模型算法日常实习投递与面试', link: '/转岗大模型算法/10-大模型算法日常实习投递与面试' },
+            { text: '11 · 2028 届秋招规划与简历转化', link: '/转岗大模型算法/11-2028届秋招规划与简历转化' },
+            { text: '12 · 资源、算力与弹性周计划', link: '/转岗大模型算法/12-资源算力与弹性周计划' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: '导师学习路径（Agent/RAG 前置）', link: '/导师学习路径/' },
+            { text: '架构师修炼（分布式底座，对应第 07 章）', link: '/架构师修炼/' },
+            { text: '面试项目深挖（诚实边界方法论）', link: '/面试项目深挖/' }
           ]
         }
       ],

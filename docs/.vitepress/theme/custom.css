@@ -225,3 +225,39 @@ html.mermaid-zoom-open body {
   margin: 0;
   line-height: 1.5;
 }
+
+/* ===== 顶部导航宽度收敛 =====
+   本仓库栏目较多（学习路线 / 转岗大模型算法 / 知识详解 / 架构与工程 / 项目与面试 …），
+   顶级菜单项一多，窄一些的窗口放不下就会横向溢出（顶栏把内容顶出视口、整页出现横向滚动条）。
+   VitePress 默认每项左右各 12px 内边距 + 14px 字号，且只在 768px 才切换成汉堡菜单，
+   所以 768~1100px 这一段最容易溢出。这里按宽度分档逐步收紧，
+   保证在 768px 以上都能完整显示，不依赖汉堡菜单。
+   分档实测值（菜单可用宽度）：≤1280px 收紧内边距，≤1040px 再降字号，≤880px 隐藏站点字标。 */
+@media (max-width: 1280px) {
+  .VPNavBarMenuLink,
+  .VPNavBarMenuGroup .button {
+    padding: 0 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .VPNavBarMenuLink,
+  .VPNavBarMenuGroup .button {
+    padding: 0 6px;
+    font-size: 12.5px;
+  }
+
+  /* 再窄就优先保住导航项本身：隐藏站点字标，只留 logo（logo 仍可点回首页） */
+  .VPNavBarTitle .title {
+    display: none;
+  }
+}
+
+@media (max-width: 880px) {
+  .VPNavBarMenuLink,
+  .VPNavBarMenuGroup .button {
+    padding: 0 5px;
+    font-size: 12px;
+  }
+}

@@ -129,8 +129,9 @@
 }
 
 /* ===== 全屏放大查看器（见 theme/mermaid-zoom.ts） ===== */
-html.mermaid-zoom-open,
-html.mermaid-zoom-open body {
+
+/* 只锁 <body>：vitepress-plugin-mermaid 监听 <html> 属性，动 <html> 会触发全页图重渲染 */
+body.mermaid-zoom-body-lock {
   overflow: hidden;
 }
 
@@ -140,7 +141,7 @@ html.mermaid-zoom-open body {
   z-index: 3000;
   display: flex;
   flex-direction: column;
-  background: rgba(17, 20, 22, 0.92);
+  background: rgba(17, 20, 22, 0.94);
 }
 
 .mermaid-zoom[hidden] {
@@ -152,36 +153,43 @@ html.mermaid-zoom-open body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 6px 12px;
+  padding: 8px 14px;
   color: #f1f3f5;
   font-size: 12px;
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .mermaid-zoom__hint {
-  opacity: 0.75;
+  opacity: 0.7;
 }
 
 .mermaid-zoom__actions {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-left: auto;
 }
 
 .mermaid-zoom__btn {
-  padding: 4px 12px;
+  padding: 3px 11px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
   color: #f8f9fa;
   font-size: 12px;
-  line-height: 1.6;
+  line-height: 1.5;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .mermaid-zoom__btn:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-zoom__btn[disabled] {
+  cursor: progress;
+  opacity: 0.7;
 }
 
 .mermaid-zoom__btn--close {
@@ -195,6 +203,7 @@ html.mermaid-zoom-open body {
   overflow: hidden;
   cursor: grab;
   touch-action: none; /* 双指缩放交给 pointer 事件处理 */
+  overscroll-behavior: contain;
 }
 
 .mermaid-zoom__stage.is-grabbing {
@@ -214,6 +223,12 @@ html.mermaid-zoom-open body {
   max-width: none;
   background: var(--vp-c-bg);
   border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* 覆盖层里的克隆体已被去掉原 id、改用该类名承载 mermaid 注入的样式 */
+.mermaid-zoom__svg {
+  display: block;
 }
 
 /* 修复：mermaid 11 的节点/边标签内部用 <p> 包裹文本，

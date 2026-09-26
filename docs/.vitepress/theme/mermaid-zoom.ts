@@ -1,29 +1,43 @@
 /**
  * Mermaid 图表放大查看器（全屏缩放 + 拖拽平移）
  *
- * 问题：节点/流程一多，图就变宽。mermaid 默认 useMaxWidth: true，SVG 会被压进正文列宽
- * （叠加 custom.css 里的 max-width: 100%），图形整体等比缩小 → 节点文字跟着变小，看不清。
+ * 问题背景：节点/流程一多，图就变宽。mermaid 默认 useMaxWidth: true，SVG 会被压进正文列宽
+ * （叠加 custom.css 里曾经的 max-width: 100%），图形整体等比缩小 → 节点文字跟着变小，看不清。
  *
  * 两层对策：
  *   1) 渲染层（config.mts）：各类图关闭 useMaxWidth，SVG 保持原始尺寸；超出容器时在
  *      .mermaid 内横向滚动，字号不再被缩小。
  *   2) 交互层（本文件）：给每张图注入「放大查看」按钮，点击后在全屏覆盖层里按原始尺寸
- *      展示，支持滚轮缩放、拖拽平移、触屏双指缩放、适应屏幕/原始大小、Esc 关闭。
+ *      展示，支持滚轮缩放、拖拽平移、触屏双指缩放、适应宽度/适应屏幕、Esc 关闭。
  *
- * 实现要点：Mermaid 组件用 v-html 重绘（切换明暗主题时整块替换），所以按钮用
- * MutationObserver 自愈式补挂，而不是一次性绑定。
+ * ⚠️ 两条必须遵守的约束（踩过坑）：
+ *   a) 绝不能改动 <html> 的属性（class 也不行）。vitepress-plugin-mermaid 用
+ *      `new MutationObserver(...).observe(document.documentElement, { attributes: true })`
+ *      监听明暗主题切换，任何 <html> 属性变化都会触发「全页所有图重新渲染」；
+ *      而 mermaid 重渲染内部会 getElementById(id).remove()，两轮重叠的重渲染会把原图
+ *      删掉又没补回来（表现为：退出放大后原图消失、再点按钮毫无反应）。
+ *      所以滚动锁定改在 <body> 上做（插件不监听 body）。
+ *   b) 克隆体不能保留原 SVG 的 id：一来避免重复 id 被 mermaid 的 getElementById 误删，
+ *      二来 mermaid 把样式写成 `#<id> .node rect{...}` 形式，克隆时要把选择器改写成
+ *      克隆体自己的类名，保证覆盖层里的图在任何重渲染下都自洽。
  */
 
 const ROOT_CLASS = 'mermaid-zoom'
 const OPEN_CLASS = 'is-open'
 const BTN_CLASS = 'mermaid-zoom-btn'
 const TOOLBAR_CLASS = 'mermaid-zoom-toolbar'
-const OPEN_STATE_CLASS = 'mermaid-zoom-open'
+const CLONE_CLASS = 'mermaid-zoom__svg'
+const BODY_LOCK_CLASS = 'mermaid-zoom-body-lock'
 
-const MIN_SCALE = 0.15
+const MIN_SCALE = 0.1
 const MAX_SCALE = 8
 /** 移动小于该像素视为「点击」，用于判断是否点空白处关闭 */
 const DRAG_THRESHOLD = 4
+/** 覆盖层里图形与视口的留白 */
+const STAGE_PADDING = 24
+/** 图表可能正处于重渲染，点击后等待 <svg> 出现的重试次数 */
+const OPEN_RETRY_TIMES = 12
+const OPEN_RETRY_INTERVAL = 100
 
 interface Point {
   x: number
@@ -47,7 +61,6 @@ class MermaidZoomViewer {
   private readonly stage: HTMLDivElement
   private readonly canvas: HTMLDivElement
   private readonly hint: HTMLSpanElement
-  private svg: SVGSVGElement | null = null
   private natural: Point = { x: 0, y: 0 }
   private scale = 1
   private offset: Point = { x: 0, y: 0 }
@@ -56,6 +69,7 @@ class MermaidZoomViewer {
   private dragMoved = 0
   private pinch: { distance: number; scale: number; mid: Point; offset: Point } | null = null
   private opened = false
+  private cloneSeq = 0
 
   constructor() {
     this.root = document.createElement('div')
@@ -71,14 +85,14 @@ class MermaidZoomViewer {
 
     this.hint = document.createElement('span')
     this.hint.className = 'mermaid-zoom__hint'
-    this.hint.textContent = '滚轮缩放 · 拖拽平移 · 双击重置'
 
     const buttons = document.createElement('div')
     buttons.className = 'mermaid-zoom__actions'
     buttons.append(
       this.makeButton('−', '缩小', () => this.zoomBy(1 / 1.25)),
       this.makeButton('+', '放大', () => this.zoomBy(1.25)),
-      this.makeButton('适应屏幕', '缩放到完整可见', () => this.fit()),
+      this.makeButton('适应宽度', '按视口宽度铺满（宽图保持可读字号）', () => this.fitWidth()),
+      this.makeButton('适应屏幕', '缩放到完整可见（看总览）', () => this.fit()),
       this.makeButton('原始大小', '按 100% 显示', () => this.zoomTo(1)),
       this.makeButton('关闭 ✕', '关闭（Esc）', () => this.hide(), 'mermaid-zoom__btn--close')
     )
@@ -123,30 +137,61 @@ class MermaidZoomViewer {
     return button
   }
 
-  /** 打开覆盖层并展示给定的 SVG（按克隆体渲染，避免动到正文里的图） */
-  show(source: SVGSVGElement) {
+  /**
+   * 克隆时要做的「隔离」：
+   * - 去掉 id，避免与正文里的图重复（mermaid 重渲染会 getElementById 删除元素）
+   * - 把内部 <style> 里**选择器位置**的 `#<原id>` 改写成本克隆体独有的类名，样式照样生效
+   *
+   * 注意：mermaid 的样式文本里 id 有三种出现形式，只有第一种能改：
+   *   1) 选择器：`#id{...}`、`#id .node rect{...}`、`,#id .x{...}`      → 改写成 .<scope>
+   *   2) 内部 defs 引用：`stroke:url(#id-gradient)`                      → 保留（渐变/箭头在同一份 SVG 里）
+   *   3) CSS 变量名：`:root{--id-font-family:...}` / `var(--id-xxx)`     → 保留（改名会和元素上的
+   *      内联 style 对不上）
+   * 判别方式：后一个字符若是 `-`（如 -gradient / --id-xxx）就不是独立选择器，直接不改。
+   */
+  private buildClone(source: SVGSVGElement): SVGSVGElement {
     const clone = source.cloneNode(true) as SVGSVGElement
-    this.natural = readNaturalSize(source)
+    const sourceId = source.getAttribute('id')
+    const scope = `${CLONE_CLASS}-${++this.cloneSeq}`
+
+    clone.removeAttribute('id')
     clone.removeAttribute('style')
+    clone.classList.add(CLONE_CLASS, scope)
+
+    if (sourceId) {
+      const escaped = sourceId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const selector = new RegExp(`#${escaped}(?=[\\s{:,>+~.\\[]|$)`, 'g')
+      clone.querySelectorAll('style').forEach((style) => {
+        const css = style.textContent || ''
+        style.textContent = css.replace(selector, (match, offset: number, whole: string) => {
+          // url(#id) / var(--id)：指向内部 defs 或变量名，保持原样
+          if (/url\(\s*["']?$/.test(whole.slice(0, offset))) return match
+          return `.${scope}`
+        })
+      })
+    }
+
     clone.setAttribute('width', String(this.natural.x))
     clone.setAttribute('height', String(this.natural.y))
-    clone.style.maxWidth = 'none'
-    clone.style.display = 'block'
+    return clone
+  }
 
-    this.canvas.replaceChildren(clone)
-    this.svg = clone
+  /** 打开覆盖层并展示给定的 SVG（按克隆体渲染，不动正文里的图） */
+  show(source: SVGSVGElement) {
+    this.natural = readNaturalSize(source)
+    this.canvas.replaceChildren(this.buildClone(source))
 
     if (!this.opened) {
       this.opened = true
       this.root.hidden = false
-      document.documentElement.classList.add(OPEN_STATE_CLASS)
+      this.lockScroll(true)
       // 先让覆盖层可见再测量尺寸，否则 clientWidth 为 0
       requestAnimationFrame(() => {
-        this.fit()
+        this.resetToActualSize()
         this.root.focus?.()
       })
     } else {
-      this.fit()
+      this.resetToActualSize()
     }
     this.root.classList.add(OPEN_CLASS)
   }
@@ -156,17 +201,54 @@ class MermaidZoomViewer {
     this.opened = false
     this.root.classList.remove(OPEN_CLASS)
     this.root.hidden = true
-    document.documentElement.classList.remove(OPEN_STATE_CLASS)
+    this.lockScroll(false)
     this.pointers.clear()
     this.pinch = null
     this.dragFrom = null
+    this.canvas.replaceChildren()
   }
 
-  /** 缩放到完整可见（不放大超过 100%，小图保持原样） */
+  /** 只在 <body> 上锁滚动：插件只监听 <html>，动 <html> 会触发全页重渲染 */
+  private lockScroll(locked: boolean) {
+    const body = document.body
+    if (locked) body.classList.add(BODY_LOCK_CLASS)
+    else body.classList.remove(BODY_LOCK_CLASS)
+  }
+
+  /**
+   * 默认视图：按 100% 原始尺寸显示（不缩小 → 字号就是设计值）。
+   * 图比视口大时贴左上角留白开始，拖动/滚轮自行探索；想看总览用「适应屏幕」或双击。
+   */
+  private resetToActualSize() {
+    this.scale = 1
+    this.offset = this.originFor(1)
+    this.apply()
+  }
+
+  /** 「装得下就居中，装不下就贴左上留白」 */
+  private originFor(scale: number): Point {
+    const box = { x: this.natural.x * scale, y: this.natural.y * scale }
+    const stageWidth = this.stage.clientWidth
+    const stageHeight = this.stage.clientHeight
+    return {
+      x: box.x + STAGE_PADDING * 2 <= stageWidth ? (stageWidth - box.x) / 2 : STAGE_PADDING,
+      y: box.y + STAGE_PADDING * 2 <= stageHeight ? (stageHeight - box.y) / 2 : STAGE_PADDING
+    }
+  }
+
+  /** 铺满视口宽度（宽图只缩到刚好放得下宽度，不再小到看不清） */
+  fitWidth() {
+    const available = Math.max(this.stage.clientWidth - STAGE_PADDING * 2, 120)
+    const scale = clamp(Math.min(available / this.natural.x, 1), MIN_SCALE, MAX_SCALE)
+    this.scale = scale
+    this.offset = this.originFor(scale)
+    this.apply()
+  }
+
+  /** 缩放到完整可见（总览用） */
   fit() {
-    const pad = 32
-    const stageWidth = Math.max(this.stage.clientWidth - pad, 120)
-    const stageHeight = Math.max(this.stage.clientHeight - pad, 120)
+    const stageWidth = Math.max(this.stage.clientWidth - STAGE_PADDING * 2, 120)
+    const stageHeight = Math.max(this.stage.clientHeight - STAGE_PADDING * 2, 120)
     const scale = clamp(
       Math.min(stageWidth / this.natural.x, stageHeight / this.natural.y, 1),
       MIN_SCALE,
@@ -203,11 +285,17 @@ class MermaidZoomViewer {
     this.apply()
   }
 
+  private panBy(dx: number, dy: number) {
+    this.offset = { x: this.offset.x + dx, y: this.offset.y + dy }
+    this.apply()
+  }
+
   private apply() {
     this.canvas.style.transform = `translate(${Math.round(this.offset.x)}px, ${Math.round(
       this.offset.y
     )}px) scale(${this.scale})`
-    this.hint.textContent = `${Math.round(this.scale * 100)}% · 滚轮缩放 · 拖拽平移 · 双击重置`
+    const percent = Math.round(this.scale * 100)
+    this.hint.textContent = `${percent}% · 滚轮缩放 · 拖拽平移 · 双击适应屏幕`
   }
 
   private localPoint(event: { clientX: number; clientY: number }): Point {
@@ -270,11 +358,7 @@ class MermaidZoomViewer {
 
     if (this.dragFrom) {
       this.dragMoved += Math.hypot(point.x - previous.x, point.y - previous.y)
-      this.offset = {
-        x: this.offset.x + (point.x - previous.x),
-        y: this.offset.y + (point.y - previous.y)
-      }
-      this.apply()
+      this.panBy(point.x - previous.x, point.y - previous.y)
     }
   }
 
@@ -306,6 +390,7 @@ class MermaidZoomViewer {
 
   private onKeydown = (event: KeyboardEvent) => {
     if (!this.opened) return
+    const step = event.shiftKey ? 160 : 60
     switch (event.key) {
       case 'Escape':
         event.preventDefault()
@@ -323,7 +408,28 @@ class MermaidZoomViewer {
         break
       case '0':
         event.preventDefault()
+        this.resetToActualSize()
+        break
+      case 'f':
+      case 'F':
+        event.preventDefault()
         this.fit()
+        break
+      case 'ArrowLeft':
+        event.preventDefault()
+        this.panBy(step, 0)
+        break
+      case 'ArrowRight':
+        event.preventDefault()
+        this.panBy(-step, 0)
+        break
+      case 'ArrowUp':
+        event.preventDefault()
+        this.panBy(0, step)
+        break
+      case 'ArrowDown':
+        event.preventDefault()
+        this.panBy(0, -step)
         break
       default:
         break
@@ -335,13 +441,38 @@ let viewer: MermaidZoomViewer | null = null
 let observer: MutationObserver | null = null
 let scanTimer: number | null = null
 
+/** 图表可能正在重渲染：按钮给出反馈，而不是静默失败 */
+function flashButton(button: HTMLButtonElement, message: string, fallback: string) {
+  button.textContent = message
+  button.disabled = true
+  window.setTimeout(() => {
+    button.textContent = fallback
+    button.disabled = false
+  }, 1600)
+}
+
+/** 等 <svg> 出现再打开：重渲染期间点击也不会丢事件 */
+function openBlock(block: HTMLElement, button: HTMLButtonElement, attempt = 0) {
+  const svg = block.querySelector('svg')
+  if (svg) {
+    viewer?.show(svg as SVGSVGElement)
+    return
+  }
+  if (attempt < OPEN_RETRY_TIMES) {
+    window.setTimeout(() => openBlock(block, button, attempt + 1), OPEN_RETRY_INTERVAL)
+    return
+  }
+  flashButton(button, '图表重绘中，请稍后重试', '🔍 放大查看')
+}
+
 /** 给每张还没挂工具的图补上「放大查看」按钮（v-html 重绘后会自动补回） */
 function decorate() {
   // 「mermaid」类来自 config.mts 的 mermaidPlugin.class
   document.querySelectorAll<HTMLElement>('.mermaid').forEach((block) => {
     if (block.querySelector(`:scope > .${TOOLBAR_CLASS}`)) return
+    // 图表还没渲染完时先不挂按钮，等下一轮 mutation
     const svg = block.querySelector('svg')
-    if (!svg) return // 图表还没渲染完，等下一轮 mutation
+    if (!svg) return
 
     const toolbar = document.createElement('div')
     toolbar.className = TOOLBAR_CLASS
@@ -353,8 +484,7 @@ function decorate() {
     button.addEventListener('click', (event) => {
       event.preventDefault()
       event.stopPropagation()
-      const target = block.querySelector('svg')
-      if (target) viewer?.show(target as SVGSVGElement)
+      openBlock(block, button)
     })
     toolbar.append(button)
     block.prepend(toolbar)
@@ -362,7 +492,8 @@ function decorate() {
     // 双击图表任意位置同样可以放大
     svg.addEventListener('dblclick', (event) => {
       event.preventDefault()
-      viewer?.show(block.querySelector('svg') as SVGSVGElement)
+      const target = block.querySelector('svg')
+      if (target) viewer?.show(target as SVGSVGElement)
     })
   })
 }
@@ -397,6 +528,7 @@ export function installMermaidZoom(): () => void {
     viewer?.hide()
     viewer?.element.remove()
     viewer = null
+    document.body.classList.remove(BODY_LOCK_CLASS)
   }
 }
 

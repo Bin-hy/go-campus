@@ -246,8 +246,8 @@ NN_topic/
 
 | 层 | 选型 |
 | --- | --- |
-| 文档站 | VitePress 1.6 + `vitepress-plugin-mermaid` + 本地全文搜索 + 暗色模式 |
-| 主题增强 | Artalk 评论（环境变量注入，未配置自动关闭）、Viewer.js 图片放大 |
+| 文档站 | VitePress 1.6 + `vitepress-plugin-mermaid` + `markdown-it-mathjax3`（公式构建期渲染成 SVG）+ 本地全文搜索 + 暗色模式 |
+| 主题增强 | Artalk 评论（环境变量注入，未配置自动关闭）、Viewer.js 图片放大、mermaid 图「放大查看」全屏查看器 |
 | 内容规范 | 中文正文 + mermaid 流程图 + 对照表 + 「面试追问链 / 自测清单」收口 |
 | 代码 | Go 1.22 / 1.25（分模块 `go.mod`），标准库优先，实验代码贴近真实 SDK |
 | 实验环境 | Docker Compose（MySQL / Redis / Kafka / MinIO / Milvus / etcd） |

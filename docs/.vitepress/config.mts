@@ -9,6 +9,13 @@ export default withMermaid(defineConfig({
   cleanUrls: true,
   lastUpdated: true,
 
+  // 数学公式：VitePress 的 math 支持基于 markdown-it-mathjax3，在**构建期**把 TeX
+  // 渲染成 SVG 写进 HTML（客户端零 JS / 零字体依赖，暗色模式也不会闪）。
+  // 行内 `$...$` 与块级 `$$...$$` 均可；代码块、行内代码里的 $ 不受影响。
+  markdown: {
+    math: true,
+  },
+
   mermaid: {
     theme: 'base',
     themeVariables: {

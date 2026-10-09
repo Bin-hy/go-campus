@@ -4,7 +4,18 @@
 
 使用 Go 实现一个面向**智能视频剪辑**场景的 AI Agent Harness（Agent 运行时框架），模拟字节跳动剪映 CapCut AutoCut 的核心 Agent 能力。
 
-**Agent Harness** 是 AI Agent 系统中 LLM 之外的运行时基础设施层——包含 Agent 控制循环（ReAct Loop）、工具注册与执行、记忆管理、规划器、护栏（Guardrails）和可观测性等核心组件。正如 MongoDB 所述："The LLM is the smallest part of your agent system"。
+### Agent = Model + Harness
+$$
+\boxed{\ \text{Agent} = \text{Model} + \text{Harness}\ }
+$$
+即 Harness = 除模型之外的一切：循环、工具、上下文、沙箱、编排、权限、可观测;
+因为正常的模型调用基于SDK或者更底层的API调用本质是一次服务请求：
+$$
+\boxed{\text{LLM API 调用} \approx \text{Client-Server 模型}}
+$$
+- 发送请求，得到response之外的便都是 **Agent Harness**
+
+正如 MongoDB 所述："The LLM is the smallest part of your agent system"。
 
 ## 为什么做这个项目
 

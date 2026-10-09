@@ -1,8 +1,100 @@
 # 第三阶段：AI 应用开发基础（8.25 - 9.07，2周）
 
+## 明确什么是AI应用开发
+
+先读 [Agent 与 Harness 的整体理解](../导师学习路径/00-Agent与Harness的整体理解)，重点理解 **Agent = LLM + Harness、Harness 是应用开发的主要对象，以及 LLM 通信和缓存复用**，再比较不同 Agent 形态，理解为什么以 Coding Agent 为主要开发对象。
+
+- 在应用层的工程划分中，Agent 由 LLM 和围绕 LLM 的外部程序组成；这套外部程序就是 Harness，也是 AI 应用开发的主要对象。
+
+$$
+\boxed{
+\text{Agent}
+=
+\underbrace{\text{LLM}}_{\text{intelligence}}
++
+\underbrace{\text{Harness}}_{\text{control system}}
+}
+$$
+- 与 LLM 对接时，主要关注：
+
+  1. **LLM 通信**：组织请求、通过 HTTP / SDK 调用、解析响应、处理流式输出和错误。
+  2. **缓存复用**：Harness 保持请求前缀稳定，在推理服务支持前缀缓存时，提高 KV Cache 的复用机会。实际缓存由推理服务维护。
+
+$$
+\boxed{
+\text{Harness}
+\xrightarrow{\text{Request}}
+\text{LLM}
+\xrightarrow{\text{Response}}
+\text{Harness}
+}
+$$
+
+$$
+\boxed{
+\text{Agent Engineering}
+\approx
+\text{LLM I/O}
++
+\text{Harness Engineering}
+}
+$$
+$$
+\boxed{
+\text{LLM I/O}
+=
+\text{Protocol}
++
+\text{Serialization}
++
+\text{Streaming}
+}
+$$
+
+$$
+\boxed{
+\text{Harness}
+=
+\text{Loop}
++
+\text{Tools}
++
+\text{Context}
++
+\text{State}
++
+\text{Control}
+}
+$$
+
+缓存部分的原理、请求示例与衡量方法见 [00 导读：通过 Harness 提高 KV Cache 复用机会](../导师学习路径/00-Agent与Harness的整体理解#_2-2-通过-harness-提高-kv-cache-复用机会)。
+
+
 ## 学习目标
 
-从"会调 LLM API 获取回复"提升到"理解 LLM 应用开发全链路 + 能独立实现一个 RAG 问答系统"。目标：面试时能清晰讲述 Prompt Engineering 方法论、RAG 架构原理、Embedding 检索流程，并有可演示的 Go 项目。
+从"会调 LLM API 获取回复"提升到"理解 LLM 应用开发全链路 + 能独立实现一个 RAG 问答系统"。
+
+> **LLM I/O** 到 一个基础完整的 **Harness Engineering**
+
+- 目标：面试时能清晰讲述
+  1. Prompt Engineering 方法论
+  2. RAG 架构原理
+  3. Embedding 检索流程
+  4. 并有可演示的 Go 项目。
+
+## 本阶段的五个模块与 LLM / Harness 的关系
+
+本阶段主要学习如何与已有模型通信，以及如何围绕模型构建检索、上下文组装和工具执行等应用能力。下面将五个学习模块映射到 LLM / Harness 框架，帮助你在进入具体知识点前建立整体认识。
+
+| 文档模块 | 用 LLM / Harness 框架理解 | 实际学习的工作 |
+| --- | --- | --- |
+| LLM 基础与 API 调用 | **LLM I/O** | 构造 messages、发送请求、解析响应、处理流式输出和错误 |
+| Prompt Engineering | **Harness 的输入与输出约束** | 组装指令和示例、指定输出结构、解析结果；其中工具调用连接模型与执行器 |
+| Embedding 与向量检索 | **Harness 可使用的知识检索组件** | 切分资料、建立索引、找到相关片段；还可能调用独立的 Embedding 模型 |
+| RAG 架构与实现 | **上下文构建和流程编排** | 检索资料，将资料加入请求，再调用生成模型，处理引用和拒答 |
+| Go 项目整合 | **应用运行与状态管理** | CLI、配置、索引持久化、错误处理和测试 |
+
+这里将 LLM 通信单独列出，是为了便于划分学习任务；在实际架构中，它通常也是 Harness 的组成部分。本阶段以 RAG 问答应用为目标，并覆盖基础工具调用；完整 Agent Harness 的循环控制、权限、记忆和执行恢复等能力由后续内容继续展开。
 
 ---
 

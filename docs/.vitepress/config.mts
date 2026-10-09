@@ -283,6 +283,7 @@ export default withMermaid(defineConfig({
           text: '导师学习路径',
           items: [
             { text: '总览与章节安排', link: '/导师学习路径/' },
+            { text: '00 · Agent 与 Harness 的整体理解', link: '/导师学习路径/00-Agent与Harness的整体理解' },
             { text: '01 · RAG 原理与 LLM 基础', link: '/导师学习路径/01-RAG原理与LLM基础' },
             { text: '02 · RAG 完整原理与 Prompt 工程', link: '/导师学习路径/02-RAG完整原理与Prompt工程' },
             { text: '03 · Function Calling 与 MCP', link: '/导师学习路径/03-FunctionCalling与MCP协议' },

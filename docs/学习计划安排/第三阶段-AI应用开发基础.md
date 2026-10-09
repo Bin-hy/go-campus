@@ -2,7 +2,10 @@
 
 ## 明确什么是AI应用开发
 
-- Agent是LLM和LLM之外的东西，LLM之外的东西就是Harness；Harness是AI应用开发的主要对象
+先读 [Agent 与 Harness 的整体理解](../导师学习路径/00-Agent与Harness的整体理解)，重点理解 **Agent = LLM + Harness、Harness 是应用开发的主要对象，以及 LLM 通信和缓存复用**，再比较不同 Agent 形态，理解为什么以 Coding Agent 为主要开发对象。
+
+- 在应用层的工程划分中，Agent 由 LLM 和围绕 LLM 的外部程序组成；这套外部程序就是 Harness，也是 AI 应用开发的主要对象。
+
 $$
 \boxed{
 \text{Agent}
@@ -12,9 +15,11 @@ $$
 \underbrace{\text{Harness}}_{\text{control system}}
 }
 $$
-- 对于LLM的部分，我们主要实现的是
-> 1. LLM的通信问题
-> 2. Agent Harness可以提高KV Cache命中率
+- 与 LLM 对接时，主要关注：
+
+  1. **LLM 通信**：组织请求、通过 HTTP / SDK 调用、解析响应、处理流式输出和错误。
+  2. **缓存复用**：Harness 保持请求前缀稳定，在推理服务支持前缀缓存时，提高 KV Cache 的复用机会。实际缓存由推理服务维护。
+
 $$
 \boxed{
 \text{Harness}
@@ -61,6 +66,8 @@ $$
 \text{Control}
 }
 $$
+
+缓存部分的原理、请求示例与衡量方法见 [00 导读：通过 Harness 提高 KV Cache 复用机会](../导师学习路径/00-Agent与Harness的整体理解#_2-2-通过-harness-提高-kv-cache-复用机会)。
 
 
 ## 学习目标

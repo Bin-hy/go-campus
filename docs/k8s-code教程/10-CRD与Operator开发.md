@@ -112,11 +112,11 @@ kubectl get wa            # shortNames 生效
 
 ```mermaid
 flowchart LR
-    CR[WebApp 自定义资源<br/>apps.example.com/v1] -->|For: 主资源变化触发| MGR[Manager<br/>缓存 + client + 事件队列]
+    CR[WebApp 自定义资源<br/>apps.example.com/v1] -->|"For: 主资源变化触发"| MGR[Manager<br/>缓存 + client + 事件队列]
     MGR --> R[Reconciler<br/>你的业务逻辑]
-    R -->|CreateOrUpdate| D[Deployment]
-    D -->|Owns: 自己管的资源变化<br/>级联触发| MGR
-    R -->|Status().Update| CR
+    R -->|"CreateOrUpdate"| D[Deployment]
+    D -->|"Owns: 自己管的资源变化<br/>级联触发"| MGR
+    R -->|"Status().Update"| CR
 ```
 
 | 组件 | 职责 | 对应代码 |

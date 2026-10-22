@@ -102,7 +102,7 @@ Deployment 管"副本数恒定"，HPA（Horizontal Pod Autoscaler）管"副本�
 ```mermaid
 flowchart LR
     MS[metrics-server<br/>采集各 Pod CPU 用量] -->|周期性拉取| HPA[HPA 控制器<br/>autoscaling/v2]
-    HPA -->|期望副本 = ceil(当前副本 × 当前利用率 ÷ 目标利用率)| DEP[Deployment]
+    HPA -->|"期望副本 = ceil(当前副本 × 当前利用率 ÷ 目标利用率)"| DEP[Deployment]
     DEP -->|更新 replicas| RS[ReplicaSet 调副本]
     RS --> PODS[Pod 增减]
     PODS -->|利用率回落| HPA

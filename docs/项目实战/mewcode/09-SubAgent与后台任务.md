@@ -1418,8 +1418,8 @@ stateDiagram-v2
     [*] --> Running: Launch / AdoptRunning / SendMessage
     Running --> Completed: RunToCompletion 返回 err == nil
     Running --> Failed: 其他 err（带 Err + Result）
-    Running --> Cancelled: errors.Is(err, context.Canceled)
-    Running --> Failed: panic（defer recover → "subagent panic: %v"）
+    Running --> Cancelled: errors.Is 判定 context.Canceled
+    Running --> Failed: panic（defer recover → subagent panic %v）
     Completed --> Running: SendMessage（仅 Completed 允许续派）
     Cancelled --> [*]
     Failed --> [*]

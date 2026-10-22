@@ -47,7 +47,7 @@ flowchart TD
 
     DONE --> MEM["记忆更新触发（每 5 轮 / 关键词）"]
     MEM --> STOPHOOK["Hook: Stop"]
-    STOPHOOK --> END([Event{Done:true}])
+    STOPHOOK --> END(["Event Done:true"])
 ```
 
 **一句话概括**：把「模型说要调什么工具」这件事，变成「确定性代码按权限判定后安全地执行，再把结果塞回历史」的循环。

@@ -198,10 +198,10 @@ sequenceDiagram
     participant A as 请求 A
     participant B as 请求 B
     participant DB as MySQL
-    A->>DB: BEGIN; INSERT idempotency_record(K)
+    A->>DB: BEGIN → INSERT idempotency_record(K)
     B->>DB: INSERT idempotency_record(K)
     Note over DB: B 阻塞在唯一索引的行锁上 等 A 提交
-    A->>DB: 写业务数据; COMMIT
+    A->>DB: 写业务数据 → COMMIT
     DB-->>B: 1062 Duplicate entry
     B->>DB: SELECT result FROM idempotency_record WHERE idem_key=K
     DB-->>B: 返回 A 的结果快照

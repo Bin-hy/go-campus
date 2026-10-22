@@ -194,17 +194,17 @@ const (
 stateDiagram-v2
     [*] --> stateSelecting: len(providers) > 1
     [*] --> stateIdle: len(providers) == 1
-    stateSelecting --> stateIdle: Enter → selectProvider (select.go:106)
-    stateIdle --> stateStreaming: Enter（非空、非 / 命令）→ submitMessage (tui.go:615)
-    stateIdle --> stateStreaming: /do、/review、skill(inline) → InjectAndSend → startStreaming (commands.go:159 / tui.go:647)
-    stateIdle --> stateResuming: /resume → OpenResumeMenu (commands.go:112)
-    stateStreaming --> stateApproving: Approval 事件 (tui.go:431-436，且不补 waitForEvent)
-    stateApproving --> stateStreaming: Enter/1/2/3 → commitApproval (tui.go:544)
-    stateStreaming --> stateIdle: Done / Err 事件 → finishTurn (tui.go:484 / 427)
-    stateResuming --> stateIdle: Esc (resume.go:165)
+    stateSelecting --> stateIdle: Enter → selectProvider「select.go 106」
+    stateIdle --> stateStreaming: Enter（非空、非 / 命令）→ submitMessage「tui.go 615」
+    stateIdle --> stateStreaming: /do、/review、skill「inline」→ InjectAndSend → startStreaming「commands.go 159 / tui.go 647」
+    stateIdle --> stateResuming: /resume → OpenResumeMenu「commands.go 112」
+    stateStreaming --> stateApproving: Approval 事件「tui.go 431-436，且不补 waitForEvent」
+    stateApproving --> stateStreaming: Enter/1/2/3 → commitApproval「tui.go 544」
+    stateStreaming --> stateIdle: Done / Err 事件 → finishTurn「tui.go 484 / 427」
+    stateResuming --> stateIdle: Esc「resume.go 165」
     stateResuming --> stateResuming: Enter → doResumeSession（等 resumeDoneMsg）
-    stateResuming --> stateIdle: resumeListMsg 空列表 (resume.go:121-124)
-    stateStreaming --> stateStreaming: Esc / Ctrl+C → turnCancel()（靠 agent 回灌 Done/Err 收尾）
+    stateResuming --> stateIdle: resumeListMsg 空列表「resume.go 121-124」
+    stateStreaming --> stateStreaming: Esc / Ctrl+C → turnCancel（靠 agent 回灌 Done/Err 收尾）
 ```
 
 **取消路径的语义很讲究**：`stateStreaming|stateApproving` 下按 Esc/Ctrl+C **不改变状态**（`tui.go:341-356` / `320-338`），只调 `m.turnCancel()` 然后继续 `waitForEvent`——**状态的迁移权完全交给 agent 事件流**（等它把 `Done`/`Err` 送回来）。这是"单一真相来源"原则在状态机上的体现：**TUI 不猜测 agent 什么时候停，它只等待。**

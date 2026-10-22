@@ -43,7 +43,7 @@
 | 🧭 **学习计划安排** | 4 篇 | 时间怎么排、每阶段学到什么程度 | [总体规划](docs/学习计划安排/总体规划.md) |
 | 🐹 **第一阶段 · Go 语言深入** | 10 篇 | Slice/Map/Interface/String 内存布局、函数调用栈、内存分配、GC、GMP、并发、Context | [知识点总览](docs/第一阶段-知识详解/index.md) |
 | 🧱 **第二阶段 · 计算机基础** | 3 篇 | 操作系统、计算机网络、分布式系统面试详解 | [分布式系统](docs/第二阶段-知识详解/分布式系统面试详解.md) |
-| 🏗️ **后端技术栈强化** | 61 篇 | S1 MySQL → S2 Redis → S3 Kafka → S4 微服务 → S5 高并发场景 → S6 Agent Backend → S7 K8s → S8 分布式 → S9 对象存储 → S10 Milvus | [模块总览](docs/后端技术栈强化/index.md) |
+| 🏗️ **后端技术栈强化** | 71 篇 | S1 MySQL → S2 Redis → S3 Kafka → S4 微服务 → S5 高并发场景 → S6 Agent Backend → S7 K8s → S8 分布式 → S9 对象存储 → S10 Milvus → S11 Elasticsearch（关键词/混合检索） | [模块总览](docs/后端技术栈强化/index.md) |
 | 🏛️ **架构师修炼** ⭐ | 29 篇 | **QPS 六道坎驱动的架构演进**：不同量级下 Redis/MySQL/Kafka/etcd 的落地参数、一致性设计、故障兜底 + 15 个可复现实验；子栏目 **19 pprof 实战**（8 篇 + 8 个可跑性能实验） | [栏目总览](docs/架构师修炼/index.md) · [pprof 实战](docs/架构师修炼/19-pprof实战/index.md) |
 | ☸️ **K8s Code 教程** | 15 篇 | 从「会用 kubectl」到「能手写 Controller / Operator」，配 client-go 实战代码 | [教程首页](docs/k8s-code教程/index.md) |
 | 🧠 **导师学习路径** | 11 篇 | RAG → Prompt → Function Calling/MCP → ReAct → Multi-Agent → 记忆评测 → Diffusion/推理优化/微调 | [总览](docs/导师学习路径/index.md) |
@@ -54,7 +54,7 @@
 | 🧪 **习题集和答案** | 75 页 | 由代码练习自动生成（`npm run docs:sync-exercises`），文档与代码永不脱节 | [习题集](docs/习题集和答案/index.md) |
 | ⭐ **代码练习指南** | — | 做题流程、判题脚本、练习与文档的对应关系 | [练习指南](docs/练习指南.md) |
 
-> 全部文档共约 **11.3 万行 Markdown**（333 篇），含 **430 张 mermaid 流程图**与 **1000+ 张对照表**；文档站支持本地全文搜索、暗色模式、图片放大与评论。
+> 全部文档共约 **11.9 万行 Markdown**（353 篇），含 **469 张 mermaid 流程图**与 **1000+ 张对照表**；文档站支持本地全文搜索、暗色模式、图片放大与评论。
 
 ---
 
@@ -91,7 +91,7 @@ GoCampus/
 │   ├── 学习计划安排/               # 四阶段总体规划与周计划
 │   ├── 第一阶段-知识详解/           # Go 底层原理（index.md 为总览，其余 10 篇为专题）
 │   ├── 第二阶段-知识详解/           # OS / 网络 / 分布式（index.md 为总览）
-│   ├── 后端技术栈强化/              # S1~S10 组件原理与面试题集
+│   ├── 后端技术栈强化/              # S1~S11 组件原理与面试题集
 │   ├── 架构师修炼/ ⭐               # 架构演进 · 一致性 · 稳定性 · 案例 · 实验
 │   ├── k8s-code教程/               # K8s 编程教程（YAML → client-go → Operator）
 │   ├── 导师学习路径/                # RAG / Agent / 多模态 知识地图
@@ -258,7 +258,7 @@ NN_topic/
 ## 路线图
 
 - [x] 三阶段学习计划与 Go 底层原理详解
-- [x] 后端技术栈强化 S1~S10（含面试题集与配套实验）
+- [x] 后端技术栈强化 S1~S11（含面试题集与配套实验）
 - [x] K8s Code 编程教程（含 client-go / Controller / Operator）
 - [x] 路由专题 30 天冲刺与简历/面试实战
 - [x] **架构师修炼栏目**：QPS 演进地图 + 一致性专题 + 稳定性工程 + 案例 + 15 个实验 + `code/architect/` 实验环境

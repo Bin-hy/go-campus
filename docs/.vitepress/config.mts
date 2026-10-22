@@ -100,14 +100,28 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: '多模态专栏',
+        items: [
+          { text: '专栏总览 · 知识地图', link: '/多模态学习专栏/' },
+          { text: '00 · 知识点总表（进度追踪）', link: '/多模态学习专栏/00-知识点总表' },
+          { text: '01 · 视频多模态', link: '/多模态学习专栏/01-视频多模态-知识点大纲' },
+          { text: '02 · 生图模型', link: '/多模态学习专栏/02-生图模型-知识点大纲' },
+          { text: '02 · 生图模型 · 事实与面试弹药', link: '/多模态学习专栏/02-生图模型-事实与面试弹药' },
+          { text: '03 · 图片理解 VL 模型', link: '/多模态学习专栏/03-图片理解VL模型-知识点大纲' },
+          { text: '03 · 图片理解 VL · 事实与面试弹药', link: '/多模态学习专栏/03-图片理解VL模型-事实与面试弹药' },
+          { text: '学习日志', link: '/多模态学习专栏/学习日志' }
+        ]
+      },
+      {
         text: '知识详解',
         items: [
           { text: 'Go 语言底层原理（11 篇）', link: '/第一阶段-知识详解/' },
           { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
           { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' },
           { text: '第二阶段 · 分布式系统', link: '/第二阶段-知识详解/分布式系统面试详解' },
-          { text: '后端技术栈强化（S1-S10）', link: '/后端技术栈强化/' },
-          { text: 'S10 · 向量数据库 Milvus', link: '/后端技术栈强化/10-milvus/01-向量检索原理' }
+          { text: '后端技术栈强化（S1-S11）', link: '/后端技术栈强化/' },
+          { text: 'S10 · 向量数据库 Milvus', link: '/后端技术栈强化/10-milvus/01-向量检索原理' },
+          { text: 'S11 · Elasticsearch', link: '/后端技术栈强化/11-elasticsearch/01-为什么需要搜索引擎' }
         ]
       },
       {
@@ -130,6 +144,45 @@ export default withMermaid(defineConfig({
       }
     ],
     sidebar: {
+      '/多模态学习专栏/': [
+        {
+          text: '总览',
+          items: [
+            { text: '专栏总览 · 知识地图（先读）', link: '/多模态学习专栏/' },
+            { text: '00 · 知识点总表（进度追踪）', link: '/多模态学习专栏/00-知识点总表' }
+          ]
+        },
+        {
+          text: 'A · 三大模块知识点大纲',
+          collapsed: false,
+          items: [
+            { text: '03 · 图片理解 VL 模型（建议先学）', link: '/多模态学习专栏/03-图片理解VL模型-知识点大纲' },
+            { text: '02 · 生图模型', link: '/多模态学习专栏/02-生图模型-知识点大纲' },
+            { text: '01 · 视频多模态', link: '/多模态学习专栏/01-视频多模态-知识点大纲' }
+          ]
+        },
+        {
+          text: 'B · 事实底稿（查数字与模型对照）',
+          items: [
+            { text: '02 · 生图模型 · 事实与面试弹药', link: '/多模态学习专栏/02-生图模型-事实与面试弹药' },
+            { text: '03 · 图片理解 VL · 事实与面试弹药', link: '/多模态学习专栏/03-图片理解VL模型-事实与面试弹药' }
+          ]
+        },
+        {
+          text: 'C · 记录与迭代',
+          items: [
+            { text: '学习日志', link: '/多模态学习专栏/学习日志' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: '转岗大模型算法 · 多模态架构谱系', link: '/转岗大模型算法/05-多模态原理与架构谱系' },
+            { text: '导师学习路径 · 生成原理零基础方案', link: '/导师学习路径/11-JD专题-生成原理零基础学习方案' },
+            { text: '导师学习路径 · 文生视频与 Diffusion', link: '/导师学习路径/07-JD专题-文生视频与Diffusion模型' }
+          ]
+        }
+      ],
       '/面试项目深挖/': [
         {
           text: '栏目总览',
@@ -465,6 +518,22 @@ export default withMermaid(defineConfig({
             { text: '部署、监控与生产实践', link: '/后端技术栈强化/10-milvus/06-部署监控与生产实践' },
             { text: 'Milvus Go 实战', link: '/后端技术栈强化/10-milvus/07-Milvus-Go实战' },
             { text: '面试题集', link: '/后端技术栈强化/10-milvus/08-面试题集' }
+          ]
+        },
+        {
+          text: 'S11 Elasticsearch 深入',
+          collapsed: false,
+          items: [
+            { text: '为什么需要搜索引擎', link: '/后端技术栈强化/11-elasticsearch/01-为什么需要搜索引擎' },
+            { text: '倒排索引与分词', link: '/后端技术栈强化/11-elasticsearch/02-倒排索引与分词' },
+            { text: '集群架构与读写路径', link: '/后端技术栈强化/11-elasticsearch/03-集群架构与读写路径' },
+            { text: '查询 DSL 与 BM25 打分', link: '/后端技术栈强化/11-elasticsearch/04-查询DSL与BM25打分' },
+            { text: '近实时、并发控制与索引重建', link: '/后端技术栈强化/11-elasticsearch/05-近实时并发控制与索引重建' },
+            { text: 'Mapping 设计与调优', link: '/后端技术栈强化/11-elasticsearch/06-Mapping设计与调优' },
+            { text: '生产运维与故障排查', link: '/后端技术栈强化/11-elasticsearch/07-生产运维与故障排查' },
+            { text: 'Go 实战：搜索服务', link: '/后端技术栈强化/11-elasticsearch/08-Go实战-搜索服务' },
+            { text: '混合检索与 AI 应用落地', link: '/后端技术栈强化/11-elasticsearch/09-混合检索与AI应用落地' },
+            { text: '面试题集', link: '/后端技术栈强化/11-elasticsearch/10-面试题集' }
           ]
         }
       ],

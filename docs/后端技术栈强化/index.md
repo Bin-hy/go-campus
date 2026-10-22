@@ -1,6 +1,6 @@
 # 后端技术栈强化
 
-> 面向字节「后端 agent 决策」岗位的后端能力补齐。按 **S1 → S10** 依赖顺序学（S7 为工程化底座加分项，S8 为分布式理论与能力强化兜底，S9 为海量素材落地，S10 为 AI 应用的向量检索底座），共约 19 周。
+> 面向字节「后端 agent 决策」岗位的后端能力补齐。按 **S1 → S11** 依赖顺序学（S7 为工程化底座加分项，S8 为分布式理论与能力强化兜底，S9 为海量素材落地，S10 为 AI 应用的向量检索底座，S11 为关键词/混合检索与搜索系统落地），共约 21 周。
 
 ## 学习路径
 
@@ -9,6 +9,7 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
         → S4 微服务（服务层）→ S5 高并发场景题（综合）→ S6 Agent Backend（串联）
         → S7 K8s（工程化底座）→ S8 分布式理论（共识与能力强化兜底）
         → S9 对象存储（海量素材落地）→ S10 向量数据库 Milvus（AI 检索底座）
+        → S11 Elasticsearch（关键词与混合检索）
 ```
 
 - 每个核心模块都要达到五级能力：**L1 原理 → L2 机制 → L3 故障 → L4 设计 → L5 追问**（能连续回答三层追问不卡壳）。
@@ -146,6 +147,23 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | [Milvus Go 实战](./10-milvus/07-Milvus-Go实战) | milvus-go-sdk 连接/建 Collection/插入/索引/检索/过滤完整代码、文档语义检索小项目 |
 | [面试题集](./10-milvus/08-面试题集) | 8 题追问 3 层：ANN 原理、HNSW/IVF-PQ 参数、选型、过滤下推、一致性、评估指标、RAG 落地 |
 
+## S11 Elasticsearch 深入（2 周）
+
+> 面向「生产可用 + 面试可答」的关键词检索与混合检索底座：先讲清楚 **为什么 `LIKE '%x%'` 救不了**，再到倒排索引与分词、集群读写路径、查询 DSL 与 BM25、近实时与并发控制、mapping 与调优、生产排障，最后落到 Go 接入与 AI 应用里的混合检索（BM25 + kNN + RRF）。与 S10 Milvus 形成「字面 vs 语义」的对照；Go 代码片段内嵌在文档中，无需额外起容器。
+
+| 文章 | 内容 |
+|------|------|
+| [为什么需要搜索引擎](./11-elasticsearch/01-为什么需要搜索引擎) | LIKE 的四个死穴（B+ 树失效/不懂词/无相关度/深分页）、倒排索引一句话本质、ES = Lucene + 分布式外壳、该用/不该用与 MySQL/Milvus 分工 |
+| [倒排索引与分词](./11-elasticsearch/02-倒排索引与分词) | FST 词表 + 倒排链（增量编码/位压缩/跳表）、doc_values/fielddata/_source、analyzer 三段流水线、中文 IK（max_word/smart）、同义词/拼音/edge_ngram、索引期 vs 查询期分析 |
+| [集群架构与读写路径](./11-elasticsearch/03-集群架构与读写路径) | 节点角色与集群状态、路由公式与"主分片数不可改"、写路径（buffer/translog/refresh/flush/merge）、读路径 query-then-fetch、分片规划四步 |
+| [查询 DSL 与 BM25 打分](./11-elasticsearch/04-查询DSL与BM25打分) | bool 四子句、query vs filter（缓存/跳过评分）、term/match/match_phrase/multi_match、BM25 公式与 k1/b、function_score/rescore、深分页三姿势、聚合近似与 composite |
+| [近实时、并发控制与索引重建](./11-elasticsearch/05-近实时并发控制与索引重建) | 三种"读"的延迟、translog durability、wait_for_active_shards、`_seq_no/_primary_term` 乐观锁、别名 + reindex 零停机重建、DB→ES 异步同步四铁律 |
+| [Mapping 设计与调优](./11-elasticsearch/06-Mapping设计与调优) | text/keyword 与字段参数、dynamic strict + 模板、mapping explosion、nested/object/flattened、分片规划公式、批量导入与查询反模式、索引模板与 ILM |
+| [生产运维与故障排查](./11-elasticsearch/07-生产运维与故障排查) | 堆内存/磁盘水位基线、red/yellow 决策树与 `allocation/explain`、unassigned 根因清单、429 背压、断路器、merge 风暴、快照/SLM、ILM、滚动升级 |
+| [Go 实战：搜索服务](./11-elasticsearch/08-Go实战-搜索服务) | go-elasticsearch/v8 连接与重试、mapping+别名、乐观锁更新、bulk 逐条判错与 BulkIndexer、search_after+PIT、降级矩阵、reindex 别名切换 |
+| [混合检索与 AI 应用落地](./11-elasticsearch/09-混合检索与AI应用落地) | 关键词 vs 向量边界、dense_vector + kNN（num_candidates/filter 下推）、RRF 融合原理、ES/Milvus/Qdrant/pgvector 选型、剪映类素材/字幕/RAG 场景建模 |
+| [面试题集](./11-elasticsearch/10-面试题集) | 12 题追问 3 层 + 15 行速答表：倒排/分词/写路径/NRT/乐观锁/query-filter/BM25/深分页/mapping/分片/集群红/选型与混合检索 |
+
 ## 配套实验
 
 实验代码在 `code/backend/`（MySQL/Redis/Kafka 实验需 `docker compose up -d` 起中间件，`go test ./...` 验证；09-object-storage 需 `docker compose up -d minio` 起 MinIO 容器；10-milvus 需 `docker compose -f code/backend/docker-compose.milvus.yml up -d` 起 Milvus standalone；07-k8s 为纯 Go 模拟，直接 `go test` 即可，可选装 kind 起单机集群 + `kubectl` 实操）：
@@ -162,9 +180,11 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | 09-object-storage | 分片上传三步协议、预签名直传直下、最小权限桶策略、STS 最小权限临时凭证（真实 MinIO SDK，需 MinIO 容器） |
 | 10-milvus | 连接/建 Collection/插入/检索/过滤全链路（真实 milvus-go-sdk，`code/backend/10-milvus`：`go run .` 跑七步演示、`go test -v .` 跑集成测试；需 `docker compose -f code/backend/docker-compose.milvus.yml up -d` 起 Milvus standalone） |
 
+> S11 Elasticsearch 不单独放 `code/` 模块：Go 接入片段内嵌在 [08 Go 实战](./11-elasticsearch/08-Go实战-搜索服务) 里，按文末"服务分层建议"拆即可直接用于本地或线上集群（需自备 ES 8.x 与 `analysis-ik` 插件）。
+
 ## 下一步：架构师修炼（新增栏目）
 
-学完 S1~S10 的**组件原理**后，进入[架构师修炼](/架构师修炼/)补齐**演进决策 + 落地参数 + 故障兜底**——S 系列讲「组件是什么」，该栏目讲「什么时候用、怎么配、挂了怎么办」：
+学完 S1~S11 的**组件原理**后，进入[架构师修炼](/架构师修炼/)补齐**演进决策 + 落地参数 + 故障兜底**——S 系列讲「组件是什么」，该栏目讲「什么时候用、怎么配、挂了怎么办」：
 
 | 主题 | 对应篇章 |
 |------|----------|
@@ -180,4 +200,4 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 
 ## 待定（backlog）
 
-分布式进阶（分库分表实战 / 分布式事务深入）—— 已由[架构师修炼](/架构师修炼/)栏目承接，并配套 `code/architect/`（MySQL 主从 / Redis 主从+哨兵 / etcd 三节点 / Kafka 集群）实验编排。（分布式理论已由 S8 覆盖：能力全景、CAP/BASE、底层存储（含一致性哈希/分片）、Raft、etcd、选主、gRPC 负载均衡、网络降级、限流熔断、高可用、容灾；etcd/分布式锁/RPC 治理的 Go 手写实践见 [路线专题 Day 8-9 代码集](/习题集和答案/route/)。）
+分布式进阶（分库分表实战 / 分布式事务深入）—— 已由[架构师修炼](/架构师修炼/)栏目承接，并配套 `code/architect/`（MySQL 主从 / Redis 主从+哨兵 / etcd 三节点 / Kafka 集群）实验编排。（分布式理论已由 S8 覆盖：能力全景、CAP/BASE、底层存储（含一致性哈希/分片）、Raft、etcd、选主、gRPC 负载均衡、网络降级、限流熔断、高可用、容灾；etcd/分布式锁/RPC 治理的 Go 手写实践见 [路线专题 Day 8-9 代码集](/习题集和答案/route/)。）Elasticsearch 的搜索系统落地已由 S11 覆盖（含 Go 接入与混合检索）；若后续要做「ES + Kafka + MySQL 的搜索同步」可复跑实验，放到 `code/backend/11-elasticsearch`。

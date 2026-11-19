@@ -23,9 +23,16 @@
 
 ```bash
 cd code/microservice
-go test ./...          # 14 个练习全部离线通过
+go build ./...            # 骨架可直接编译
+go test -run '^$' ./...   # 只验证编译，不运行用例
+# 实现某个练习后：cd <题目目录> && go test -v
 go test -race ./02_governance/... ./03_messaging/... ./04_observability/...
 ```
+
+::: tip solution 与 answer
+`solution.go` 是待填空骨架（`panic("not implemented")`），`answer/answer.go` 是完整参考实现。
+先自己写，卡住或写完后再对照 answer；仓库约定 solution 首次提交后设为 skip-worktree，本地修改不会被提交。
+:::
 
 ::: tip 关于依赖下载
 本机 `proxy.golang.org` 可能超时，拉依赖时可用：

@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-// 参考答案 / 可运行实现。
-
 var (
 	ErrRateLimited = errors.New("rate limited")
 	ErrOpen        = errors.New("circuit open")
@@ -42,26 +40,15 @@ func (b *TokenBucket) SetClock(fn func() time.Time) {
 	b.last = fn()
 }
 
+// Allow 原子地取一个令牌。提示：先按 elapsed*rate 补水，再判断 tokens。
 func (b *TokenBucket) Allow() bool {
-	b.mu.Lock()
-	defer b.mu.Unlock()
-	now := b.now()
-	elapsed := now.Sub(b.last).Seconds()
-	if elapsed > 0 {
-		b.tokens = min(b.burst, b.tokens+elapsed*b.rate)
-		b.last = now
-	}
-	if b.tokens < 1 {
-		return false
-	}
-	b.tokens--
-	return true
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
 func (b *TokenBucket) Tokens() float64 {
-	b.mu.Lock()
-	defer b.mu.Unlock()
-	return b.tokens
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
 // BreakerState 三态。
@@ -100,100 +87,66 @@ func (b *Breaker) SetClock(fn func() time.Time) {
 	b.now = fn
 }
 
-// Allow 是否放行这次调用。
-// Open 且冷却结束 → 进入 Half-Open，只放一个探测请求。
+// Allow 是否放行：Open 且冷却结束 → Half-Open 放行一个探测；Open 未到期 → 拒绝。
 func (b *Breaker) Allow() bool {
-	b.mu.Lock()
-	defer b.mu.Unlock()
-	if b.state == BreakerOpen && b.now().Sub(b.openedAt) >= b.cfg.Cooldown {
-		b.state = BreakerHalfOpen
-	}
-	return b.state != BreakerOpen
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
+// Success 记录成功：清零失败；Half-Open 探测成功 → Closed。
 func (b *Breaker) Success() {
-	b.mu.Lock()
-	defer b.mu.Unlock()
-	b.failures = 0
-	b.state = BreakerClosed
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
+// Failure 记录失败：Half-Open 失败 → Open；Closed 连续失败达阈值 → Open。
 func (b *Breaker) Failure() {
-	b.mu.Lock()
-	defer b.mu.Unlock()
-	if b.state == BreakerHalfOpen {
-		b.state = BreakerOpen
-		b.openedAt = b.now()
-		return
-	}
-	b.failures++
-	if b.failures >= b.cfg.MaxFailures {
-		b.state = BreakerOpen
-		b.openedAt = b.now()
-		b.failures = 0
-	}
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
 func (b *Breaker) State() BreakerState {
-	b.mu.Lock()
-	defer b.mu.Unlock()
-	return b.state
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
-// Drain 优雅停机门闸：
-// 收到 SIGTERM 后先 StopAccepting，等在途请求清零，再真正退出。
+// Drain 优雅停机门闸：收到 SIGTERM 后停止接新请求，等在途清零。
 type Drain struct {
 	mu       sync.Mutex
 	draining bool
 	inflight int
-	zero     chan struct{} // 每次归零时关闭并重建
+	zero     chan struct{}
 }
 
 func NewDrain() *Drain {
 	return &Drain{zero: make(chan struct{})}
 }
 
+// Acquire 申请进入；draining 后返回 ErrDraining。
 func (d *Drain) Acquire() error {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-	if d.draining {
-		return ErrDraining
-	}
-	d.inflight++
-	return nil
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
+// Release 归还；在途归零时通知等待者（注意 zero channel 要重建）。
 func (d *Drain) Release() {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-	d.inflight--
-	if d.inflight == 0 {
-		close(d.zero)
-		d.zero = make(chan struct{})
-	}
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
-// StopAccepting 停止接新请求；返回的 channel 在在途请求清零时关闭。
+// StopAccepting 停止接新请求；返回的 channel 在在途清零时关闭。
 func (d *Drain) StopAccepting() <-chan struct{} {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-	d.draining = true
-	return d.zero
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
 func (d *Drain) Inflight() int {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-	return d.inflight
+	// TODO: 实现你的代码
+	panic("not implemented")
 }
 
-// Shutdown 等待在途请求完成，超时返回 ctx 错误（调用方据此强制退出）。
+// Shutdown 停止接收并等待在途清零；超时返回 ctx.Err()。
 func (d *Drain) Shutdown(ctx context.Context) error {
-	zero := d.StopAccepting()
-	select {
-	case <-zero:
-		return nil
-	case <-ctx.Done():
-		return ctx.Err()
-	}
+	// TODO: 实现你的代码
+	panic("not implemented")
 }

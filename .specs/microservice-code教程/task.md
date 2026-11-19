@@ -24,8 +24,9 @@
 - [x] 04_observability/02_metrics
 - [x] 05_deploy/01_probe_hpa
 - [x] 每题 README + solution + test + answer
-- [x] `go test ./...` 全绿；关键目录 `-race` 全绿
-- [x] `go vet ./...` 无告警
+- [x] 骨架 `go build ./...` 通过；用 answer 覆盖后 `go test ./...` 全绿；关键目录 `-race` 全绿
+- [x] solution.go 为待填空骨架，answer/answer.go 为完整参考
+- [x] solution 首次入库后设为 skip-worktree
 
 ## 三、Lab
 

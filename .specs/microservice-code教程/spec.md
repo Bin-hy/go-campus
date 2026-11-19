@@ -28,7 +28,7 @@
 
 ## 非功能需求
 
-- N1 可运行：`go build ./...`、`go test ./...`、`go vet ./...` 全绿；治理/消息/观测练习 `-race` 通过。
+- N1 可运行：`go build ./...`、`go vet ./...` 全绿；`solution.go` 骨架可编译；参考答案覆盖后可 `go test ./...` 全绿，治理/消息/观测练习 `-race` 通过。
 - N2 风格一致：中文、比喻、mermaid、每章「练习 / 面试追问 / 串起来」。
 - N3 渐进：四阶段对应四组目录，练习编号与章节编号对齐。
 - N4 零外部依赖测试：Kafka/etcd 用接口抽象，真 Kafka 作为可选手工实验。
@@ -43,7 +43,7 @@
 ## 验收标准
 
 - AC1 `docs/microservice-code教程/` 存在 ≥ 17 篇，每章含 mermaid、练习、面试追问、串起来。
-- AC2 `code/microservice/` 14 个练习 `go test ./...` 全绿，`go test -race` 关键目录全绿。
+- AC2 `code/microservice/` 14 个练习骨架可编译；用 `answer/answer.go` 覆盖后 `go test ./...` 全绿、关键目录 `-race` 全绿；提交时 solution 骨架入库并设为 skip-worktree。
 - AC3 三实例 Lab + 网关可本机运行，8 项验收清单可复现。
 - AC4 VitePress 注册导航/侧边栏，与 S4/S8/K8s 互链。
 - AC5 `npm run docs:build` 构建通过。

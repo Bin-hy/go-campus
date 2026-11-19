@@ -13,21 +13,25 @@
 ```bash
 cd code/microservice
 
-# 1. 全部练习测试（无需 Docker / 网络）
-go test ./...
+# 1. 骨架可直接编译；测试用例需实现 solution.go 后才会通过
+go build ./...
+go test -run '^$' ./...
 
-# 2. 带数据竞争检测（治理类练习建议必跑）
-go test -race ./02_governance/... ./03_messaging/... ./04_observability/...
-
-# 3. 单题
+# 2. 实现某个练习后跑测试
 go test -v ./01_grpc_basics/02_interceptor_auth
+
+# 3. 带数据竞争检测（治理类练习建议必跑）
+go test -race ./02_governance/... ./03_messaging/... ./04_observability/...
 ```
 
-> 做题方式：先读题目目录里的 `README.md`，把 `solution.go` 的方法体清空后自己实现，
-> 跑通测试，再对照 `answer/answer.go`。所有 `answer/` 目录不参与编译测试。
+> 做题方式：先读题目目录里的 `README.md`，补全 `solution.go` 中的
+> `// TODO`（初始为 `panic("not implemented")`），跑通测试，再对照 `answer/answer.go`
+> 的完整参考实现。所有 `answer/` 目录不参与编译测试。
 >
 > 提交约定：仓库 `.gitignore` 忽略了 `**/solution.go`。按本仓库惯例，新增练习首次提交需
-> `git add -f 01_grpc_basics/01_unary_stream/solution.go ...` 把骨架纳入版本库，后续改动再忽略。
+> `git add -f 01_grpc_basics/01_unary_stream/solution.go ...` 把骨架纳入版本库，随后用
+> `git update-index --skip-worktree` 忽略本地实现，避免答案被提交。需要更新骨架时先
+> `git update-index --no-skip-worktree <path>`。
 
 ## 练习地图
 

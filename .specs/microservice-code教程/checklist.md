@@ -2,10 +2,11 @@
 
 ## 代码可运行性
 
-- [x] `cd code/microservice && go build ./...`
-- [x] `go vet ./...`
-- [x] `go test ./...`：14 个练习全部通过
-- [x] `go test -race ./01_grpc_basics/... ./02_governance/... ./03_messaging/... ./04_observability/...`
+- [x] `cd code/microservice && go build ./...`、`go vet ./...` 通过（骨架状态）
+- [x] `solution.go` 仅含类型/签名 + `panic("not implemented")`
+- [x] 用 `answer/answer.go` 覆盖后 `go test ./...`：14 个练习全部通过
+- [x] 用 answer 覆盖后 `go test -race ./01_grpc_basics/... ./02_governance/... ./03_messaging/... ./04_observability/...`
+- [x] `git update-index --skip-worktree` 应用于 14 个 solution.go
 - [x] `go run ./lab/uservice -addr :9001` 可启动
 - [x] `go run ./lab/gateway` 可编译并访问三实例
 - [x] `make proto` 可重新生成且无 diff

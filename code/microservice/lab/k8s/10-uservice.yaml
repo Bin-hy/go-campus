@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: microservice-demo
+  labels:
+    app.kubernetes.io/part-of: gocampus-microservice
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uservice
+  namespace: microservice-demo
+  labels:
+    app: uservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: uservice
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 # 先起新 Pod 再停旧 Pod，发布期间容量不下降
+  template:
+    metadata:
+      labels:
+        app: uservice
+    spec:
+      # 给优雅停机留足时间：preStop 5s + 在途请求处理
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: uservice
+          image: gocampus/uservice:dev
+          imagePullPolicy: IfNotPresent
+          args:
+            - "-addr=:9001"
+            - "-metrics-addr=:9101"
+            - "-instance=$(POD_NAME)"
+            - "-token=campus-secret"
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          ports:
+            - name: grpc
+              containerPort: 9001
+            - name: metrics
+              containerPort: 9101
+          # startup：慢启动保护。失败会重启容器，但不会触发 liveness。
+          startupProbe:
+            grpc:
+              port: 9001
+              service: user.v1.UserService
+            periodSeconds: 2
+            failureThreshold: 30
+          # readiness：失败即从 Service endpoints 摘除，不再接新流量。
+          readinessProbe:
+            grpc:
+              port: 9001
+              service: user.v1.UserService
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 2
+          # liveness：只判断"进程还活着"，不要探测下游依赖。
+          livenessProbe:
+            grpc:
+              port: 9001
+              service: user.v1.UserService
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          lifecycle:
+            preStop:
+              exec:
+                # 等待 kube-proxy / EndpointSlice 收敛，避免停机瞬间仍被转发。
+                command: ["/bin/sh", "-c", "sleep 5"]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

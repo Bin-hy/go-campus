@@ -129,6 +129,7 @@ export default withMermaid(defineConfig({
         items: [
           { text: '架构师修炼 · 总览', link: '/架构师修炼/' },
           { text: '19 · pprof 性能调优实战', link: '/架构师修炼/19-pprof实战/' },
+          { text: 'Go 微服务实战教程', link: '/microservice-code教程/' },
           { text: 'K8s Code 编程教程', link: '/k8s-code教程/' }
         ]
       },
@@ -613,6 +614,59 @@ export default withMermaid(defineConfig({
           items: [
             { text: '后端技术栈强化（组件原理）', link: '/后端技术栈强化/' },
             { text: '分布式系统面试详解（理论）', link: '/第二阶段-知识详解/分布式系统面试详解' },
+            { text: 'K8s Code 教程（部署编排）', link: '/k8s-code教程/' }
+          ]
+        }
+      ],
+      '/microservice-code教程/': [
+        {
+          text: '阶段一 · 把 gRPC 学完整',
+          items: [
+            { text: '教程首页与路线图', link: '/microservice-code教程/' },
+            { text: '01 环境与项目骨架', link: '/microservice-code教程/01-环境与项目骨架' },
+            { text: '02 gRPC 四种 RPC 与流式', link: '/microservice-code教程/02-gRPC四种RPC与流式' },
+            { text: '03 拦截器与 Metadata 鉴权', link: '/microservice-code教程/03-拦截器与Metadata鉴权' },
+            { text: '04 Deadline、取消与错误码', link: '/microservice-code教程/04-Deadline取消与错误码' },
+            { text: '05 健康检查、连接与 TLS', link: '/microservice-code教程/05-健康检查连接与TLS' },
+            { text: '06 Proto 兼容性与版本演进', link: '/microservice-code教程/06-Proto兼容性与版本演进' }
+          ]
+        },
+        {
+          text: '阶段二 · 分布式服务治理',
+          items: [
+            { text: '07 注册发现与客户端负载均衡', link: '/microservice-code教程/07-注册发现与客户端负载均衡' },
+            { text: '08 超时重试、指数退避与幂等', link: '/microservice-code教程/08-超时重试指数退避与幂等' },
+            { text: '09 熔断、限流与优雅停机', link: '/microservice-code教程/09-熔断限流与优雅停机' }
+          ]
+        },
+        {
+          text: '阶段三 · 分布式数据与消息',
+          items: [
+            { text: '10 Kafka 可靠投递与幂等消费', link: '/microservice-code教程/10-Kafka可靠投递与幂等消费' },
+            { text: '11 重试、死信与事务性 Outbox', link: '/microservice-code教程/11-重试死信与Outbox' },
+            { text: '12 Saga 与最终一致性', link: '/microservice-code教程/12-Saga与最终一致性' }
+          ]
+        },
+        {
+          text: '阶段四 · 可观测性与部署',
+          items: [
+            { text: '13 OpenTelemetry 全链路追踪', link: '/microservice-code教程/13-OpenTelemetry全链路追踪' },
+            { text: '14 Prometheus 指标与 Grafana', link: '/microservice-code教程/14-Prometheus指标与Grafana' },
+            { text: '15 K8s 部署、探针、滚动发布与 HPA', link: '/microservice-code教程/15-K8s部署探针滚动发布与HPA' }
+          ]
+        },
+        {
+          text: '验收与面试',
+          items: [
+            { text: '16 实战验收：8 项清单', link: '/microservice-code教程/16-实战验收8项清单' },
+            { text: '17 面试题集', link: '/microservice-code教程/17-面试题集' }
+          ]
+        },
+        {
+          text: '相关链接',
+          items: [
+            { text: 'S4 微服务（理论）', link: '/后端技术栈强化/04-microservice/架构与gRPC' },
+            { text: 'S8 分布式（理论）', link: '/后端技术栈强化/08-distributed/分布式系统能力全景' },
             { text: 'K8s Code 教程（部署编排）', link: '/k8s-code教程/' }
           ]
         }

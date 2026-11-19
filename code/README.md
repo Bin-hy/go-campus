@@ -44,6 +44,7 @@ code/
 ├── route/             # 路线专题实战（11 道，独立 module）
 ├── backend/           # 后端技术栈强化（39 道，独立 module，需 Docker）
 ├── k8s/               # K8s 编程（5 道，独立 module，可选 minikube）
+├── microservice/      # Go 微服务实战（14 道 + 三实例 Lab，独立 module）
 ├── architect/         # 架构师修炼配套
 │   └── pprof-lab/     #   性能定位实验包（独立 module，零依赖）
 └── scripts/judge.sh   # 一键判题

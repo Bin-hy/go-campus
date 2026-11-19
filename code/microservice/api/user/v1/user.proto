@@ -1,0 +1,66 @@
+// 用户服务契约：贯穿整个微服务教程的示例。
+//
+// 生成命令（在 code/microservice 目录）：
+//   protoc -I api --go_out=. --go_opt=module=gocampus/microservice \
+//          --go-grpc_out=. --go-grpc_opt=module=gocampus/microservice \
+//          api/user/v1/user.proto
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "gocampus/microservice/api/user/v1;userv1";
+
+// UserService 演示四种 RPC + 一个用于幂等/重试教学的写接口。
+service UserService {
+  // 一元：一问一答。
+  rpc GetUser(GetUserRequest) returns (User);
+  // 服务端流：一问多答（分页下发大结果集）。
+  rpc ListUsers(ListUsersRequest) returns (stream User);
+  // 客户端流：多问一答（批量上传）。
+  rpc UploadUsers(stream User) returns (UploadSummary);
+  // 双向流：多问多答（对话/实时同步）。
+  rpc Chat(stream ChatMessage) returns (stream ChatMessage);
+  // 写接口：配合幂等键演示"重试不重复扣款"。
+  rpc Charge(ChargeRequest) returns (ChargeReply);
+}
+
+message User {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  // 乐观锁版本号，更新时用于 CAS。
+  int64 version = 4;
+}
+
+message GetUserRequest {
+  int64 id = 1;
+}
+
+message ListUsersRequest {
+  // 每批多少条；0 表示使用服务端默认值。
+  int32 page_size = 1;
+}
+
+message UploadSummary {
+  int32 accepted = 1;
+  int32 rejected = 2;
+}
+
+message ChatMessage {
+  string from = 1;
+  string text = 2;
+}
+
+message ChargeRequest {
+  // 幂等键：同一个 key 重复提交只扣一次。
+  string idempotency_key = 1;
+  int64 user_id = 2;
+  int64 amount_cents = 3;
+}
+
+message ChargeReply {
+  string charge_id = 1;
+  int64 amount_cents = 2;
+  // true 表示命中幂等缓存，没有再扣一次。
+  bool deduplicated = 3;
+}

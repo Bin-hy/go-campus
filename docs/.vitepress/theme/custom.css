@@ -276,3 +276,33 @@ body.mermaid-zoom-body-lock {
     font-size: 12px;
   }
 }
+
+/* 划线批注：桌面端 FAB 上移，避让右下角控件；移动端回到安全区 */
+.annotation-sdk-host {
+  --annotation-fab-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .annotation-sdk-host {
+    --annotation-fab-bottom: 24px;
+  }
+}
+
+/* 顶栏导航项较多：1280–1439 区间把外观开关/社交链接收进 VitePress 自带「…」菜单，
+   同时压缩导航项水平内边距，为批注入口留出空间 */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .VPNavBarAppearance,
+  .VPNavBarSocialLinks {
+    display: none !important;
+  }
+
+  .VPNavBarExtra {
+    display: block !important;
+  }
+
+  .VPNavBarMenuLink,
+  .VPNavBarMenuGroup .button {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+}

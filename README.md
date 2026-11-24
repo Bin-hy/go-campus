@@ -179,6 +179,9 @@ npm run docs:dev
 生产环境需先创建站点并配置 GitHub OAuth（或站点级 OIDC），再在构建时注入
 `VITE_ANNOTATION_API` 与 `VITE_ANNOTATION_SITE_KEY`，详见服务端 README。
 
+页面体验：文档页顶部导航提供「批注 N」与登录/头像入口；文档页之间使用 SDK 的
+`setPage` 单实例切换，首页/404 自动隐藏；SDK 跟随 VitePress 暗色主题，抽屉从顶栏下方开始。
+
 ---
 
 ## 代码练习体系

@@ -179,6 +179,32 @@ npm run docs:dev
 生产环境需先创建站点并配置 GitHub OAuth（或站点级 OIDC），再在构建时注入
 `VITE_ANNOTATION_API` 与 `VITE_ANNOTATION_SITE_KEY`，详见服务端 README。
 
+#### Cloudflare Pages 部署
+
+站点部署在 Cloudflare Pages 时，`VITE_*` 只在**构建期**读取，需要在
+Pages 项目的 **Settings → Environment variables** 中配置（Production 与 Preview 都建议配置）：
+
+| 变量 | 当前生产值 | 说明 |
+| --- | --- | --- |
+| `VITE_ANNOTATION_API` | `https://zhupi.gataccay.com` | 批注服务地址 |
+| `VITE_ANNOTATION_SITE_KEY` | `2w1fyqdW1M2Xc4JPJOg-d35XmuqeKYOE` | zhupi 站点 `gocampus` 的公开标识 |
+| `VITE_ARTALK_SERVER` | `https://artalk.gataccay.com` | 评论服务地址 |
+| `VITE_ARTALK_SITE` | `gocampus训练营` | Artalk 站点名（区分大小写） |
+
+Pages 构建配置：
+
+- Build command：`npm run docs:build`
+- Build output directory：`docs/.vitepress/dist`
+- Node.js：22
+
+注意事项：
+
+- `VITE_ANNOTATION_SITE_KEY` 是公开标识，不是密钥；真正的访问控制由 zhupi 的站点来源白名单负责。
+- zhupi 站点 `gocampus` 已允许 `https://gocampus.gataccay.com`、`https://go-campus.pages.dev`、
+  `https://main.go-campus.pages.dev`。新增自定义域名或预览域名时，需要在 zhupi 管理后台
+  （站点 → 编辑 → 允许来源）或 `PATCH /api/v1/admin/sites/{id}` 中同步补 origin。
+- 环境变量只在构建时注入，修改后必须重新部署一次才会生效。
+
 页面体验：文档页顶部导航提供「批注 N」与登录/头像入口；文档页之间使用 SDK 的
 `setPage` 单实例切换，首页/404 自动隐藏；SDK 跟随 VitePress 暗色主题，抽屉从顶栏下方开始。
 

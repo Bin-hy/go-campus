@@ -157,6 +157,31 @@ docker kill -s KILL arch-mysql-master   # 亲手制造主库宕机，观察丢�
 
 > 实验清单与预期现象见 [18 实验手册：Go 落地实验](docs/架构师修炼/18-实验手册-Go落地实验.md)；故障注入速查见 [`code/architect/README.md`](code/architect/README.md)。
 
+### ⑤ 划线批注 SDK（可选，需登录）
+
+文档站已改为接入独立的 **朱批（zhupi）** 提供的可嵌入 SDK（多站点、支持 GitHub / 站点级 OIDC）。
+未配置 `VITE_ANNOTATION_*` 时不会加载 SDK，不影响阅读与 Artalk 评论。
+
+```bash
+# 终端 A：批注服务（位于与本仓库同级的 zhupi/）
+cd ../zhupi
+make build
+export SECRET_KEY=$(openssl rand -hex 32) DB_PATH=./zhupi.db \
+       PUBLIC_BASE_URL=http://127.0.0.1:8080 DEV_LOGIN=1
+./bin/zhupi admin site create --name gocampus --origin http://127.0.0.1:5173
+./bin/zhupi serve
+
+# 终端 B：文档站（<siteKey> 换成上一步输出）
+VITE_ANNOTATION_API=http://127.0.0.1:8080 VITE_ANNOTATION_SITE_KEY=<siteKey> \
+npm run docs:dev
+```
+
+生产环境需先创建站点并配置 GitHub OAuth（或站点级 OIDC），再在构建时注入
+`VITE_ANNOTATION_API` 与 `VITE_ANNOTATION_SITE_KEY`，详见服务端 README。
+
+页面体验：文档页顶部导航提供「批注 N」与登录/头像入口；文档页之间使用 SDK 的
+`setPage` 单实例切换，首页/404 自动隐藏；SDK 跟随 VitePress 暗色主题，抽屉从顶栏下方开始。
+
 ---
 
 ## 代码练习体系
@@ -247,7 +272,7 @@ NN_topic/
 | 层 | 选型 |
 | --- | --- |
 | 文档站 | VitePress 1.6 + `vitepress-plugin-mermaid` + `markdown-it-mathjax3`（公式构建期渲染成 SVG）+ 本地全文搜索 + 暗色模式 |
-| 主题增强 | Artalk 评论（环境变量注入，未配置自动关闭）、Viewer.js 图片放大、mermaid 图「放大查看」全屏查看器 |
+| 主题增强 | Artalk 评论（环境变量注入，未配置自动关闭）、**划线批注 SDK**（多站点、可嵌入）、Viewer.js 图片放大、mermaid 图「放大查看」全屏查看器 |
 | 内容规范 | 中文正文 + mermaid 流程图 + 对照表 + 「面试追问链 / 自测清单」收口 |
 | 代码 | Go 1.22 / 1.25（分模块 `go.mod`），标准库优先，实验代码贴近真实 SDK |
 | 实验环境 | Docker Compose（MySQL / Redis / Kafka / MinIO / Milvus / etcd） |

@@ -6,37 +6,80 @@ import 'artalk/Artalk.css'
 import { h, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRoute, useData } from 'vitepress'
 import { installMermaidZoom, closeMermaidZoom } from './mermaid-zoom'
+import AnnotationNav from './AnnotationNav.vue'
+import { annotationBridge, resetAnnotationBridge } from './annotation-bridge'
 import './custom.css'
 
-/**
- * Artalk 评论系统服务端地址。
- * 通过环境变量 VITE_ARTALK_SERVER 注入（见 docs/.env.example），例如：
- *   VITE_ARTALK_SERVER=https://comments.example.com
- * 未配置时不渲染评论功能（页面不受影响）。
- * 注意：VITE_ 前缀变量会打包进客户端 bundle 并公开可见，不要放置敏感凭据。
- */
 const ARTALK_SERVER = (import.meta as any).env?.VITE_ARTALK_SERVER as string | undefined
-
-/**
- * Artalk 站点名：必须与后台「设置 → 站点」中创建的站点名完全一致（区分大小写）。
- * 可通过环境变量 VITE_ARTALK_SITE 覆盖，默认 GoCampus。
- */
 const ARTALK_SITE = ((import.meta as any).env?.VITE_ARTALK_SITE as string | undefined) || 'GoCampus'
+
+const ANNOTATION_API = (import.meta as any).env?.VITE_ANNOTATION_API as string | undefined
+const ANNOTATION_SITE_KEY = (import.meta as any).env?.VITE_ANNOTATION_SITE_KEY as string | undefined
+
+type AnnotationInstance = {
+  setPage(page: { pageKey?: string; pageTitle?: string }): Promise<void>
+  setTheme(mode: 'auto' | 'light' | 'dark'): void
+  openDrawer(): void
+  openAccount(): void
+  destroy(): void
+}
+
+type ZhupiSDKGlobal = {
+  init(options: Record<string, unknown>): AnnotationInstance
+}
+
+declare global {
+  interface Window {
+    ZhupiSDK?: ZhupiSDKGlobal
+  }
+}
+
+let sdkLoading: Promise<void> | null = null
+
+function loadZhupiSDK(apiBase: string): Promise<void> {
+  if (window.ZhupiSDK) return Promise.resolve()
+  if (sdkLoading) return sdkLoading
+  sdkLoading = new Promise<void>((resolve, reject) => {
+    const script = document.createElement('script')
+    script.src = `${apiBase.replace(/\/+$/, '')}/sdk/v1/zhupi.js`
+    script.async = true
+    script.onload = () => resolve()
+    script.onerror = () => {
+      sdkLoading = null
+      reject(new Error('zhupi SDK failed to load'))
+    }
+    document.head.appendChild(script)
+  })
+  return sdkLoading
+}
+
+async function waitForDoc(timeoutMs = 1500): Promise<boolean> {
+  const started = Date.now()
+  while (Date.now() - started < timeoutMs) {
+    if (document.querySelector('.vp-doc')) return true
+    await new Promise((resolve) => setTimeout(resolve, 50))
+  }
+  return !!document.querySelector('.vp-doc')
+}
 
 export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
-      // 在每篇文档正文之后注入评论挂载点（首页等非 doc 布局不会渲染）
-      'doc-after': () => h('div', { id: 'artalk-comment' })
+      'doc-after': () => h('div', { id: 'artalk-comment' }),
+      'nav-bar-content-after': () => h(AnnotationNav),
     })
   },
   setup() {
     const route = useRoute()
-    const { isDark } = useData()
+    const { isDark, page } = useData()
     let viewer: Viewer | null = null
     let artalk: Artalk | null = null
+    let annotationInstance: AnnotationInstance | null = null
+    let annotationSeq = 0
     let disposeMermaidZoom: (() => void) | null = null
+
+    const annotationEnabled = !!ANNOTATION_API && !!ANNOTATION_SITE_KEY
 
     const initViewer = () => {
       viewer?.destroy()
@@ -63,8 +106,6 @@ export default {
       artalk = null
       if (!ARTALK_SERVER) return
 
-      // 首次冷加载新页面时，文档 chunk 可能尚未加载完成、挂载点还不存在，
-      // 轮询等待元素出现（最多约 2s），避免该页评论漏渲染。
       let attempts = 0
       const tryInit = () => {
         const el = document.getElementById('artalk-comment')
@@ -84,10 +125,96 @@ export default {
       tryInit()
     }
 
+    const destroyAnnotations = () => {
+      annotationInstanceSeq()
+      annotationInstance?.destroy()
+      annotationInstance = null
+      resetAnnotationBridge()
+      annotationBridge.hasDoc = false
+    }
+
+    function annotationInstanceSeq(): void {
+      annotationSeq += 1
+    }
+
+    const mountAnnotations = async () => {
+      const seq = ++annotationSeq
+      if (!annotationEnabled) {
+        annotationBridge.hasDoc = false
+        return
+      }
+      if (page.value.isNotFound || page.value.frontmatter?.layout === 'home') {
+        destroyAnnotations()
+        return
+      }
+
+      const hasDoc = await waitForDoc()
+      if (seq !== annotationSeq) return
+      annotationBridge.hasDoc = hasDoc
+      if (!hasDoc) {
+        destroyAnnotations()
+        return
+      }
+
+      if (annotationInstance) {
+        annotationBridge.status = 'loading'
+        annotationBridge.error = ''
+        await annotationInstance.setPage({ pageKey: route.path, pageTitle: document.title })
+        if (seq === annotationSeq && annotationBridge.status !== 'error') {
+          annotationBridge.status = 'ready'
+        }
+        return
+      }
+
+      annotationBridge.status = 'loading'
+      annotationBridge.error = ''
+      try {
+        await loadZhupiSDK(ANNOTATION_API!)
+        if (seq !== annotationSeq) return
+        if (!window.ZhupiSDK) throw new Error('zhupi SDK unavailable')
+
+        const instance = window.ZhupiSDK.init({
+          siteKey: ANNOTATION_SITE_KEY,
+          apiBase: ANNOTATION_API,
+          pageKey: route.path,
+          pageTitle: document.title,
+          selectRoot: '.vp-doc',
+          theme: isDark.value ? 'dark' : 'light',
+          cssVariables: {
+            '--annotation-drawer-top': 'var(--vp-nav-height, 64px)',
+          },
+          on: {
+            ready: () => {
+              if (seq === annotationSeq) annotationBridge.status = 'ready'
+            },
+            statechange: (payload: any) => {
+              annotationBridge.user = payload.user
+              annotationBridge.count = payload.annotationCount
+            },
+            error: (err: unknown) => {
+              console.warn('[annotation]', err)
+              if (annotationBridge.status === 'loading') {
+                annotationBridge.status = 'error'
+                annotationBridge.error = '批注服务暂不可用'
+              }
+            },
+          },
+        })
+        annotationInstance = instance
+        annotationBridge.actions.openDrawer = () => instance.openDrawer()
+        annotationBridge.actions.openAccount = () => instance.openAccount()
+      } catch (err) {
+        if (seq !== annotationSeq) return
+        console.warn('[annotation] SDK 初始化失败', err)
+        annotationBridge.status = 'error'
+        annotationBridge.error = '批注服务暂不可用'
+      }
+    }
+
     onMounted(() => {
       initViewer()
       initArtalk()
-      // 给 mermaid 图补「放大查看」入口（宽图在窄列里不再被缩小，细节靠全屏查看）
+      nextTick(() => void mountAnnotations())
       disposeMermaidZoom = installMermaidZoom()
     })
 
@@ -97,19 +224,24 @@ export default {
         closeMermaidZoom()
         initViewer()
         initArtalk()
-      })
+        void mountAnnotations()
+      }),
     )
 
-    // 跟随站点明暗主题切换
-    watch(isDark, (v) => artalk?.setDarkMode(v))
+    watch(isDark, (v) => {
+      artalk?.setDarkMode(v)
+      annotationInstance?.setTheme(v ? 'dark' : 'light')
+    })
 
     onUnmounted(() => {
       viewer?.destroy()
       viewer = null
       artalk?.destroy()
       artalk = null
+      annotationInstance?.destroy()
+      annotationInstance = null
       disposeMermaidZoom?.()
       disposeMermaidZoom = null
     })
-  }
+  },
 }

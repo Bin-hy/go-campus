@@ -59,6 +59,20 @@ export default withMermaid(defineConfig({
     class: 'mermaid',
   },
 
+  // mermaid 11.17 的 ESM chunk 直接 `import ... from "fastdom"` 和
+  // `fastdom/extensions/fastdom-promised.js`，这两个文件都是 CJS；
+  // pnpm 下它们没有被提升到根 node_modules，Vite 开发期的依赖扫描不会预构建，
+  // 浏览器就会收到原始 CJS 文件并报 "does not provide an export named 'default'"。
+  // 用「父包 > 子包」的写法强制预构建，交给 esbuild 做 CJS→ESM 互操作。
+  vite: {
+    optimizeDeps: {
+      include: [
+        'mermaid > fastdom',
+        'mermaid > fastdom/extensions/fastdom-promised.js',
+      ],
+    },
+  },
+
   head: [
     ['meta', { name: 'theme-color', content: '#087f5b' }],
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]
@@ -411,6 +425,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: '存储引擎与 B+ 树', link: '/后端技术栈强化/01-mysql/存储引擎与B+树' },
             { text: '事务与 MVCC', link: '/后端技术栈强化/01-mysql/事务与MVCC' },
+            { text: '锁机制详解', link: '/后端技术栈强化/01-mysql/锁机制详解' },
             { text: '索引与 SQL 优化', link: '/后端技术栈强化/01-mysql/索引与SQL优化' },
             { text: '慢查询优化实战', link: '/后端技术栈强化/01-mysql/慢查询优化实战' },
             { text: '主从复制与高可用', link: '/后端技术栈强化/01-mysql/主从复制与高可用' },

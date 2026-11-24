@@ -24,29 +24,29 @@ type AnnotationInstance = {
   destroy(): void
 }
 
-type AnnotationSDKGlobal = {
+type ZhupiSDKGlobal = {
   init(options: Record<string, unknown>): AnnotationInstance
 }
 
 declare global {
   interface Window {
-    AnnotationSDK?: AnnotationSDKGlobal
+    ZhupiSDK?: ZhupiSDKGlobal
   }
 }
 
 let sdkLoading: Promise<void> | null = null
 
-function loadAnnotationSDK(apiBase: string): Promise<void> {
-  if (window.AnnotationSDK) return Promise.resolve()
+function loadZhupiSDK(apiBase: string): Promise<void> {
+  if (window.ZhupiSDK) return Promise.resolve()
   if (sdkLoading) return sdkLoading
   sdkLoading = new Promise<void>((resolve, reject) => {
     const script = document.createElement('script')
-    script.src = `${apiBase.replace(/\/+$/, '')}/sdk/v1/annotation-sdk.js`
+    script.src = `${apiBase.replace(/\/+$/, '')}/sdk/v1/zhupi.js`
     script.async = true
     script.onload = () => resolve()
     script.onerror = () => {
       sdkLoading = null
-      reject(new Error('annotation SDK failed to load'))
+      reject(new Error('zhupi SDK failed to load'))
     }
     document.head.appendChild(script)
   })
@@ -169,11 +169,11 @@ export default {
       annotationBridge.status = 'loading'
       annotationBridge.error = ''
       try {
-        await loadAnnotationSDK(ANNOTATION_API!)
+        await loadZhupiSDK(ANNOTATION_API!)
         if (seq !== annotationSeq) return
-        if (!window.AnnotationSDK) throw new Error('annotation SDK unavailable')
+        if (!window.ZhupiSDK) throw new Error('zhupi SDK unavailable')
 
-        const instance = window.AnnotationSDK.init({
+        const instance = window.ZhupiSDK.init({
           siteKey: ANNOTATION_SITE_KEY,
           apiBase: ANNOTATION_API,
           pageKey: route.path,

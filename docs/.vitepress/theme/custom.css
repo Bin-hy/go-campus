@@ -278,12 +278,12 @@ body.mermaid-zoom-body-lock {
 }
 
 /* 划线批注：桌面端 FAB 上移，避让右下角控件；移动端回到安全区 */
-.annotation-sdk-host {
+.zhupi-host {
   --annotation-fab-bottom: 80px;
 }
 
 @media (max-width: 768px) {
-  .annotation-sdk-host {
+  .zhupi-host {
     --annotation-fab-bottom: 24px;
   }
 }

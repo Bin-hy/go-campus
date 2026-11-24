@@ -159,17 +159,17 @@ docker kill -s KILL arch-mysql-master   # 亲手制造主库宕机，观察丢�
 
 ### ⑤ 划线批注 SDK（可选，需登录）
 
-文档站已改为接入独立的 **annotation-service** 提供的可嵌入 SDK（多站点、支持 GitHub / 站点级 OIDC）。
+文档站已改为接入独立的 **朱批（zhupi）** 提供的可嵌入 SDK（多站点、支持 GitHub / 站点级 OIDC）。
 未配置 `VITE_ANNOTATION_*` 时不会加载 SDK，不影响阅读与 Artalk 评论。
 
 ```bash
-# 终端 A：批注服务（位于与本仓库同级的 annotation-service/）
-cd ../annotation-service
+# 终端 A：批注服务（位于与本仓库同级的 zhupi/）
+cd ../zhupi
 make build
-export SECRET_KEY=$(openssl rand -hex 32) DB_PATH=./annotations.db \
+export SECRET_KEY=$(openssl rand -hex 32) DB_PATH=./zhupi.db \
        PUBLIC_BASE_URL=http://127.0.0.1:8080 DEV_LOGIN=1
-./bin/annotation-service admin site create --name gocampus --origin http://127.0.0.1:5173
-./bin/annotation-service serve
+./bin/zhupi admin site create --name gocampus --origin http://127.0.0.1:5173
+./bin/zhupi serve
 
 # 终端 B：文档站（<siteKey> 换成上一步输出）
 VITE_ANNOTATION_API=http://127.0.0.1:8080 VITE_ANNOTATION_SITE_KEY=<siteKey> \

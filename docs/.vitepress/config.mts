@@ -135,7 +135,8 @@ export default withMermaid(defineConfig({
           { text: '第二阶段 · 分布式系统', link: '/第二阶段-知识详解/分布式系统面试详解' },
           { text: '后端技术栈强化（S1-S11）', link: '/后端技术栈强化/' },
           { text: 'S10 · 向量数据库 Milvus', link: '/后端技术栈强化/10-milvus/01-向量检索原理' },
-          { text: 'S11 · Elasticsearch', link: '/后端技术栈强化/11-elasticsearch/01-为什么需要搜索引擎' }
+          { text: 'S11 · Elasticsearch', link: '/后端技术栈强化/11-elasticsearch/01-为什么需要搜索引擎' },
+          { text: 'S12 · 消息队列专题（Kafka vs RabbitMQ）', link: '/后端技术栈强化/12-mq/' }
         ]
       },
       {
@@ -451,7 +452,6 @@ export default withMermaid(defineConfig({
             { text: '架构与存储', link: '/后端技术栈强化/03-kafka/架构与存储' },
             { text: '生产消费语义', link: '/后端技术栈强化/03-kafka/生产消费语义' },
             { text: '可靠性与积压', link: '/后端技术栈强化/03-kafka/可靠性与积压' },
-            { text: 'Kafka vs RabbitMQ', link: '/后端技术栈强化/03-kafka/Kafka-vs-RabbitMQ' },
             { text: '面试题集', link: '/后端技术栈强化/03-kafka/面试题集' }
           ]
         },
@@ -551,6 +551,29 @@ export default withMermaid(defineConfig({
             { text: 'Go 实战：搜索服务', link: '/后端技术栈强化/11-elasticsearch/08-Go实战-搜索服务' },
             { text: '混合检索与 AI 应用落地', link: '/后端技术栈强化/11-elasticsearch/09-混合检索与AI应用落地' },
             { text: '面试题集', link: '/后端技术栈强化/11-elasticsearch/10-面试题集' }
+          ]
+        }
+      ],
+      '/后端技术栈强化/12-mq/': [
+        {
+          text: 'S12 消息队列专题',
+          collapsed: false,
+          items: [
+            { text: '专题总览', link: '/后端技术栈强化/12-mq/' },
+            { text: '01 从零理解消息队列', link: '/后端技术栈强化/12-mq/01-从零理解消息队列' },
+            { text: '02 Kafka 架构全景', link: '/后端技术栈强化/12-mq/02-Kafka-架构全景' },
+            { text: '03 RabbitMQ 架构全景', link: '/后端技术栈强化/12-mq/03-RabbitMQ-架构全景' },
+            { text: '04 可靠性对照', link: '/后端技术栈强化/12-mq/04-可靠性对照' },
+            { text: '05 消费语义与顺序', link: '/后端技术栈强化/12-mq/05-消费语义与顺序' },
+            { text: '06 能力边界', link: '/后端技术栈强化/12-mq/06-能力边界' },
+            { text: '07 选型与面试', link: '/后端技术栈强化/12-mq/07-选型与面试' }
+          ]
+        },
+        {
+          text: '相关',
+          items: [
+            { text: 'S3 Kafka 深入', link: '/后端技术栈强化/03-kafka/架构与存储' },
+            { text: 'Kafka 削峰与可靠投递落地', link: '/架构师修炼/05-Kafka削峰与可靠投递落地' }
           ]
         }
       ],

@@ -50,6 +50,8 @@ cd code/backend && docker compose up -d
 
 部署、批注 SDK、架构实验环境（MySQL 主从 / Redis 哨兵 / etcd 集群）等完整步骤见 **[本地开发与部署](docs/本地开发与部署.md)**。
 
+不知道该学什么？先读 [总体规划](docs/学习计划安排/总体规划.md)，站点首页也给出了后端、Agent、算法三条路线与每阶段验收方式。
+
 ---
 
 ## 内容地图

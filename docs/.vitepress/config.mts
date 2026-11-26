@@ -129,11 +129,11 @@ export default withMermaid(defineConfig({
       {
         text: '知识详解',
         items: [
-          { text: 'Go 语言底层原理（11 篇）', link: '/第一阶段-知识详解/' },
+          { text: 'Go 语言底层原理（10 篇）', link: '/第一阶段-知识详解/' },
           { text: '第二阶段 · 操作系统', link: '/第二阶段-知识详解/操作系统面试详解' },
           { text: '第二阶段 · 计算机网络', link: '/第二阶段-知识详解/计算机网络面试详解' },
           { text: '第二阶段 · 分布式系统', link: '/第二阶段-知识详解/分布式系统面试详解' },
-          { text: '后端技术栈强化（S1-S11）', link: '/后端技术栈强化/' },
+          { text: '后端技术栈强化（S1-S12）', link: '/后端技术栈强化/' },
           { text: 'S10 · 向量数据库 Milvus', link: '/后端技术栈强化/10-milvus/01-向量检索原理' },
           { text: 'S11 · Elasticsearch', link: '/后端技术栈强化/11-elasticsearch/01-为什么需要搜索引擎' },
           { text: 'S12 · 消息队列专题（Kafka vs RabbitMQ）', link: '/后端技术栈强化/12-mq/' }
@@ -407,11 +407,12 @@ export default withMermaid(defineConfig({
         {
           text: '开始',
           items: [
-            { text: '模块总览', link: '/后端技术栈强化/' }
+            { text: '模块总览', link: '/后端技术栈强化/' },
+            { text: 'S12 消息队列专题（Kafka vs RabbitMQ）', link: '/后端技术栈强化/12-mq/' }
           ]
         },
         {
-          text: 'S1 MySQL · 基础篇（先过一遍）',
+          text: 'S1 MySQL · 基础',
           collapsed: false,
           items: [
             { text: 'MySQL 入门与库表操作', link: '/后端技术栈强化/01-mysql/基础-MySQL入门与库表操作' },
@@ -421,7 +422,7 @@ export default withMermaid(defineConfig({
           ]
         },
         {
-          text: 'S1 MySQL · 深入篇',
+          text: 'S1 MySQL · 深入',
           collapsed: false,
           items: [
             { text: '存储引擎与 B+ 树', link: '/后端技术栈强化/01-mysql/存储引擎与B+树' },
@@ -434,7 +435,7 @@ export default withMermaid(defineConfig({
           ]
         },
         {
-          text: 'S2 Redis 深入',
+          text: 'S2 Redis',
           collapsed: false,
           items: [
             { text: '数据类型与常见用法', link: '/后端技术栈强化/02-redis/数据类型与常见用法' },
@@ -446,7 +447,7 @@ export default withMermaid(defineConfig({
           ]
         },
         {
-          text: 'S3 Kafka 深入',
+          text: 'S3 Kafka',
           collapsed: false,
           items: [
             { text: '架构与存储', link: '/后端技术栈强化/03-kafka/架构与存储' },
@@ -456,7 +457,7 @@ export default withMermaid(defineConfig({
           ]
         },
         {
-          text: 'S4 Go 微服务',
+          text: 'S4 微服务',
           collapsed: false,
           items: [
             { text: '单体拆分与边界设计', link: '/后端技术栈强化/04-microservice/单体拆分与边界设计' },
@@ -466,7 +467,7 @@ export default withMermaid(defineConfig({
           ]
         },
         {
-          text: 'S5 高并发场景题',
+          text: 'S5 高并发场景',
           collapsed: false,
           items: [
             { text: '一致性与故障边界（AP/CP 深挖）', link: '/后端技术栈强化/05-high-concurrency/一致性与故障边界' },
@@ -572,7 +573,7 @@ export default withMermaid(defineConfig({
         {
           text: '相关',
           items: [
-            { text: 'S3 Kafka 深入', link: '/后端技术栈强化/03-kafka/架构与存储' },
+            { text: 'S3 Kafka', link: '/后端技术栈强化/03-kafka/架构与存储' },
             { text: 'Kafka 削峰与可靠投递落地', link: '/架构师修炼/05-Kafka削峰与可靠投递落地' }
           ]
         }

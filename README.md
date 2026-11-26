@@ -4,19 +4,17 @@
 
 # GoCampus
 
-**从 Go 语言深入到 AI Agent 落地，再到分布式架构设计的一站式学习工程**
+**Go 后端 + AI Agent 求职学习工程：从语言底层、中间件与分布式架构，一路走到 RAG / Agent 实战与面试追问链**
 
-按「阶段计划 → 原理详解 → 可运行代码 → 动手实验 → 面试实战」闭环组织，<br />
-261 篇文档 · 114 道带测试的练习 · 12 个内容栏目 · 一套可跑的中间件实验环境。
+按「原理 → 可跑练习 → 实验 → 面试收口」组织：373 篇文档 · 128 道可判练习 · 481 个测试用例 · 505 张 mermaid 图。
 
-[![文档](https://img.shields.io/badge/文档-261%20篇-087f5b?style=flat-square)](docs/index.md)
-[![练习](https://img.shields.io/badge/练习-114%20道-099268?style=flat-square)](code/README.md)
-[![测试](https://img.shields.io/badge/测试-194%20个-2f9e44?style=flat-square)](code/README.md)
+[![文档](https://img.shields.io/badge/文档-373%20篇-087f5b?style=flat-square)](https://gocampus.gataccay.com)
+[![练习](https://img.shields.io/badge/练习-128%20道-099268?style=flat-square)](code/README.md)
+[![测试](https://img.shields.io/badge/测试-481%20个-2f9e44?style=flat-square)](code/README.md)
 [![Go](https://img.shields.io/badge/Go-1.22%20%7C%201.25-00ADD8?style=flat-square&logo=go&logoColor=white)](code/go.mod)
 [![VitePress](https://img.shields.io/badge/VitePress-1.6-646CFF?style=flat-square&logo=vite&logoColor=white)](package.json)
-[![Mermaid](https://img.shields.io/badge/Mermaid-11-FF3670?style=flat-square&logo=mermaid&logoColor=white)](docs/.vitepress/config.mts)
 
-[文档站首页](docs/index.md) · [学习计划](docs/学习计划安排/总体规划.md) · [架构师修炼](docs/架构师修炼/index.md) · [项目实战](docs/项目实战/index.md) · [代码练习](docs/练习指南.md)
+[🌐 文档站](https://gocampus.gataccay.com) · [学习计划](docs/学习计划安排/总体规划.md) · [架构师修炼](docs/架构师修炼/index.md) · [代码练习](docs/练习指南.md) · [本地开发与部署](docs/本地开发与部署.md)
 
 </div>
 
@@ -24,37 +22,49 @@
 
 ## 这是什么
 
-一个**有明确靶心**的学习仓库：目标是拿到 **Agent 开发实习生（AI 剪辑）· 剪映 CapCut** 的 offer，主线语言是 **Go**。
+一个**有明确靶心**的学习仓库：目标是 Go 后端 / Agent 开发方向的实习与校招，主线语言是 **Go**。
 
 它和「收藏夹里的教程合集」有三点不同：
 
 | | 一般教程仓库 | GoCampus |
 | --- | --- | --- |
-| **知识从哪来** | 零散文章堆叠 | 按 **阶段 → 栏目 → 篇章** 三级组织，每篇都有前置/产出/验收动作 |
-| **怎么验证学会** | 读完就算 | 每篇配 **可运行的练习或实验**（`go test` 判定 / Docker 编排实操） |
-| **离面试多远** | 差一层 | 每篇都有 **面试追问链 + 自测清单**，并单独有[白板架构面试实战](docs/架构师修炼/17-面试-白板架构设计与追问链.md)与[模拟面试脚本](docs/架构师修炼/17-面试-白板架构设计与追问链.md) |
+| **知识从哪来** | 零散文章堆叠 | 按 **阶段 → 栏目 → 篇章** 组织，每篇有前置、产出与验收动作 |
+| **怎么验证学会** | 读完就算 | 每篇配 **可运行练习或 Docker 实验**（`go test` 判定 / 亲手注入故障） |
+| **离面试多远** | 差一层 | 每篇带 **面试追问链 + 自测清单**，另有[白板架构设计与追问链](docs/架构师修炼/17-面试-白板架构设计与追问链.md) |
+
+适合：准备 Go 后端、基础架构、AI 应用（RAG / Agent）岗位的同学。
+不适合：想找现成框架或业务脚手架的读者——这里重点是**原理、取舍与可验证的动手能力**。
+
+## 30 秒开始
+
+```bash
+# ① 读文档
+npm install && npm run docs:dev          # http://127.0.0.1:5173
+
+# ② 做题
+cd code && go test ./...                 # 128 道练习，逐题判定
+
+# ③ 起中间件做实验（可选，需 Docker）
+cd code/backend && docker compose up -d
+```
+
+部署、批注 SDK、架构实验环境（MySQL 主从 / Redis 哨兵 / etcd 集群）等完整步骤见 **[本地开发与部署](docs/本地开发与部署.md)**。
 
 ---
 
 ## 内容地图
 
-| 栏目 | 规模 | 解决什么问题 | 入口 |
-| --- | --- | --- | --- |
-| 🧭 **学习计划安排** | 4 篇 | 时间怎么排、每阶段学到什么程度 | [总体规划](docs/学习计划安排/总体规划.md) |
-| 🐹 **第一阶段 · Go 语言深入** | 10 篇 | Slice/Map/Interface/String 内存布局、函数调用栈、内存分配、GC、GMP、并发、Context | [知识点总览](docs/第一阶段-知识详解/index.md) |
-| 🧱 **第二阶段 · 计算机基础** | 3 篇 | 操作系统、计算机网络、分布式系统面试详解 | [分布式系统](docs/第二阶段-知识详解/分布式系统面试详解.md) |
-| 🏗️ **后端技术栈强化** | 71 篇 | S1 MySQL → S2 Redis → S3 Kafka → S4 微服务 → S5 高并发场景 → S6 Agent Backend → S7 K8s → S8 分布式 → S9 对象存储 → S10 Milvus → S11 Elasticsearch（关键词/混合检索） | [模块总览](docs/后端技术栈强化/index.md) |
-| 🏛️ **架构师修炼** ⭐ | 29 篇 | **QPS 六道坎驱动的架构演进**：不同量级下 Redis/MySQL/Kafka/etcd 的落地参数、一致性设计、故障兜底 + 15 个可复现实验；子栏目 **19 pprof 实战**（8 篇 + 8 个可跑性能实验） | [栏目总览](docs/架构师修炼/index.md) · [pprof 实战](docs/架构师修炼/19-pprof实战/index.md) |
-| ☸️ **K8s Code 教程** | 15 篇 | 从「会用 kubectl」到「能手写 Controller / Operator」，配 client-go 实战代码 | [教程首页](docs/k8s-code教程/index.md) |
-| 🧠 **导师学习路径** | 11 篇 | RAG → Prompt → Function Calling/MCP → ReAct → Multi-Agent → 记忆评测 → Diffusion/推理优化/微调 | [总览](docs/导师学习路径/index.md) |
-| 🚀 **转岗大模型算法** ⭐ | 13 篇 | **从 Agent 后端转大模型算法岗的 18 个月作战地图**（2026.10 → 2028.06）：岗位分层与差距自评、数学最小集、PyTorch 训练工程、Transformer 手推、多模态架构谱系、**单卡 12GB 从零训练多模态小模型**、训练与推理工程、评测与技术报告、实习期算法筹码经营、日常实习与 2028 届秋招规划 | [作战地图](docs/转岗大模型算法/index.md) |
-| 🧩 **主流 Agent 拆解** | 12 篇 | 拆 pi / Eino / LangGraph 的架构、核心机制与可借鉴设计 | [拆解总览](docs/主流agent拆解/index.md) |
-| 🚀 **项目实战** | 32 篇 | MewCode 终端 Agent、RAG 文档问答、AI Agent Harness | [第三阶段总览](docs/项目实战/index.md) |
-| 🎯 **路线专题** | 5 篇 | 30 天冲刺：算法、后端基础、大模型与 Agent、简历与面试 | [专题总览](docs/路线专题/index.md) |
-| 🧪 **习题集和答案** | 75 页 | 由代码练习自动生成（`npm run docs:sync-exercises`），文档与代码永不脱节 | [习题集](docs/习题集和答案/index.md) |
-| ⭐ **代码练习指南** | — | 做题流程、判题脚本、练习与文档的对应关系 | [练习指南](docs/练习指南.md) |
+| 板块 | 规模 | 内容 |
+| --- | --- | --- |
+| 🧭 **学习路线** | 19 篇 | [总体规划](docs/学习计划安排/总体规划.md)、[Go 语言底层原理](docs/第一阶段-知识详解/index.md)（Slice/Map/Interface 内存布局、GC、GMP、Context）、OS / 网络 / 分布式系统 |
+| 🏗️ **后端技术栈强化** | 73 篇 | S1 MySQL → S2 Redis → S3 Kafka（含 [Kafka vs RabbitMQ](docs/后端技术栈强化/03-kafka/Kafka-vs-RabbitMQ.md)）→ S4 微服务 → S5 高并发 → S6 Agent Backend → S7 K8s → S8 分布式 → S9 对象存储 → S10 Milvus → S11 Elasticsearch |
+| 🏛️ **架构师修炼** ⭐ | 29 篇 | [QPS 六道坎](docs/架构师修炼/01-QPS分级与架构演进地图.md)驱动的架构演进：各量级的 MySQL/Redis/Kafka/etcd 落地参数、一致性与故障兜底、15 个可复现实验、[pprof 调优实战](docs/架构师修炼/19-pprof实战/index.md) |
+| 🧱 **Go 微服务 / K8s** | 33 篇 | [微服务实战](docs/microservice-code教程/index.md)（拆分、gRPC、治理）；[K8s Code 教程](docs/k8s-code教程/index.md)（client-go → Informer → 手写 Controller / Operator） |
+| 🚀 **转岗大模型算法** ⭐ | 13 篇 | [18 个月作战地图](docs/转岗大模型算法/index.md)：差距自评、数学最小集、Transformer 手推、单卡 12GB 从零训练多模态小模型、评测与技术报告 |
+| 🧠 **AI 应用** | 66 篇 | [导师学习路径](docs/导师学习路径/index.md)（RAG/Prompt/MCP/ReAct/Multi-Agent）、[主流 Agent 拆解](docs/主流agent拆解/index.md)（pi/Eino/LangGraph）、[项目实战](docs/项目实战/index.md)（MewCode/RAG/Harness）、[多模态专栏](docs/多模态学习专栏/index.md) |
+| 🎯 **面试收口** | 138 篇 | [面试项目深挖](docs/面试项目深挖/index.md)（四项目追问包）、[30 天冲刺](docs/路线专题/index.md)、[习题集](docs/习题集和答案/index.md)（由代码自动生成） |
 
-> 全部文档共约 **11.9 万行 Markdown**（353 篇），含 **469 张 mermaid 流程图**与 **1000+ 张对照表**；文档站支持本地全文搜索、暗色模式、图片放大与评论。
+> 全站约 **12.4 万行 Markdown**，支持全文搜索、暗色模式、图片放大、Artalk 评论与划线批注。
 
 ---
 
@@ -62,269 +72,67 @@
 
 ```mermaid
 flowchart LR
-    A["① Go 语言深入<br/>语法 · 并发 · 内存 · GC"] --> B["② 计算机基础<br/>OS · 网络 · 分布式理论"]
-    B --> C["③ AI 应用开发<br/>LLM · Prompt · RAG · Agent"]
+    A["① Go 语言深入<br/>语法 · 并发 · 内存 · GC"] --> B["② 计算机基础<br/>OS · 网络 · 分布式"]
+    B --> C["③ AI 应用开发<br/>LLM · RAG · Agent"]
     C --> D["④ 项目实战<br/>MewCode · docs-rag · Harness"]
     D --> E["⑤ 架构师修炼<br/>QPS 演进 · 一致性 · 稳定性"]
-    D --> F["⑥ 面试收口<br/>白板设计 · 追问链 · 简历改造"]
+    D --> F["⑥ 面试收口<br/>白板设计 · 追问链 · 简历"]
     E --> F
     style E fill:#e6fcf5,stroke:#087f5b,stroke-width:2px
     style F fill:#fff9db,stroke:#f59f00,stroke-width:2px
 ```
 
-| 阶段 | 主题 | 目标 | 配套代码 |
-| --- | --- | --- | --- |
-| 一 | Go 语言深入 | 语法精通、并发模型、标准库与工程化 | `code/phase1/`（34 道） |
-| 二 | 计算机基础强化 | 数据结构与算法、操作系统、网络 | `code/phase2/`（25 道） |
-| 三 | AI 应用开发基础 | LLM API、Prompt 工程、RAG、Agent 架构 | `code/phase3/` |
-| 四 | 后端技术栈强化 | MySQL/Redis/Kafka/微服务/K8s/Milvus | `code/backend/`（39 道，需 Docker） |
-| 五 | **架构师修炼** | 从单体到百万 QPS 的演进决策与故障兜底 | [`code/architect/`](code/architect/README.md)（可跑中间件集群）· [`code/architect/pprof-lab/`](code/architect/pprof-lab/README.md)（8 个零依赖性能实验） |
-| 加分 | K8s 编程 | client-go、Informer、手写控制器与 CRD/Operator | `code/k8s/`（5 道，可选 minikube） |
-
----
-
-## 仓库结构
-
-```
-GoCampus/
-├── docs/                          # VitePress 文档站（261 篇）
-│   ├── 学习计划安排/               # 四阶段总体规划与周计划
-│   ├── 第一阶段-知识详解/           # Go 底层原理（index.md 为总览，其余 10 篇为专题）
-│   ├── 第二阶段-知识详解/           # OS / 网络 / 分布式（index.md 为总览）
-│   ├── 后端技术栈强化/              # S1~S11 组件原理与面试题集
-│   ├── 架构师修炼/ ⭐               # 架构演进 · 一致性 · 稳定性 · 案例 · 实验
-│   ├── k8s-code教程/               # K8s 编程教程（YAML → client-go → Operator）
-│   ├── 导师学习路径/                # RAG / Agent / 多模态 知识地图
-│   ├── 转岗大模型算法/ ⭐            # Agent 后端 → 大模型算法岗：18 个月转岗作战地图
-│   ├── 主流agent拆解/               # pi · Eino · LangGraph 源码级拆解
-│   ├── 项目实战/                    # MewCode · RAG 文档问答 · Agent Harness
-│   ├── 路线专题/                    # 30 天冲刺路线
-│   ├── 面试项目深挖/ ⭐              # 字节面试深挖包（Vistack · BinRag · EasyCoding）
-│   ├── 习题集和答案/                # 自动生成，与代码同步
-│   ├── .vitepress/                 # 站点配置、mermaid、主题与本地搜索
-│   └── index.md                    # 首页
-├── code/                          # 全部代码（644 个 Go 文件 / 194 个测试）
-│   ├── phase1/  phase2/  phase3/   # 三阶段练习
-│   ├── route/                      # 路线专题实战代码
-│   ├── backend/                    # 后端技术栈实验（docker-compose 起中间件）
-│   ├── architect/ ⭐                # 架构师修炼配套：中间件编排 + pprof-lab 性能实验
-│   ├── k8s/                        # K8s manifests + client-go 代码（k8s-code教程配套）
-│   └── scripts/judge.sh            # 一键判题（统计通过率）
-├── projects/                      # 独立实战项目（EasyCoding、docs-rag，均为 submodule）
-├── .specs/                        # 各栏目的 spec / plan / task / checklist（过程产物，不参与站点导航）
-├── scripts/                       # 文档生成脚本（练习 → 文档）
-└── package.json                   # 文档站构建/开发脚本
-```
-
----
-
-## 快速开始
-
-### ① 读文档（VitePress 站点）
-
-```bash
-npm install
-npm run docs:dev        # http://127.0.0.1:5173
-npm run docs:build      # 产出静态站点到 docs/.vitepress/dist
-```
-
-### ② 做练习（Go，逐题判定）
-
-```bash
-cd code
-go test ./...                       # 跑全部练习
-cd phase1/01_slice/01_deep_copy     # 单题：读 README → 补 solution.go → 验证
-go test -v
-bash scripts/judge.sh               # 统计整体完成情况
-```
-
-### ③ 起中间件做后端实验（MySQL / Redis / Kafka / MinIO）
-
-```bash
-cd code/backend
-docker compose up -d                # 起中间件
-go test ./...                       # 依赖中间件的实验（如 02-redis、03-kafka）
-```
-
-### ④ 跑架构师实验环境（主从 / 哨兵 / etcd 集群）
-
-```bash
-cd code/architect
-docker compose up -d                # MySQL 主从 · Redis 主从+三哨兵 · etcd 三节点 · Kafka
-bash scripts/init-replication.sh    # 一键建立 GTID 主从复制
-docker kill -s KILL arch-mysql-master   # 亲手制造主库宕机，观察丢数据窗口
-```
-
-> 实验清单与预期现象见 [18 实验手册：Go 落地实验](docs/架构师修炼/18-实验手册-Go落地实验.md)；故障注入速查见 [`code/architect/README.md`](code/architect/README.md)。
-
-### ⑤ 划线批注 SDK（可选，需登录）
-
-文档站已改为接入独立的 **朱批（zhupi）** 提供的可嵌入 SDK（多站点、支持 GitHub / 站点级 OIDC）。
-未配置 `VITE_ANNOTATION_*` 时不会加载 SDK，不影响阅读与 Artalk 评论。
-
-```bash
-# 终端 A：批注服务（位于与本仓库同级的 zhupi/）
-cd ../zhupi
-make build
-export SECRET_KEY=$(openssl rand -hex 32) DB_PATH=./zhupi.db \
-       PUBLIC_BASE_URL=http://127.0.0.1:8080 DEV_LOGIN=1
-./bin/zhupi admin site create --name gocampus --origin http://127.0.0.1:5173
-./bin/zhupi serve
-
-# 终端 B：文档站（<siteKey> 换成上一步输出）
-VITE_ANNOTATION_API=http://127.0.0.1:8080 VITE_ANNOTATION_SITE_KEY=<siteKey> \
-npm run docs:dev
-```
-
-生产环境需先创建站点并配置 GitHub OAuth（或站点级 OIDC），再在构建时注入
-`VITE_ANNOTATION_API` 与 `VITE_ANNOTATION_SITE_KEY`，详见服务端 README。
-
-#### Cloudflare Pages 部署
-
-站点部署在 Cloudflare Pages 时，`VITE_*` 只在**构建期**读取，需要在
-Pages 项目的 **Settings → Environment variables** 中配置（Production 与 Preview 都建议配置）：
-
-| 变量 | 当前生产值 | 说明 |
+| 阶段 | 主题 | 配套代码 |
 | --- | --- | --- |
-| `VITE_ANNOTATION_API` | `https://zhupi.gataccay.com` | 批注服务地址 |
-| `VITE_ANNOTATION_SITE_KEY` | `2w1fyqdW1M2Xc4JPJOg-d35XmuqeKYOE` | zhupi 站点 `gocampus` 的公开标识 |
-| `VITE_ARTALK_SERVER` | `https://artalk.gataccay.com` | 评论服务地址 |
-| `VITE_ARTALK_SITE` | `gocampus训练营` | Artalk 站点名（区分大小写） |
-
-Pages 构建配置：
-
-- Build command：`npm run docs:build`
-- Build output directory：`docs/.vitepress/dist`
-- Node.js：22
-
-注意事项：
-
-- `VITE_ANNOTATION_SITE_KEY` 是公开标识，不是密钥；真正的访问控制由 zhupi 的站点来源白名单负责。
-- zhupi 站点 `gocampus` 已允许 `https://gocampus.gataccay.com`、`https://go-campus.pages.dev`、
-  `https://main.go-campus.pages.dev`。新增自定义域名或预览域名时，需要在 zhupi 管理后台
-  （站点 → 编辑 → 允许来源）或 `PATCH /api/v1/admin/sites/{id}` 中同步补 origin。
-- 环境变量只在构建时注入，修改后必须重新部署一次才会生效。
-
-页面体验：文档页顶部导航提供「批注 N」与登录/头像入口；文档页之间使用 SDK 的
-`setPage` 单实例切换，首页/404 自动隐藏；SDK 跟随 VitePress 暗色主题，抽屉从顶栏下方开始。
-
----
-
-## 代码练习体系
-
-每道练习都是**同一套结构**，读完文档立刻能验证：
-
-```
-NN_topic/
-├── README.md          题目 · 考点 · 难度 · 环境准备 · 提示
-├── solution.go        待填空（panic("not implemented")）
-├── solution_test.go   测试用例
-└── answer/answer.go   参考答案
-```
-
-| 模块 | 练习数 | 依赖 |
-| --- | --- | --- |
-| `phase1` Go 语言深入 | 34 | 无 |
-| `phase2` 数据结构与算法 | 25 | 无 |
-| `route` 路线专题实战 | 11 | 部分需中间件 |
-| `backend` 后端技术栈 | 39 | Docker（MySQL/Redis/Kafka/MinIO/Milvus） |
-| `k8s` Kubernetes 编程 | 5 | 纯 Go 模拟，可选 minikube |
-
-练习完成后执行 `bash scripts/judge.sh` 得到通过率；`npm run docs:sync-exercises` 会把练习自动同步成站点里的习题页（75 页），**保证文档与代码永不脱节**。
+| 一 | Go 语言深入、计算机基础 | `code/phase1/`（34 道）、`code/phase2/`（25 道） |
+| 二 | AI 应用：LLM / Prompt / RAG / Agent | `code/phase3/`、[项目实战](docs/项目实战/index.md) |
+| 三 | 后端技术栈：MySQL / Redis / Kafka / K8s / Milvus | `code/backend/`（39 道，需 Docker） |
+| 四 | 架构师修炼：从单体到百万 QPS | [`code/architect/`](code/architect/README.md)、[`pprof-lab/`](code/architect/pprof-lab/README.md)（8 个零依赖实验） |
 
 ---
 
 ## 重点栏目
 
-<details open>
-<summary><b>🏛️ 架构师修炼 —— 从单体到百万 QPS（本仓库最硬核的栏目）</b></summary>
+- **🏛️ [架构师修炼](docs/架构师修炼/index.md)** —— 不教「组件是什么」，只练架构判断力：六道 QPS 坎、真实落地参数（`acks=all` + `min.insync.replicas`、`min-replicas-to-write`、fencing token）、每个组件的「故障 → 降级 → 丢数据窗口 → 对账」表，以及 15 个可亲手复现的实验。
+- **🚀 [转岗大模型算法](docs/转岗大模型算法/index.md)** —— 从 Agent 后端到算法岗的 18 个月路线：先做 100 分制差距诊断，再补数学/PyTorch/Transformer/多模态地基，最终落到「单卡 12GB 训练多模态小模型 + 技术报告」。
+- **🏗️ [后端技术栈强化](docs/后端技术栈强化/index.md)** —— S1~S11 按依赖顺序学，每篇「原理 → 机制 → 故障 → 设计」，末尾带三层追问。
+- **☸️ [K8s Code 教程](docs/k8s-code教程/index.md)** —— 从会用 `kubectl` 到能手写 Controller / Operator，配 client-go 可运行代码。
 
-不教「组件是什么」（那是[后端技术栈强化](docs/后端技术栈强化/index.md)的活），只练**架构判断力**：
+## 仓库结构
 
-- **能力阶梯 A1→A5**：会用 → 懂原理 → **会算量** → **会选型** → **会演进与兜底**，每级有可验证行为与里程碑 M1~M6。
-- **六道坎坐标系**：`<100 / 1k / 1w / 10w / 100w / 1000w` QPS 各自的瓶颈、架构形态、触发指标与成本；附「同一件事在六个量级下的做法」总表。
-- **真实落地参数**：MySQL 半同步的超时静默降级、Redis `min-replicas-to-write` 防丢写、Kafka `acks=all` + `min.insync.replicas`、etcd Lease + **fencing token 防双写**。
-- **一致性专题**：缓存与 DB 一致性的失败窗口、分布式事务选型矩阵、幂等与 Exactly-Once 的真实边界。
-- **每个组件都有「故障与一致性边界」表**：挂了 → 现象 → 降级 → **丢数据的窗口在哪** → 靠对账如何发现。
-- **15 个可复现实验**：[实验手册](docs/架构师修炼/18-实验手册-Go落地实验.md) + [`code/architect/`](code/architect/README.md)，亲手制造主从延迟、哨兵丢写、缓存雪崩打挂 DB、Kafka 丢消息与重复消费、etcd 假死双写、不停机迁移校验。
-- **性能调优取证能力（子栏目 19 pprof 实战）**：[从火焰图到架构决策](docs/架构师修炼/19-pprof实战/index.md) —— 观测决策图（现象 → 该抓哪个 profile）→ CPU 火焰图 / 内存与 GC / goroutine 与锁阻塞 → 27 条常见问题手册 → 生产环境安全采集与开销自测 → 7 个完整案例 → 30 道面试题；配套 [`code/architect/pprof-lab/`](code/architect/pprof-lab/README.md)：**8 个零依赖可跑实验**（自带压测器、`-fix` 一键对比修复前后，业务端口 1808N / pprof 端口 1908N）。
+```text
+GoCampus/
+├── docs/                    # VitePress 文档站（373 篇）
+│   ├── 后端技术栈强化/       # S1~S11 组件原理与面试题集
+│   ├── 架构师修炼/ ⭐        # QPS 演进 · 一致性 · 稳定性 · 15 个实验
+│   ├── 转岗大模型算法/ ⭐     # 18 个月转岗作战地图
+│   ├── 项目实战/             # MewCode · RAG · Agent Harness
+│   ├── 面试项目深挖/         # 四项目追问包
+│   └── 习题集和答案/         # 由 code/ 自动生成
+├── code/                    # 705 个 Go 文件，练习 + 中间件实验 + pprof-lab
+├── projects/                # 独立项目（submodule）
+├── scripts/                 # 练习 → 文档同步脚本
+└── package.json             # 文档站构建脚本
+```
 
-推荐顺序：[00 方法论](docs/架构师修炼/00-架构师思维与设计方法论.md) → [01 QPS 地图](docs/架构师修炼/01-QPS分级与架构演进地图.md) → 演进六阶段（02~07）→ 一致性（08~11）→ 稳定性（12~14）→ 案例（15~16）→ [17 白板面试](docs/架构师修炼/17-面试-白板架构设计与追问链.md) → [18 实验](docs/架构师修炼/18-实验手册-Go落地实验.md) → [19 pprof 实战](docs/架构师修炼/19-pprof实战/index.md)。
-
-</details>
-
-<details>
-<summary><b>☸️ K8s Code 教程 —— 从「会用 K8s」到「能写 K8s」</b></summary>
-
-环境 → 核心对象 YAML → client-go CRUD/Watch → Informer 与 Workqueue → **手写 Controller** → CRD/Operator → 调度器/网络/存储深入 → 排障 → 面试题集。配套 `code/k8s/` 可运行代码，可直接对着本机 minikube 实操。
-
-入口：[教程首页](docs/k8s-code教程/index.md)
-</details>
-
-<details>
-<summary><b>🧩 主流 Agent 拆解 —— 看别人怎么做工程</b></summary>
-
-对 **pi**（开源 Agent Harness）、**Eino**（Go 编排框架）、**LangGraph**（Python 编排框架）做「全景图 → 核心机制 → 对照与面试」三段式拆解，提炼可迁移的架构决策。
-
-入口：[拆解总览](docs/主流agent拆解/index.md)
-</details>
-
-<details>
-<summary><b>🧠 导师学习路径 —— RAG 与 Agent 知识地图</b></summary>
-
-把原始提纲提炼为 10 章：RAG 原理 → Prompt 工程 → Function Calling/MCP → ReAct → Multi-Agent → 记忆与评测 → 文生视频与 Diffusion → LLM 推理优化 → 训练与微调 → 技术栈速通。每章含知识点提炼、mermaid 流程图、带答案的面试问答与自测清单。
-
-入口：[总览与章节安排](docs/导师学习路径/index.md)
-</details>
-
-<details open>
-<summary><b>🚀 转岗大模型算法 —— 从 Agent 后端到算法岗的 18 个月作战地图</b></summary>
-
-面向「已经拿到 Agent 后端实习、下一步想转大模型算法岗」的人，把 2026.10 → 2028.06 拆成四个阶段（预热 / 双线期 / 转岗冲刺 / 秋招兑现）：
-
-- **先诊断再学习**：[01 目标岗位分层与差距诊断](docs/转岗大模型算法/01-目标岗位分层与差距诊断.md) 给一份 100 分制自评表与逐项工时估算，把「大模型算法岗」拆成 A 档预训练 / B 档多模态 / C 档应用算法三档，告诉你哪些门能推。
-- **原理地基四章**：[02 数学最小集](docs/转岗大模型算法/02-数学地基最小集.md)（线代·概率·微积分 → 代码闭环映射 + 14 道手算题）→ [03 PyTorch 与训练工程地基](docs/转岗大模型算法/03-PyTorch与训练工程地基.md)（含 240 行生产风格训练脚本模板与 12GB 显存预算表）→ [04 Transformer 手推](docs/转岗大模型算法/04-Transformer与LLM原理手推.md)（手写 MHSA + 134 行 mini-GPT 实战）→ [05 多模态架构谱系](docs/转岗大模型算法/05-多模态原理与架构谱系.md)（含「单卡 12GB 可复现性分级表」与选型决策树）。
-- **核心项目**：[06 单卡 12GB 从零训练多模态小模型](docs/转岗大模型算法/06-核心项目-多模态小模型从零训练.md) —— 2050 万参数 CLIP 式双塔、自训中文分词器、自建 10 万图文对、GradCache 解决「小 batch 与负样本」的核心矛盾、6 组消融、四个里程碑与止损点。
-- **工程差异化**：[07 训练与推理工程进阶](docs/转岗大模型算法/07-训练与推理工程进阶.md) 把 GPU 训练讲成分布式系统工程（显存四份开销、DP/TP/PP/ZeRO、ring all-reduce、租卡实操、vLLM 与量化）。
-- **收口与兑现**：[08 评测体系与技术报告](docs/转岗大模型算法/08-评测体系与技术报告.md)（30 页报告模板 + 可照抄的填充示例）、[09 实习期算法筹码经营](docs/转岗大模型算法/09-京东实习期的算法筹码经营.md)（把工程工时翻译成算法产出的方法与话术）、[10 日常实习投递与面试](docs/转岗大模型算法/10-大模型算法日常实习投递与面试.md)（12 道手撕题 + 六模块题库）、[11 2028 届秋招规划](docs/转岗大模型算法/11-2028届秋招规划与简历转化.md)、[12 资源算力与弹性周计划](docs/转岗大模型算法/12-资源算力与弹性周计划.md)（保底 15h / 标准 30h / 冲刺 50h 三档）。
-
-入口：[作战地图总览](docs/转岗大模型算法/index.md) · 自测起点：[差距诊断](docs/转岗大模型算法/01-目标岗位分层与差距诊断.md)
-</details>
-
----
-
-## 技术栈与工程化
+## 技术栈
 
 | 层 | 选型 |
 | --- | --- |
-| 文档站 | VitePress 1.6 + `vitepress-plugin-mermaid` + `markdown-it-mathjax3`（公式构建期渲染成 SVG）+ 本地全文搜索 + 暗色模式 |
-| 主题增强 | Artalk 评论（环境变量注入，未配置自动关闭）、**划线批注 SDK**（多站点、可嵌入）、Viewer.js 图片放大、mermaid 图「放大查看」全屏查看器 |
-| 内容规范 | 中文正文 + mermaid 流程图 + 对照表 + 「面试追问链 / 自测清单」收口 |
-| 代码 | Go 1.22 / 1.25（分模块 `go.mod`），标准库优先，实验代码贴近真实 SDK |
-| 实验环境 | Docker Compose（MySQL / Redis / Kafka / MinIO / Milvus / etcd） |
-| 自动化 | `docs:sync-exercises` 练习→文档同步、`scripts/judge.sh` 判题、`docs:build` 死链校验 |
-
----
+| 文档站 | VitePress 1.6 + Mermaid 11 + MathJax + 本地全文搜索 + 暗色模式 |
+| 交互 | Artalk 评论、划线批注 SDK、Viewer.js 图片放大、Mermaid 全屏查看 |
+| 代码 | Go 1.22 / 1.25（模块级 `go.mod`），标准库优先 |
+| 实验 | Docker Compose：MySQL / Redis / Kafka / MinIO / Milvus / etcd |
+| 自动化 | 练习→文档同步、`judge.sh` 判题、构建期死链校验、mermaid 尺寸检查 |
 
 ## 路线图
 
 - [x] 三阶段学习计划与 Go 底层原理详解
 - [x] 后端技术栈强化 S1~S11（含面试题集与配套实验）
-- [x] K8s Code 编程教程（含 client-go / Controller / Operator）
-- [x] 路由专题 30 天冲刺与简历/面试实战
-- [x] **架构师修炼栏目**：QPS 演进地图 + 一致性专题 + 稳定性工程 + 案例 + 15 个实验 + `code/architect/` 实验环境
-- [x] **转岗大模型算法栏目**：岗位分层与差距自评 → 数学/PyTorch/Transformer/多模态地基 → 单卡从零训练多模态小模型 → 训练与推理工程 → 评测与技术报告 → 实习筹码经营与 2028 届秋招规划（13 篇）
-- [ ] 架构实验环境端到端实测：把 15 个实验的实测数字（丢数据条数、切换耗时、拐点 QPS）回填进文档
-- [ ] 分库分表迁移与分布式事务的完整可运行项目（从实验升级为项目）
-- [ ] [02_map/04_blocking_map：阻塞 Map](https://github.com/Bin-hy/go-campus/tree/main/code/phase1/02_map/04_blocking_map)
-
----
-
-## 写作与提交约定
-
-- **文档**：中文；流程图一律用 mermaid；原理与「怎么落地」分开写，不重复堆砌。
-- **新代码提交**：涉及练习答案时，**先提交 `solution.go` 骨架，随后将该文件加入忽略**（`skip-worktree` / `.gitignore`），避免个人答案污染仓库。
-- **交叉引用**：栏目内用相对链接，跨栏目用站点绝对路径（构建时校验死链）。
+- [x] 架构师修炼：QPS 演进 + 一致性 + 稳定性 + 实验环境
+- [x] 转岗大模型算法：差距诊断 → 原理地基 → 单卡训练 → 秋招兑现
+- [ ] 把 15 个架构实验的实测数字（丢数据条数、切换耗时、拐点 QPS）回填进文档
+- [ ] 分库分表迁移与分布式事务的完整可运行项目
 
 ---
 
@@ -332,6 +140,6 @@ NN_topic/
 
 **持续学习，持续构建。**
 
-本仓库为个人学习工程，内容用于知识梳理与面试准备。
+个人学习工程，内容用于知识梳理与面试准备。
 
 </div>

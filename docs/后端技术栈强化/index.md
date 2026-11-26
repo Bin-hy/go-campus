@@ -59,6 +59,7 @@ S1 MySQL（数据层）→ S2 Redis（缓存层）→ S3 Kafka（异步层）
 | [架构与存储](./03-kafka/架构与存储) | partition/ISR、顺序写、零拷贝、acks |
 | [生产消费语义](./03-kafka/生产消费语义) | 幂等、事务、消费组、rebalance、offset |
 | [可靠性与积压](./03-kafka/可靠性与积压) | 不丢/不重/顺序、积压处理 |
+| [Kafka vs RabbitMQ](./03-kafka/Kafka-vs-RabbitMQ) | 消息模型、吞吐来源、可靠性三段、路由/延迟/回溯、选型决策树、面试背诵卡 |
 | [面试题集](./03-kafka/面试题集) | 6 题追问 3 层 |
 
 ## S4 Go 微服务（2 周）

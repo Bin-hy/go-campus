@@ -451,6 +451,7 @@ export default withMermaid(defineConfig({
             { text: '架构与存储', link: '/后端技术栈强化/03-kafka/架构与存储' },
             { text: '生产消费语义', link: '/后端技术栈强化/03-kafka/生产消费语义' },
             { text: '可靠性与积压', link: '/后端技术栈强化/03-kafka/可靠性与积压' },
+            { text: 'Kafka vs RabbitMQ', link: '/后端技术栈强化/03-kafka/Kafka-vs-RabbitMQ' },
             { text: '面试题集', link: '/后端技术栈强化/03-kafka/面试题集' }
           ]
         },
@@ -721,6 +722,16 @@ export default withMermaid(defineConfig({
           items: [
             { text: '知识点总览', link: '/第一阶段-知识详解/' },
             { text: '第一阶段学习计划', link: '/学习计划安排/第一阶段-Go语言深入' }
+          ]
+        }
+      ],
+      '/本地开发与部署': [
+        {
+          text: '开发与部署',
+          items: [
+            { text: '本地开发与部署', link: '/本地开发与部署' },
+            { text: '练习指南', link: '/练习指南' },
+            { text: '习题集和答案', link: '/习题集和答案/' }
           ]
         }
       ],
